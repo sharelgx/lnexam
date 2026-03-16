@@ -1,0 +1,27 @@
+# 依赖（在镜像内重新安装）
+node_modules
+server/node_modules
+
+# 版本与本地
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose*.yml
+*.md
+.env
+.env.*
+.DS_Store
+*.log
+
+# 数据库与本地数据（部署时用 volume 挂载，不打包进镜像）
+server/data
+server/data/*.db
+server/data/*.db-wal
+server/data/*.db-shm
+
+# 开发与测试
+.cursor
+.vscode
+*.test.js
+*.spec.js

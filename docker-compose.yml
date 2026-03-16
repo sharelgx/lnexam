@@ -1,0 +1,25 @@
+# 辽宁金融单招在线备考平台 - 独立部署
+# 部署后仅占用指定端口与数据卷，不影响宿主机其他项目
+
+services:
+  lnexam:
+    build: .
+    image: lnexam:latest
+    container_name: lnexam
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # 持久化数据库与上传数据，避免容器删除后丢失
+      - lnexam-data:/app/server/data
+    # 可选：限制资源，与其他项目隔离
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 512M
+
+volumes:
+  lnexam-data:

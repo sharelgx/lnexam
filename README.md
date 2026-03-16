@@ -70,3 +70,44 @@ lnexam/
 - `GET/POST/PUT/DELETE /api/admin/categories` — 分类管理（管理员）
 
 生产环境部署时请设置环境变量 `JWT_SECRET` 和 `PORT`。
+
+## Docker 部署（推荐：与宿主机其他项目隔离）
+
+在服务器上可完全用容器独立运行，不污染本机 Node 环境、不占用除指定端口和卷以外的资源。
+
+### 一键启动
+
+```bash
+# 构建并后台运行
+docker compose up -d --build
+
+# 查看日志
+docker compose logs -f
+```
+
+访问：**http://服务器IP:3000**
+
+### 常用命令
+
+```bash
+# 停止
+docker compose down
+
+# 停止并删除数据卷（慎用，会清空数据库）
+docker compose down -v
+
+# 仅重新构建镜像
+docker compose build --no-cache
+```
+
+### 数据持久化
+
+数据库文件通过 Docker 卷 `lnexam-data` 持久化，容器删除或重建后数据仍保留。卷位置可由 Docker 管理，如需备份可执行：
+
+```bash
+docker compose exec lnexam cat /app/server/data/lnexam.db > backup.db
+```
+
+### 自定义端口
+
+在 `docker-compose.yml` 中修改 `ports`，例如改为 `"8080:3000"` 即对外使用 8080 端口。
