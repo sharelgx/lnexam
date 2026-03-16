@@ -1,0 +1,17 @@
+{
+  "name": "lnexam-server",
+  "version": "1.0.0",
+  "description": "辽宁金融单招在线备考平台 - 后端",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node scripts/init-db.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

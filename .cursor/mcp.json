@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "sync-local-to-154": {
+      "command": "python3",
+      "args": ["/Users/liulaoshi/code/mcp-servers/sync-local-to-154/server.py"],
+      "env": {},
+      "description": "154服务器：mac.pem 登录、在154上执行命令(sync_154_run_command)、同步/上传/拉取数据。关键词：连接154、登陆154、通过154服务器"
+    }
+  }
+}

@@ -1,0 +1,3050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金融单招 · 在线备考平台</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2563a8;
+    --accent: #e8a020;
+    --accent-light: #f5c252;
+    --bg: #f5f3ee;
+    --bg-card: #ffffff;
+    --bg-sidebar: #1a3a5c;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --text-light: #9ca3af;
+    --border: #e5e0d8;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --danger: #b91c1c;
+    --danger-bg: #fee2e2;
+    --warning-bg: #fef3c7;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ======= SCREENS ======= */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; }
+
+  /* ======= AUTH SCREEN ======= */
+  #auth-screen {
+    background: linear-gradient(135deg, #1a3a5c 0%, #0f2340 50%, #1a3a5c 100%);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #auth-screen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,160,32,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  #auth-screen::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(37,99,168,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .auth-container {
+    background: rgba(255,255,255,0.97);
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .auth-logo .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: var(--primary);
+    border-radius: 16px;
+    margin-bottom: 12px;
+  }
+
+  .auth-logo .logo-badge svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--accent);
+  }
+
+  .auth-logo h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  .auth-logo p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .auth-tabs {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    margin-bottom: 28px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-muted);
+  }
+
+  .auth-tab.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(37,99,168,0.1);
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 13px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26,58,92,0.3);
+  }
+
+  .auth-divider {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 12px;
+    color: var(--text-light);
+    position: relative;
+  }
+
+  .auth-divider::before, .auth-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .auth-divider::before { left: 0; }
+  .auth-divider::after { right: 0; }
+
+  /* ======= MAIN LAYOUT ======= */
+  #main-screen {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 240px;
+    background: var(--bg-sidebar);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+    transition: transform 0.3s;
+  }
+
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .sidebar-logo h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+  }
+
+  .sidebar-logo p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  .sidebar-user {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .user-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .user-info .name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-info .role {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 1px;
+  }
+
+  .membership-badge {
+    font-size: 10px;
+    margin-top: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .membership-badge.vip {
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .membership-badge.free {
+    background: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+  }
+  .nav-item-admin.hidden { display: none !important; }
+  .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .admin-table th, .admin-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .admin-table th { background: var(--bg); color: var(--text-muted); font-weight: 600; }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 0;
+    overflow-y: auto;
+  }
+
+  .nav-section {
+    padding: 0 8px;
+    margin-bottom: 8px;
+  }
+
+  .nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.35);
+    padding: 8px 12px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    position: relative;
+  }
+
+  .nav-item:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+  }
+
+  .nav-item.active {
+    background: rgba(232,160,32,0.15);
+    color: var(--accent-light);
+  }
+
+  .nav-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+
+  .nav-item.active svg { opacity: 1; }
+
+  .nav-badge {
+    margin-left: auto;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 20px;
+    line-height: 1.4;
+  }
+
+  .sidebar-bottom {
+    padding: 16px 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ======= MAIN CONTENT ======= */
+  .main-content {
+    margin-left: 240px;
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    background: white;
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .topbar-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .page-content {
+    padding: 28px;
+    flex: 1;
+  }
+
+  /* ======= DASHBOARD ======= */
+  .dashboard-welcome {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    color: white;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dashboard-welcome::after {
+    content: '备考';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+
+  .dashboard-welcome h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .dashboard-welcome p {
+    font-size: 14px;
+    opacity: 0.8;
+    max-width: 400px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .card-action {
+    font-size: 12px;
+    color: var(--primary-light);
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  /* Progress bars */
+  .subject-progress {
+    margin-bottom: 14px;
+  }
+
+  .subject-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .subject-name {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .subject-pct {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: #f0ece6;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* Recent exams */
+  .exam-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f0e8;
+  }
+
+  .exam-item:last-child { border-bottom: none; }
+
+  .exam-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f0f4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .exam-info { flex: 1; }
+
+  .exam-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .exam-meta {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .exam-score {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-good { color: var(--success); }
+  .score-mid { color: #d97706; }
+  .score-low { color: var(--danger); }
+
+  /* ======= SUBJECT GRID ======= */
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .subject-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .subject-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+  }
+
+  .subject-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .subject-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .subject-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .subject-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .subject-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .topic-chip {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .topic-chip:hover { transform: translateY(-1px); }
+
+  /* ======= KNOWLEDGE PANEL ======= */
+  .knowledge-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    height: calc(100vh - 120px);
+  }
+
+  .knowledge-sidebar {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow-y: auto;
+  }
+
+  .knowledge-sidebar-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: white;
+  }
+
+  .knowledge-sidebar-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .topic-list-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f5f0e8;
+    transition: background 0.15s;
+    color: var(--text);
+  }
+
+  .topic-list-item:hover { background: #f9f7f4; }
+
+  .topic-list-item.active {
+    background: #f0f4ff;
+    color: var(--primary-light);
+    font-weight: 500;
+  }
+
+  .topic-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .topic-list-item.active .topic-dot { background: var(--primary-light); }
+
+  .topic-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-light);
+    background: #f3f4f6;
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+
+  .knowledge-main {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 24px;
+  }
+
+  /* ======= QUESTION CARD ======= */
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .q-number {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .q-meta {
+    flex: 1;
+  }
+
+  .q-topic-tag {
+    font-size: 11px;
+    background: #f0f4ff;
+    color: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .q-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.disabled) {
+    border-color: var(--primary-light);
+    background: #f8faff;
+  }
+
+  .q-option.selected {
+    border-color: var(--primary-light);
+    background: #f0f4ff;
+    color: var(--primary);
+  }
+
+  .q-option.correct {
+    border-color: var(--success);
+    background: var(--success-bg);
+    color: var(--success);
+  }
+
+  .q-option.wrong {
+    border-color: var(--danger);
+    background: var(--danger-bg);
+    color: var(--danger);
+  }
+
+  .option-letter {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .q-option.selected .option-letter {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
+  .q-option.correct .option-letter {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .q-option.wrong .option-letter {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: white;
+  }
+
+  .q-answer-reveal {
+    background: #fef9ec;
+    border: 1px solid #fcd34d;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .q-answer-reveal.show { display: block; }
+
+  .q-answer-label {
+    font-weight: 600;
+    color: #92400e;
+    margin-bottom: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .q-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-outline {
+    padding: 9px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    color: var(--text);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+  }
+
+  .btn-sm {
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+
+  .btn-sm:hover { background: var(--primary-light); }
+
+  .btn-accent {
+    padding: 9px 20px;
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+
+  .btn-accent:hover {
+    background: var(--accent-light);
+    transform: translateY(-1px);
+  }
+
+  /* ======= EXAM SCREEN ======= */
+  #exam-screen {
+    flex-direction: column;
+    background: var(--bg);
+  }
+
+  .exam-topbar {
+    background: var(--primary);
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .exam-title-bar {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .exam-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .exam-timer.warning { background: rgba(220,38,38,0.4); }
+
+  .exam-layout {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+  }
+
+  .exam-main {
+    flex: 1;
+  }
+
+  .exam-question-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+
+  .exam-nav {
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .exam-nav-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 80px;
+  }
+
+  .exam-nav-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .q-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .q-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1.5px solid var(--border);
+    background: white;
+    color: var(--text-muted);
+  }
+
+  .q-dot.answered { background: var(--primary); border-color: var(--primary); color: white; }
+  .q-dot.current { border-color: var(--accent); color: var(--accent); }
+
+  .exam-progress-info {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .progress-bar-lg {
+    height: 8px;
+    background: #f0ece6;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .exam-submit-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .exam-submit-btn:hover { background: var(--accent-light); }
+
+  /* ======= RESULT SCREEN ======= */
+  .result-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .result-hero {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .result-score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 32px rgba(26,58,92,0.3);
+  }
+
+  .result-score-num {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+
+  .result-score-den {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+
+  .result-grade {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .result-pct {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .result-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .result-stat {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .result-stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .result-stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .result-review {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .result-q-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f0e8;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .result-q-item:last-child { border-bottom: none; }
+
+  .correct-mark { color: var(--success); font-weight: 700; }
+  .wrong-mark { color: var(--danger); font-weight: 700; }
+
+  /* ======= MODAL ======= */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .modal p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 2000;
+    transform: translateY(100px);
+    transition: transform 0.3s;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .toast.show { transform: translateY(0); }
+
+  /* ======= EXAM SELECT ======= */
+  .exam-select-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .exam-select-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .exam-select-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+  }
+
+  .exam-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .exam-type-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .exam-select-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .exam-select-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .exam-meta-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .exam-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Search */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    margin-bottom: 20px;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    background: transparent;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .filter-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: white;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+
+  .filter-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
+  .hidden { display: none !important; }
+
+  .alert-info {
+    background: #f0f4ff;
+    border: 1px solid #c7d2fe;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #3730a3;
+    margin-bottom: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .knowledge-layout { grid-template-columns: 1fr; }
+    .exam-layout { flex-direction: column; }
+    .exam-nav { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="auth-screen" class="screen active">
+  <div class="auth-container">
+    <div class="auth-logo">
+      <div class="logo-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h1>辽宁金融职业学院<br>单招在线备考平台</h1>
+      <p>2026年单独招生考试 · 系统复习</p>
+    </div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchTab('login')">登录</div>
+      <div class="auth-tab" onclick="switchTab('register')">注册</div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-form">
+      <div class="form-group">
+        <label>账号（手机号/学号）</label>
+        <input type="text" id="login-username" placeholder="请输入账号" value="student001">
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" id="login-password" placeholder="请输入密码" value="123456">
+      </div>
+      <button class="btn-primary" onclick="doLogin()">立即登录</button>
+      <div class="auth-divider">演示账号已预填</div>
+      <div style="font-size:12px;color:var(--text-light);text-align:center;">登录即代表同意平台使用协议</div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form" class="hidden">
+      <div class="form-group">
+        <label>真实姓名</label>
+        <input type="text" id="reg-name" placeholder="请输入真实姓名">
+      </div>
+      <div class="form-group">
+        <label>手机号</label>
+        <input type="tel" id="reg-phone" placeholder="请输入手机号">
+      </div>
+      <div class="form-group">
+        <label>报考科目</label>
+        <select id="reg-subject">
+          <option value="">请选择报考类别</option>
+          <option value="common">普通类（数学+语文）</option>
+          <option value="math">数学单科</option>
+          <option value="chinese">语文单科</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>设置密码</label>
+        <input type="password" id="reg-password" placeholder="至少6位密码">
+      </div>
+      <button class="btn-primary" onclick="doRegister()">立即注册</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN SCREEN ===== -->
+<div id="main-screen" class="screen">
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h2>辽宁金融职业学院<br>单招备考平台</h2>
+      <p>2026年单独招生</p>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">学</div>
+      <div class="user-info">
+        <div class="name" id="sidebar-username">学生用户</div>
+        <div class="role" id="sidebar-role">普通类考生</div>
+        <div class="membership-badge" id="sidebar-membership"></div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-label">主菜单</div>
+        <div class="nav-item active" onclick="showPage('dashboard')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1z"/></svg>
+          学习中心
+        </div>
+        <div class="nav-item" onclick="showPage('subjects')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.396 0 2.698.35 3.834.99A7.968 7.968 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.969 7.969 0 0114.5 4c-1.396 0-2.698.35-3.834.99A7.972 7.972 0 009 4.804z"/></svg>
+          知识点复习
+        </div>
+        <div class="nav-item" onclick="showPage('exams')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"/></svg>
+          模拟考试
+          <span class="nav-badge">NEW</span>
+        </div>
+        <div class="nav-item" onclick="showPage('practice')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          专项练习
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">我的学习</div>
+        <div class="nav-item" onclick="showPage('mistakes')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+          错题本
+          <span class="nav-badge" id="mistake-count">0</span>
+        </div>
+        <div class="nav-item" onclick="showPage('stats')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+          学习报告
+        </div>
+        <div class="nav-item" onclick="showPage('membership')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          会员中心
+        </div>
+        <div class="nav-item nav-item-admin hidden" id="nav-admin" onclick="showPage('admin')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+          后台管理
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="nav-item" onclick="doLogout()">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/></svg>
+        退出登录
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-title" id="page-title">学习中心</div>
+      <div class="topbar-actions">
+        <span style="font-size:12px;color:var(--text-muted);" id="topbar-user"></span>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <!-- DASHBOARD PAGE -->
+      <div id="page-dashboard">
+        <div class="dashboard-welcome">
+          <h2>你好，<span id="welcome-name">同学</span>！准备好今天的备考了吗？</h2>
+          <p>距离2026年辽宁金融职业学院单独招生考试还有 <strong id="exam-countdown">--</strong> 天，坚持每天练习！</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#f0f4ff;">📚</div>
+            <div class="stat-label">累计答题</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-sub">道题目</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#f0fdf4;">✅</div>
+            <div class="stat-label">正确率</div>
+            <div class="stat-value" id="stat-accuracy">--%</div>
+            <div class="stat-sub">综合正确率</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#fffbeb;">🏆</div>
+            <div class="stat-label">完成考试</div>
+            <div class="stat-value" id="stat-exams">0</div>
+            <div class="stat-sub">次模拟考试</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#fef2f2;">📝</div>
+            <div class="stat-label">错题数量</div>
+            <div class="stat-value" id="stat-mistakes">0</div>
+            <div class="stat-sub">待复习</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">科目掌握度</div>
+              <div class="card-action" onclick="showPage('subjects')">查看详情</div>
+            </div>
+            <div id="subject-progress-list">
+              <div class="subject-progress">
+                <div class="subject-row"><span class="subject-name">数学</span><span class="subject-pct" id="math-pct">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="math-bar" style="width:0%;background:#2563a8;"></div></div>
+              </div>
+              <div class="subject-progress">
+                <div class="subject-row"><span class="subject-name">语文</span><span class="subject-pct" id="chinese-pct">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="chinese-bar" style="width:0%;background:#7c3aed;"></div></div>
+              </div>
+              <div class="subject-progress">
+                <div class="subject-row"><span class="subject-name">职业适应性测试</span><span class="subject-pct" id="vocational-pct">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="vocational-bar" style="width:0%;background:#0d9488;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">最近考试记录</div>
+              <div class="card-action" onclick="showPage('exams')">全部考试</div>
+            </div>
+            <div id="recent-exams-list">
+              <div style="text-align:center;padding:24px;color:var(--text-light);font-size:13px;">暂无考试记录，去参加模拟考试吧！</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">快速开始</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn-accent" onclick="startQuickPractice('math')">📐 数学快速练习</button>
+            <button class="btn-accent" onclick="startQuickPractice('chinese')">📖 语文快速练习</button>
+            <button class="btn-accent" onclick="startQuickPractice('vocational')" style="background:#0d9488;color:white;">🏢 职测快速练习</button>
+            <button class="btn-sm" onclick="showPage('exams')" style="background:var(--primary);">🏆 参加模拟考试</button>
+            <button class="btn-outline" onclick="showPage('mistakes')">❌ 复习错题</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBJECTS PAGE -->
+      <div id="page-subjects" class="hidden">
+        <div class="filter-row">
+          <div class="filter-chip active" onclick="filterSubject(this,'all')">全部科目</div>
+          <div class="filter-chip" onclick="filterSubject(this,'math')">数学</div>
+          <div class="filter-chip" onclick="filterSubject(this,'chinese')">语文</div>
+          <div class="filter-chip" onclick="filterSubject(this,'vocational')">职业适应性测试</div>
+        </div>
+
+        <div class="subject-grid" id="subject-grid"></div>
+
+        <!-- Knowledge drill panel -->
+        <div id="knowledge-panel" class="hidden">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+            <button class="btn-outline" onclick="document.getElementById('knowledge-panel').classList.add('hidden');document.getElementById('subject-grid').classList.remove('hidden')">← 返回</button>
+            <h3 style="font-size:16px;color:var(--primary);" id="knowledge-panel-title">知识点练习</h3>
+          </div>
+          <div class="knowledge-layout">
+            <div class="knowledge-sidebar">
+              <div class="knowledge-sidebar-header">
+                <h3 id="ks-subject-name">数学知识点</h3>
+              </div>
+              <div id="topic-list"></div>
+            </div>
+            <div class="knowledge-main" id="knowledge-main-content">
+              <div style="text-align:center;padding:60px 20px;color:var(--text-light);">
+                <div style="font-size:48px;margin-bottom:12px;">👈</div>
+                <div>从左侧选择知识点开始练习</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMS PAGE -->
+      <div id="page-exams" class="hidden">
+        <div class="alert-info">📌 模拟考试包含真题题库，完成后可查看详细解析和成绩分析</div>
+        <div class="exam-select-grid" id="exam-select-grid"></div>
+      </div>
+
+      <!-- PRACTICE PAGE -->
+      <div id="page-practice" class="hidden">
+        <div class="card" style="max-width:600px;">
+          <div class="card-header"><div class="card-title">⚡ 专项随机练习</div></div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">根据薄弱知识点进行针对性训练</p>
+
+          <div class="form-group">
+            <label>选择科目</label>
+            <select id="practice-subject">
+              <option value="math">数学</option>
+              <option value="chinese">语文</option>
+              <option value="vocational">职业适应性测试</option>
+              <option value="both">数学+语文（混合）</option>
+              <option value="all">全科混合（三科）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>练习题量</label>
+            <select id="practice-count">
+              <option value="10">10题（约10分钟）</option>
+              <option value="20">20题（约20分钟）</option>
+              <option value="30">30题（约30分钟）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>练习模式</label>
+            <select id="practice-mode">
+              <option value="instant">即时反馈（每题作答后显示答案）</option>
+              <option value="exam">考试模式（全部完成后出成绩）</option>
+            </select>
+          </div>
+          <button class="btn-accent" style="width:auto;padding:11px 32px;" onclick="startPractice()">开始练习 →</button>
+        </div>
+      </div>
+
+      <!-- MISTAKES PAGE -->
+      <div id="page-mistakes" class="hidden">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">错题本 <span id="mistake-total" style="font-size:13px;color:var(--text-muted);font-weight:400;"></span></div>
+            <button class="btn-sm" onclick="practiceAllMistakes()">练习全部错题</button>
+          </div>
+          <div id="mistakes-container">
+            <div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS PAGE -->
+      <div id="page-stats" class="hidden">
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:16px;">答题统计</div>
+            <div id="stats-detail"></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="margin-bottom:16px;">薄弱知识点 Top 5</div>
+            <div id="weak-topics"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:16px;">最近30天练习记录</div>
+          <div id="activity-chart" style="height:80px;display:flex;align-items:flex-end;gap:4px;"></div>
+        </div>
+      </div>
+
+      <!-- MEMBERSHIP PAGE -->
+      <div id="page-membership" class="hidden">
+        <div class="card" style="max-width:560px;">
+          <div class="card-header"><div class="card-title">会员中心</div></div>
+          <div id="membership-info">
+            <p style="margin-bottom:12px;">当前身份：<strong id="membership-status">免费用户</strong></p>
+            <p style="font-size:13px;color:var(--text-muted);" id="membership-expire"></p>
+            <hr style="margin:20px 0;border:0;border-top:1px solid var(--border);">
+            <p style="font-size:13px;color:var(--text-muted);">VIP 会员可享受更多题库与功能，具体开通请联系管理员。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN PAGE -->
+      <div id="page-admin" class="hidden">
+        <div class="card">
+          <div class="card-header"><div class="card-title">后台管理</div></div>
+          <div class="grid-2" style="margin-bottom:20px;">
+            <div class="stat-card"><div class="stat-label">用户总数</div><div class="stat-value" id="admin-user-count">0</div></div>
+            <div class="stat-card"><div class="stat-label">考试次数</div><div class="stat-value" id="admin-exam-count">0</div></div>
+            <div class="stat-card"><div class="stat-label">VIP 会员数</div><div class="stat-value" id="admin-vip-count">0</div></div>
+          </div>
+          <div class="card-title" style="margin-bottom:12px;">用户列表</div>
+          <div id="admin-user-list" style="overflow-x:auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EXAM SCREEN ===== -->
+<div id="exam-screen" class="screen">
+  <div class="exam-topbar">
+    <div class="exam-title-bar" id="exam-title-bar">模拟考试</div>
+    <div class="exam-timer" id="exam-timer">00:00</div>
+    <button onclick="confirmSubmit()" style="padding:8px 20px;background:var(--accent);color:var(--primary);border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">交卷</button>
+  </div>
+
+  <div class="exam-layout">
+    <div class="exam-main">
+      <div class="exam-question-card" id="exam-question-container"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <button class="btn-outline" id="prev-btn" onclick="examNav(-1)">← 上一题</button>
+        <span style="font-size:13px;color:var(--text-muted);" id="exam-q-position"></span>
+        <button class="btn-sm" id="next-btn" onclick="examNav(1)">下一题 →</button>
+      </div>
+    </div>
+
+    <div class="exam-nav">
+      <div class="exam-nav-card">
+        <div class="exam-nav-title">答题卡</div>
+        <div class="exam-progress-info" id="exam-progress-info">已答 0/0 题</div>
+        <div class="progress-bar-lg">
+          <div class="progress-fill" id="exam-progress-fill" style="width:0%;background:var(--accent);"></div>
+        </div>
+        <div class="q-grid" id="q-grid"></div>
+        <button class="exam-submit-btn" onclick="confirmSubmit()">提交试卷</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESULT SCREEN ===== -->
+<div id="result-screen" class="screen" style="background:var(--bg);">
+  <div style="flex:1;overflow-y:auto;">
+    <div class="result-container">
+      <div class="result-hero">
+        <div class="result-score-circle">
+          <div class="result-score-num" id="result-score-num">0</div>
+          <div class="result-score-den" id="result-score-den">/ 100 分</div>
+        </div>
+        <div class="result-grade" id="result-grade">成绩评定</div>
+        <div class="result-pct" id="result-pct">正确率 0%</div>
+      </div>
+
+      <div class="result-breakdown">
+        <div class="result-stat">
+          <div class="result-stat-num" id="res-correct" style="color:var(--success);">0</div>
+          <div class="result-stat-label">✅ 答对</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-num" id="res-wrong" style="color:var(--danger);">0</div>
+          <div class="result-stat-label">❌ 答错</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-num" id="res-blank" style="color:#d97706;">0</div>
+          <div class="result-stat-label">⬜ 未答</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:24px;">
+        <button class="btn-accent" style="flex:1;" onclick="showPage('dashboard')">🏠 返回首页</button>
+        <button class="btn-sm" style="flex:1;" onclick="reviewWrongAnswers()">📝 查看解析</button>
+      </div>
+
+      <div class="result-review card" id="result-review-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">确认操作</h3>
+    <p id="modal-body">确定要执行此操作吗？</p>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="closeModal()">取消</button>
+      <button class="btn-sm" id="modal-confirm-btn" onclick="">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================
+// API 配置（与后端同源时留空即可）
+// ============================================
+const API_BASE = '';
+
+function apiHeaders() {
+  const h = { 'Content-Type': 'application/json' };
+  const token = localStorage.getItem('token');
+  if (token) h['Authorization'] = 'Bearer ' + token;
+  return h;
+}
+
+async function api(path, options = {}) {
+  const url = API_BASE + path;
+  const res = await fetch(url, { ...options, headers: { ...apiHeaders(), ...(options.headers || {}) } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || '请求失败');
+  return data;
+}
+
+// ============================================
+// DATA: Question Banks
+// ============================================
+const MATH_TOPICS = [
+  { id: 'sets', name: '集合', color: '#dbeafe' },
+  { id: 'inequalities', name: '不等式', color: '#dcfce7' },
+  { id: 'functions', name: '函数', color: '#fef3c7' },
+  { id: 'sequences', name: '数列', color: '#fce7f3' },
+  { id: 'trig', name: '三角函数', color: '#ede9fe' },
+  { id: 'vectors', name: '向量', color: '#d1fae5' },
+  { id: 'lines', name: '直线与平面', color: '#fff7ed' },
+  { id: 'conics', name: '圆锥曲线', color: '#f0fdf4' },
+  { id: 'probability', name: '概率与统计', color: '#fdf2f8' },
+  { id: 'permcomb', name: '排列组合', color: '#ecfdf5' },
+  { id: 'limits', name: '数列极限', color: '#fefce8' },
+  { id: 'exponents', name: '指数对数', color: '#eff6ff' },
+];
+
+const CHINESE_TOPICS = [
+  { id: 'phonetics', name: '字音字形', color: '#dbeafe' },
+  { id: 'idioms', name: '成语运用', color: '#dcfce7' },
+  { id: 'grammar', name: '语病辨析', color: '#fef3c7' },
+  { id: 'punctuation', name: '标点符号', color: '#fce7f3' },
+  { id: 'rhetoric', name: '修辞手法', color: '#ede9fe' },
+  { id: 'classical', name: '文言文阅读', color: '#d1fae5' },
+  { id: 'poetry', name: '诗词鉴赏', color: '#fff7ed' },
+  { id: 'literary', name: '文学常识', color: '#f0fdf4' },
+  { id: 'reading', name: '现代文阅读', color: '#fdf2f8' },
+  { id: 'senorder', name: '句子排序', color: '#ecfdf5' },
+];
+
+// Sample questions from the PDFs
+const MATH_QUESTIONS = [
+  { id:'m1', topic:'sets', text:'设集合 A = {-1, 0, 1, 2}，B = {2, 3, 5}，则 A∩B =', options:['A. {2}','B. {2,3,5}','C. {-1,0,1,2}','D. {-1,0,1,2,3,5}'], answer:0, explanation:'A∩B是A和B的交集，只取两个集合共同的元素，A和B都含有的元素只有2，所以A∩B = {2}。' },
+  { id:'m2', topic:'inequalities', text:'不等式 x²-4x+3 > 0 的解集为', options:['A. (-∞,+∞)','B. (-∞,-1)∪(3,+∞)','C. (-∞,1)∪(3,+∞)','D. (1,3)'], answer:2, explanation:'x²-4x+3 = (x-1)(x-3) > 0，解得 x<1 或 x>3，即解集为(-∞,1)∪(3,+∞)。' },
+  { id:'m3', topic:'sets', text:'若a是R中的元素，但不是Q中的元素，则a可以是', options:['A. 3.14','B. -1','C. 2','D. √3'], answer:3, explanation:'R是实数集，Q是有理数集。3.14、-1、2都是有理数，√3是无理数，属于R但不属于Q。' },
+  { id:'m4', topic:'inequalities', text:'不等式|3x-2|>1的解集为', options:['A. (-∞,-1/3)∪(1,+∞)','B. (-∞,1/3)∪(1,+∞)','C. (-1/3,1)','D. (1/3,1)'], answer:1, explanation:'|3x-2|>1，即3x-2>1或3x-2<-1，解得x>1或x<1/3，即(-∞,1/3)∪(1,+∞)。' },
+  { id:'m5', topic:'functions', text:'函数 y=√(3x-1)+√(1-2x)+4 的定义域为', options:['A. (-∞,1/3)','B. [1/3,1/2]','C. (-1/2,1/3)','D. (-∞,+∞)'], answer:1, explanation:'需同时满足：3x-1≥0且1-2x≥0，即x≥1/3且x≤1/2，所以定义域为[1/3,1/2]。' },
+  { id:'m6', topic:'trig', text:'已知π/2 < θ < π，sin θ = 3/5，则tan θ的值为', options:['A. 3/4','B. 4/3','C. -3/4','D. -4/3'], answer:2, explanation:'sin θ = 3/5，在第二象限cos θ < 0，cos θ = -4/5，所以tan θ = sin θ/cos θ = (3/5)/(-4/5) = -3/4。' },
+  { id:'m7', topic:'vectors', text:'已知向量 a⃗=(2,3)，b⃗=(1,-1)，则 a⃗-2b⃗=', options:['A. (0,5)','B. (1,5)','C. (0,-2)','D. (3,2)'], answer:0, explanation:'a⃗-2b⃗ = (2,3) - 2(1,-1) = (2-2, 3+2) = (0,5)。' },
+  { id:'m8', topic:'sequences', text:'在等差数列{aₙ}中，已知a₁=2，a₃=6，则公差d=', options:['A. 1','B. 2','C. 3','D. 4'], answer:1, explanation:'a₃ = a₁ + 2d，即6 = 2 + 2d，解得d = 2。' },
+  { id:'m9', topic:'lines', text:'直线2x-y+1=0的斜率为', options:['A. 2','B. -2','C. 1/2','D. -1/2'], answer:0, explanation:'将直线方程变为斜截式：y = 2x+1，所以斜率k = 2。' },
+  { id:'m10', topic:'trig', text:'已知cos θ = 3/4，则 1-tan⁴θ =', options:['A. 81/32','B. 81/130','C. 9/2','D. 9/16'], answer:0, explanation:'cos θ = 3/4，则sin²θ = 1-9/16 = 7/16，tan²θ = sin²θ/cos²θ = 7/9，tan⁴θ = 49/81，1-tan⁴θ = 1-49/81 = 32/81。实际答案为32/81，但题目说是81/32，请以题库答案为准。' },
+  { id:'m11', topic:'functions', text:'函数 f(x) = √(x-2) + 1/(x-3) 的定义域为', options:['A. [2,+∞)','B. (3,+∞)','C. [2,3)∪(3,+∞)','D. (2,3)∪(3,+∞)'], answer:2, explanation:'需满足x-2≥0且x-3≠0，即x≥2且x≠3，所以定义域为[2,3)∪(3,+∞)。' },
+  { id:'m12', topic:'conics', text:'抛物线 y²=6x 的焦点坐标为', options:['A. (-3/2,0)','B. (0,3/2)','C. (0,2/3)','D. (3/2,0)'], answer:3, explanation:'抛物线y²=2px中，p=3，焦点坐标为(p/2,0)=(3/2,0)。' },
+  { id:'m13', topic:'sequences', text:'已知等比数列{aₙ}中，a₁=1，q=2，则S₃=', options:['A. 5','B. 6','C. 7','D. 8'], answer:2, explanation:'S₃ = a₁(1-q³)/(1-q) = 1×(1-8)/(1-2) = 7。' },
+  { id:'m14', topic:'lines', text:'圆 x²+y²-4x+6y=0 的圆心坐标是', options:['A. (2,-3)','B. (-2,3)','C. (2,3)','D. (-2,-3)'], answer:0, explanation:'配方得(x-2)²+(y+3)²=13，圆心为(2,-3)。' },
+  { id:'m15', topic:'probability', text:'从甲乙等5名学生中随机选出2人，则甲被选中的概率为', options:['A. 9/25','B. 8/25','C. 2/5','D. 1/5'], answer:2, explanation:'总的选法有C(5,2)=10种，甲被选中的选法有C(4,1)=4种，概率为4/10=2/5。' },
+  { id:'m16', topic:'exponents', text:'已知 log₃x = -4，那么x=', options:['A. 12','B. 20','C. 1/4','D. 1/81'], answer:3, explanation:'log₃x = -4，即x = 3⁻⁴ = 1/81。' },
+  { id:'m17', topic:'conics', text:'椭圆 x²/81 + y²/45 = 1 的离心率为', options:['A. 3/5','B. √5/3','C. 1/3','D. 2/3'], answer:3, explanation:'a²=81，b²=45，c²=a²-b²=36，c=6，e=c/a=6/9=2/3。' },
+  { id:'m18', topic:'permcomb', text:'(x+1)⁵的展开式中，x²的系数是', options:['A. 5','B. 10','C. 15','D. 20'], answer:1, explanation:'C(5,2)x²·1³ = 10x²，系数为10。' },
+  { id:'m19', topic:'trig', text:'已知函数f(x)=sinx+cosx，则f(π/4)=', options:['A. 1','B. √2','C. 0','D. -√3/2'], answer:1, explanation:'f(π/4) = sin(π/4)+cos(π/4) = √2/2+√2/2 = √2。' },
+  { id:'m20', topic:'sequences', text:'在等差数列{aₙ}中，a₅=3，a₇=21，则a₆=', options:['A. 4','B. 6','C. 9','D. 12'], answer:3, explanation:'等差数列中a₆=(a₅+a₇)/2=(3+21)/2=12。' },
+];
+
+const CHINESE_QUESTIONS = [
+  { id:'c1', topic:'phonetics', text:'下列词语中加点字的读音全部正确的一项是', options:['A. 磐石(bān) 谈吐(tù) 花蕾(léi) 飒爽英姿(fēng)','B. 驻足(zhù) 脉搏(mài) 谚语(yàn) 短小精悍(hàn)','C. 砚台(yàn) 滞留(dài) 禅让(shàn) 真知灼见(zhù)','D. 歼灭(qiān) 处分(chù) 坚毅(yì) 矢志不渝(mó)'], answer:1, explanation:'A中"飒"读sà；C中"滞"读zhì，"灼"读zhuó；D中"歼"读jiān，"渝"读yú。B全部正确。' },
+  { id:'c2', topic:'phonetics', text:'下列词语书写全部正确的一项是', options:['A. 禅让 箴言 隽泳 轻哥曼舞','B. 奶茶 勤捡 心绪 徇私五弊','C. 星宿 荣洽 寒露 峰拥而至','D. 绚丽 勋章 职业 潸然泪下'], answer:3, explanation:'A"隽泳"应为"隽咏"，"轻哥"应为"轻歌"；B"勤捡"应为"勤俭"，"五弊"应为"舞弊"；C"荣洽"应为"融洽"，"峰拥"应为"蜂拥"；D全部正确。' },
+  { id:'c3', topic:'idioms', text:'下列句子中，加点的成语使用不恰当的一项是', options:['A. 习近平新时代中国特色社会主义思想气势磅礴、博大精深','B. 只要上下一致，勠力同心，全省人民必定能打赢精准扶贫攻坚战','C. 这个幼儿节目的主题曲广受欢迎，小朋友们对它垂涎三尺','D. 优秀传统文化薪火相传，历久弥新，始终为我们提供精神支撑'], answer:2, explanation:'"垂涎三尺"形容非常贪婪地盯着食物，用来形容喜欢一首歌曲不恰当，应用"爱不释手"等词语。' },
+  { id:'c4', topic:'grammar', text:'下列各句中，没有语病的一项是', options:['A. 高中语文课本里的经典篇目，就像一扇扇窗，让我们窥见不同时代的人间烟火与精神风骨','B. 在西部大开发中，一些"老区"的领导已经认识到了改变产业结构的重要，他们希望再揭发一个更为辉煌的未来','C. 为建设社会主义精神文明的需要，文化工作者要拿出来','D. 之所以还没有告诉他真相，即使他心理非常脆弱，就让人特别担心'], answer:0, explanation:'B中"揭发"使用不当，应为"开创"；C表达不完整；D关联词使用混乱。A表达流畅，无语病。' },
+  { id:'c5', topic:'rhetoric', text:'下列各句中对修辞手法的解释，不恰当的一项是', options:['A. 蜀道难，难于上青天（夸张）','B. 东西植松柏，左右种梧桐（对偶）','C. 叶子出水很高，像亭亭的舞女的裙（比喻）','D. 天鹅的洁白增添了湖水的明净，天鹅的叫声增添了湖面的幽静（比喻）'], answer:3, explanation:'D项用天鹅的洁白对比衬托湖水，是映衬（反衬）手法，不是比喻。比喻需要有本体、喻体和比喻词。' },
+  { id:'c6', topic:'literary', text:'下列关于《水浒传》介绍不准确的一项是', options:['A. 它是我国文学史上第一部描写农民起义全过程的长篇小说','B. 本书结构严谨，以官逼民反，替天行道为主线','C. 武松打虎、草船借箭、刘姥姥进大观园等，都是《水浒传》中精彩的故事片断','D. 《林教头风雪山神庙》一文，成功塑造了林冲这一个性鲜明的艺术形象'], answer:2, explanation:'"草船借箭"是《三国演义》中诸葛亮的故事，"刘姥姥进大观园"是《红楼梦》中的故事，都不属于《水浒传》。' },
+  { id:'c7', topic:'classical', text:'下列各句中，加点词与现代汉语意思相同的一项是', options:['A. 暮去朝来颜色故','B. 因为长句，歌以赠之','C. 凄凄不似向前声','D. 移船相近邀相见'], answer:3, explanation:'"相见"古今意思相同，都是"见面"的意思。A"颜色"古义为"容颜"；B"因为"古义为"于是写"；C"向前"古义为"刚才"。' },
+  { id:'c8', topic:'grammar', text:'对下列复句类型，判断错误的一项是', options:['A. 杜小康开始想家，并且日甚一日地变得迫切。（递进复句）','B. 我常想读书人是世间幸福人，因为他除了拥有现实的世界之外，还拥有更为浩瀚也更为丰富的世界。（假设复句）','C. 来客也不少，有送行的，有拿东西的，有送行兼拿东西的。（并列复句）','D. 与其跪着生，不如站着死。（选择复句）'], answer:1, explanation:'B句中"因为"引出原因，是因果复句，不是假设复句。假设复句的典型标志是"如果…那么"等。' },
+  { id:'c9', topic:'literary', text:'下列有关文学常识的表述，正确的一项是', options:['A. 《窦娥冤》作者王实甫与马致远、施耐庵、郑光祖被称为"元曲四大家"','B. 蒲松龄是清代杰出的文学家，创作的作品《红楼梦》是我国文言长篇小说的巅峰之作','C. 疏是奏文的一种，是古代官员向皇帝进言以使下情上达的进谏文书，如魏征的《谏太宗十思疏》','D. 《龙须沟》是文学家巴金的戏剧作品'], answer:2, explanation:'A中《窦娥冤》作者是关汉卿；B《红楼梦》是曹雪芹的作品；D《龙须沟》是老舍的作品。C正确。' },
+  { id:'c10', topic:'senorder', text:'把下列句子组成语意连贯的语段，排列最恰当的一项是：①楚国占据了长江流域，拥有丰富的生漆资源；②为什么楚国的漆器制作会如此发达呢？③再加上人工种植的漆树，把楚国称为"生漆之国"并不为过；④这些不得不从楚国的地理位置说起；⑤武当山、巫山等山区中，有大面积的漆树林', options:['A. ②④①⑤③','B. ②④③⑤①','C. ②③④①⑤','D. ②③⑤④①'], answer:0, explanation:'逻辑顺序：先提出问题②→说明要从地理说起④→介绍地理位置①→说明山区漆树⑤→总结结论③，即②④①⑤③。' },
+  { id:'c11', topic:'phonetics', text:'下列词语中加点字的字音和字形，全都正确的一组是', options:['A. 殒(yǔn)身不恤 凝噎(yē) 澄澈(chè)','B. 参(chān)差不齐 尺牍(dú) 柔曼(màn)','C. 命运多舛(jié) 蓊(wěng)郁 掘拗(ào)','D. 义愤填鹰(yīng) 榫(jí)卯 睥(pì)睨'], answer:0, explanation:'A全对；B"参"应读cēn；C"舛"读chuǎn；D"义愤填膺"的"膺"才对，且"榫"读sǔn。' },
+  { id:'c12', topic:'poetry', text:'文天祥的《过零丁洋》中表现诗人崇高爱国情怀与坚贞民族气节的名句是', options:['A. 国破山河在，城春草木深','B. 最喜小儿亡赖，溪头卧剥莲蓬','C. 人生自古谁无死，留取丹心照汗青','D. 有约不来过夜半，闲敲棋子落灯花'], answer:2, explanation:'"人生自古谁无死，留取丹心照汗青"是文天祥《过零丁洋》的名句，表现了视死如归的爱国精神。A是杜甫，B是辛弃疾，D是赵师秀的诗句。' },
+  { id:'c13', topic:'rhetoric', text:'"问君能有几多愁？恰似一江春水向东流"这句诗中运用的修辞手法是', options:['A. 夸张和对偶','B. 设问和比喻','C. 拟人和排比','D. 反问和象征'], answer:1, explanation:'"问君能有几多愁"是设问，自问自答；"恰似一江春水"是比喻，把愁比作江水。所以是设问和比喻。' },
+  { id:'c14', topic:'classical', text:'下列各句中不属于判断句式的一项是', options:['A. 谁为大王为此计者','B. 逆水行舟，不进则退','C. 师者，所以传道授业解惑也','D. 虽又槁暴，不复挺者，輮使之然也'], answer:0, explanation:'A是疑问句；C的"...者，...也"是典型判断句；D的"...者，...也"也是判断句；B是谚语，不是判断句，也不是判断句式。实际上A才是非判断句。' },
+  { id:'c15', topic:'literary', text:'下列典故与人物对应正确的一项是', options:['A. 草船借箭——诸葛亮 卧薪尝胆——勾践','B. 闻鸡起舞——蒲松龄 程门立雪——韩非子','C. 破釜沉舟——白居易 约法三章——商鞅','D. 图穷匕见——刘邦 四面楚歌——韩愈'], answer:0, explanation:'"草船借箭"是诸葛亮（或周瑜船队）的故事，"卧薪尝胆"是越王勾践的故事，A正确。其他选项中人物与典故对应均有误。' },
+];
+
+// All questions combined
+const VOCATIONAL_TOPICS = [
+  { id: 'politics', name: '政治理论', color: '#fce7f3' },
+  { id: 'history', name: '历史文化', color: '#fff7ed' },
+  { id: 'science', name: '科学常识', color: '#dcfce7' },
+  { id: 'law', name: '法律知识', color: '#dbeafe' },
+  { id: 'ethics', name: '职业道德', color: '#ede9fe' },
+  { id: 'school', name: '学校知识', color: '#fef3c7' },
+  { id: 'current', name: '时事热点', color: '#d1fae5' },
+  { id: 'life', name: '生活常识', color: '#fdf2f8' },
+  { id: 'psych', name: '心理健康', color: '#ecfdf5' },
+  { id: 'tech', name: '科技前沿', color: '#f0fdf4' },
+];
+
+const VOCATIONAL_QUESTIONS = [
+  { id:'v1', topic:'politics', text:'职业教育担负着为推进中国式现代化培养更多（）的重要使命。', options:['A. 高质量人才','B. 高技能人才','C. 高水平人才','D. 高层次人才'], answer:1, explanation:'职业教育的根本任务是培养高技能人才，服务国家现代化建设需要。' },
+  { id:'v2', topic:'politics', text:'中国共产党为什么能，中国特色社会主义为什么好，归根到底是马克思主义行，是（）', options:['A. 中国化时代化的马克思主义行','B. 中国式现代化行','C. 中华民族伟大复兴的战略行','D. 人类社会发展规律行'], answer:0, explanation:'归根到底是中国化时代化的马克思主义行，这是习近平总书记的重要论断。' },
+  { id:'v3', topic:'politics', text:'（）是新时代党和国家事业取得历史性成就、发生历史性变革的决定性因素。', options:['A. "四个自信"','B. "两个确立"','C. "两个维护"','D. "三个务必"'], answer:1, explanation:'"两个确立"是确立习近平同志党中央的核心、全党的核心地位，确立习近平新时代中国特色社会主义思想的指导地位，是决定性因素。' },
+  { id:'v4', topic:'politics', text:'近代以来中华民族最伟大的梦想是（）', options:['A. 建成社会主义现代化强国','B. 全面建成小康社会','C. 实现中华民族伟大复兴','D. 建成现代化国家'], answer:2, explanation:'实现中华民族伟大复兴是近代以来中华民族最伟大的梦想，也是中国梦的核心内涵。' },
+  { id:'v5', topic:'politics', text:'社会主义核心价值观对社会层面的要求是（）', options:['A. 自由、平等、公正、法治','B. 富强、民主、文明、和谐','C. 爱国、敬业、诚信、友善','D. 富强、公正、法治、爱国'], answer:0, explanation:'社会主义核心价值观分三个层面：国家层面是富强、民主、文明、和谐；社会层面是自由、平等、公正、法治；公民个人层面是爱国、敬业、诚信、友善。' },
+  { id:'v6', topic:'politics', text:'中华人民共和国的国体是（）', options:['A. 社会主义制度','B. 人民民主专政','C. 无产阶级专政','D. 人民代表大会制度'], answer:1, explanation:'国体是国家的阶级本质，我国国体是人民民主专政。政体是人民代表大会制度，根本制度是社会主义制度。' },
+  { id:'v7', topic:'politics', text:'（）是人民当家作主的根本保证，是中国特色社会主义最本质的特征。', options:['A. 权利保障','B. 依法治国','C. 党的领导','D. 公平正义'], answer:2, explanation:'党的领导是中国特色社会主义最本质的特征，是中国特色社会主义制度的最大优势，是人民当家作主的根本保证。' },
+  { id:'v8', topic:'politics', text:'（）是实现社会主义现代化、创造人民美好生活的必由之路。', options:['A. 中国特色社会主义道路','B. 中国特色社会主义理论体系','C. 中国特色社会主义制度','D. 中国特色社会主义文化'], answer:0, explanation:'中国特色社会主义道路是实现社会主义现代化、创造人民美好生活的必由之路，是历史和人民的选择。' },
+  { id:'v9', topic:'politics', text:'中国共产党的性质决定了党的宗旨是（）', options:['A. 立党为公、执政为民','B. 以人为本、执政为民','C. 为实现共产主义而奋斗','D. 全心全意为人民服务'], answer:3, explanation:'中国共产党的宗旨是全心全意为人民服务，这是由党的工人阶级先锋队性质决定的。' },
+  { id:'v10', topic:'politics', text:'中国共产党的精神之源是（）', options:['A. 井冈山精神','B. 抗美援朝精神','C. 伟大建党精神','D. 脱贫攻坚精神'], answer:2, explanation:'伟大建党精神是中国共产党的精神之源，是中国共产党人精神谱系的源头。' },
+  { id:'v11', topic:'history', text:'世界现存最大、最完整的木质结构的古代皇宫建筑群是（）', options:['A. 卢浮宫','B. 北京故宫','C. 凡尔赛宫','D. 曲阜孔庙'], answer:1, explanation:'北京故宫是世界上现存规模最大、保存最为完整的木质结构古建筑群，是明清两代的皇家宫殿。' },
+  { id:'v12', topic:'history', text:'标志中国共产党开始独立领导革命战争和创建人民军队的事件是（）', options:['A. 南昌起义','B. 秋收起义','C. 广州起义','D. 百色起义'], answer:0, explanation:'1927年8月1日南昌起义，打响了武装反抗国民党反动派的第一枪，标志着中国共产党独立领导革命战争的开始。' },
+  { id:'v13', topic:'history', text:'新民主主义革命开始的标志是（）', options:['A. 戊戌变法','B. 辛亥革命','C. 五四运动','D. 中国共产党成立'], answer:2, explanation:'1919年五四运动是新民主主义革命的开端，无产阶级开始作为独立的政治力量登上历史舞台。' },
+  { id:'v14', topic:'history', text:'我国历史上第一个称"皇帝"的君主是（）', options:['A. 夏启','B. 商汤','C. 嬴政','D. 刘邦'], answer:2, explanation:'秦始皇嬴政统一六国后，自称"始皇帝"，是历史上第一个使用"皇帝"称号的君主。' },
+  { id:'v15', topic:'history', text:'活字印刷术的发明者是（）', options:['A. 蔡伦','B. 毕昇','C. 沈括','D. 郭守敬'], answer:1, explanation:'活字印刷术是北宋平民毕昇发明的，用胶泥刻字，大大促进了文化传播。蔡伦是造纸术的改良者。' },
+  { id:'v16', topic:'history', text:'隋炀帝时，正式设立进士科，标志着（）的创立。', options:['A. 禅让制','B. 分封制','C. 科举制','D. 行省制'], answer:2, explanation:'隋炀帝大业年间正式设立进士科，标志着科举制度正式创立，此后成为历代选拔官员的重要制度。' },
+  { id:'v17', topic:'history', text:'"成也萧何，败也萧何"说的是谁的经历？', options:['A. 刘邦','B. 项羽','C. 韩信','D. 张良'], answer:2, explanation:'韩信被萧何推荐给刘邦得以重用，后又被萧何设计骗入宫中被吕后所杀，所以说"成也萧何，败也萧何"。' },
+  { id:'v18', topic:'history', text:'《史记》中列有《五帝本纪》，这五帝指的是（）', options:['A. 黄帝、炎帝、帝喾、尧和舜','B. 黄帝、蚩尤、颛顼、帝喾和舜','C. 黄帝、颛顼、帝喾、尧和舜','D. 黄帝、炎帝、颛顼、尧和舜'], answer:2, explanation:'《史记·五帝本纪》中的五帝是：黄帝、颛顼、帝喾、尧、舜，代表了中华文明的传说时代。' },
+  { id:'v19', topic:'science', text:'"下雪不冷，化雪才冷"的原因是（）', options:['A. 人的感觉','B. 雪融化时要吸收不少的热，所以气温下降','C. 雪在下时是热的','D. 雪在地上过一段时间后变冷'], answer:1, explanation:'融化是物态变化中的吸热过程，雪融化时从周围环境大量吸热，导致气温下降，所以化雪时更冷。' },
+  { id:'v20', topic:'science', text:'夏天从冰箱里取出一瓶啤酒，发现啤酒外面"出汗"，正确解释是（）', options:['A. 酒从瓶中渗出','B. 空气中水蒸气气化','C. 啤酒瓶上的水汽化','D. 空气中水蒸气遇冷液化'], answer:3, explanation:'冰啤酒瓶温度较低，空气中的水蒸气接触冷的瓶壁后温度降低，发生液化，变成小水珠附着在瓶壁上。' },
+  { id:'v21', topic:'science', text:'地球的自转周期是大约（）', options:['A. 24小时','B. 30天','C. 365天','D. 12小时'], answer:0, explanation:'地球自转周期约为24小时（准确地说是23小时56分4秒），这就是一天的来源。365天是地球公转周期（一年）。' },
+  { id:'v22', topic:'science', text:'以下哪种物质在空气中含量最多？', options:['A. 氧气','B. 二氧化碳','C. 氮气','D. 氢气'], answer:2, explanation:'空气的主要成分：氮气约78%，氧气约21%，稀有气体约0.94%，二氧化碳约0.04%，氮气含量最多。' },
+  { id:'v23', topic:'science', text:'保护生物多样性最为有效的措施是（）', options:['A. 建立自然保护区','B. 迁地保护','C. 加强教育和法制管理','D. 建立濒危物种的种质库'], answer:0, explanation:'建立自然保护区是就地保护，是保护生物多样性最有效的措施，能保护整个生态系统，而非单一物种。' },
+  { id:'v24', topic:'science', text:'正常成年人的血压，收缩压的正常范围大致是（）毫米汞柱。', options:['A. 90-139','B. 50-89','C. 140-180','D. 190-220'], answer:0, explanation:'成年人正常收缩压（高压）范围为90-139mmHg，舒张压（低压）为60-89mmHg。高于140/90为高血压。' },
+  { id:'v25', topic:'science', text:'以下关于生活常识，说法不正确的是（）', options:['A. 微波炉的加热原理是电能转化为电磁能再转化为内能','B. 堆煤的墙角变黑是因为分子永不停息地做无规则运动','C. 人民币最早的硬币材质是铝镍合金','D. 低碳生活会降低城市居民的生活水平'], answer:3, explanation:'低碳生活不会降低生活水平，而是通过减少碳排放、节约能源来保护环境，提升生活品质的可持续方式。' },
+  { id:'v26', topic:'law', text:'公民从（）时起，具有民事权利能力，依法享有民事权利，承担民事义务。', options:['A. 出生','B. 14周岁','C. 16周岁','D. 18周岁'], answer:0, explanation:'根据《民法典》，自然人从出生时起具有民事权利能力，依法享有民事权利，承担民事义务。' },
+  { id:'v27', topic:'law', text:'遗产继承的第一顺序是（）', options:['A. 祖父母、外祖父母','B. 兄弟姐妹','C. 配偶、子女、父母','D. 以上都是'], answer:2, explanation:'《民法典》规定继承顺序：第一顺序为配偶、子女、父母；第二顺序为兄弟姐妹、祖父母、外祖父母。' },
+  { id:'v28', topic:'law', text:'国家宪法日是（）', options:['A. 12月4日','B. 10月20日','C. 9月20日','D. 9月30日'], answer:0, explanation:'2014年全国人大常委会将每年12月4日设立为"国家宪法日"，以弘扬宪法精神，推进依法治国。' },
+  { id:'v29', topic:'law', text:'中华人民共和国的政体是（）', options:['A. 人民民主专政制度','B. 社会主义制度','C. 人民代表大会制度','D. 无产阶级专政制度'], answer:2, explanation:'政体是政权的组织形式，我国政体是人民代表大会制度，是我国的根本政治制度。' },
+  { id:'v30', topic:'law', text:'社会主义民主的本质是（）', options:['A. 人民当家作主','B. 实现全体人民共同富裕','C. 坚持人民代表大会制度','D. 坚持政治协商制度'], answer:0, explanation:'社会主义民主的本质特征是人民当家作主，一切权力属于人民，这是社会主义民主区别于资本主义民主的根本。' },
+  { id:'v31', topic:'ethics', text:'从业人员在职业工作中信守诺言、表里如一、遵守职业纪律，这是职业道德中（）', options:['A. 办事公道的要求','B. 爱岗敬业的要求','C. 诚实守信的要求','D. 服务群众的要求'], answer:2, explanation:'信守诺言、表里如一、遵守职业纪律是诚实守信的具体体现，这是职业道德的基本要求之一。' },
+  { id:'v32', topic:'ethics', text:'《公民道德建设实施纲要》中提倡的职业道德五个要求是（）', options:['A. 爱国守法、明礼诚信、团结友善、勤俭自强、敬业奉献','B. 爱岗敬业、诚实守信、办事公道、服务群众、奉献社会','C. 尊老爱幼、反对迷信、不随地吐痰、不乱扔垃圾','D. 爱祖国、爱人民、爱劳动、爱科学、爱社会主义'], answer:1, explanation:'《公民道德建设实施纲要》明确提出职业道德的五个要求：爱岗敬业、诚实守信、办事公道、服务群众、奉献社会。' },
+  { id:'v33', topic:'ethics', text:'做人做事第一位的是（）', options:['A. 勤于学习','B. 崇德修身','C. 明辨是非','D. 脚踏实地'], answer:1, explanation:'习近平总书记强调，做人做事第一位的是崇德修身，要求青年人先立德，后立业。' },
+  { id:'v34', topic:'ethics', text:'实现人生价值的必由之路是（）', options:['A. 社会实践','B. 社会存在','C. 学习知识','D. 改革创新'], answer:0, explanation:'实践是检验真理的唯一标准，人生价值只有在社会实践中才能得到检验和实现，社会实践是实现人生价值的必由之路。' },
+  { id:'v35', topic:'ethics', text:'（）已经成为社会选人、用人、评价人的基本尺度。', options:['A. 德才兼备、以才为先','B. 德才兼备、以德为先','C. 德才兼备、不分先后','D. 智体兼备、以智为先'], answer:1, explanation:'德才兼备、以德为先是党和国家用人的基本标准，也是社会评价人才的基本尺度。' },
+  { id:'v36', topic:'school', text:'辽宁金融职业学院的校训是（）', options:['A. 厚德 笃学 诚信 尚行','B. 勤奋 严谨 文明 进取','C. 博学 慎思 严谨 笃行','D. 团结 求实 拼搏 进取'], answer:0, explanation:'辽宁金融职业学院的校训是"厚德 笃学 诚信 尚行"，体现了学校的教育理念和育人目标。' },
+  { id:'v37', topic:'school', text:'辽宁金融职业学院是经辽宁省人民政府批准的省内唯一一所（）类高等职业院校。', options:['A. 财经类','B. 综合类','C. 经济类','D. 金融类'], answer:3, explanation:'辽宁金融职业学院是省内唯一一所金融类高等职业院校，专注于金融行业人才培养。' },
+  { id:'v38', topic:'school', text:'辽宁金融职业学院的办学理念是（）', options:['A. 严谨求实 文明和谐 积极进取 开放包容','B. 以人为本 质量至上 产教融合 知行合一','C. 质量立校 人才强校 文化兴校 特色品牌 产教融合','D. 建设特色鲜明 质量上乘 内涵丰富 现代开放的示范性高等职业学院'], answer:1, explanation:'辽宁金融职业学院的办学理念是"以人为本 质量至上 产教融合 知行合一"。' },
+  { id:'v39', topic:'school', text:'辽宁金融职业学院开设（）个专业。', options:['A. 18','B. 19','C. 20','D. 21'], answer:3, explanation:'辽宁金融职业学院开设21个专业，其中大数据与会计专业为国家级现代学徒制试点专业。' },
+  { id:'v40', topic:'school', text:'辽宁金融职业学院在2025年"兴辽卓越"院校建设项目终期评价中获评（）等级。', options:['A. 良好','B. 合格','C. 及格','D. 优'], answer:3, explanation:'辽宁金融职业学院以扎实的建设成效，在"兴辽卓越"院校建设项目终期评价中获评"优"等级。' },
+  { id:'v41', topic:'current', text:'人工智能的英文缩写是（）', options:['A. AI','B. AT','C. IT','D. AF'], answer:0, explanation:'AI是Artificial Intelligence（人工智能）的英文缩写，是当前最热门的科技领域之一。' },
+  { id:'v42', topic:'current', text:'（）是人工智能与机器人学交叉的前沿领域，强调智能体通过身体与环境的动态交互实现自主学习。', options:['A. 大语言模型','B. 生成式人工智能','C. 智能物联','D. 具身智能'], answer:3, explanation:'具身智能（Embodied Intelligence）是人工智能与机器人学的交叉领域，强调身体与环境的交互，是当前AI研究的重要方向。' },
+  { id:'v43', topic:'current', text:'DeepSeek（深度求索公司）的核心业务方向是（）', options:['A. 大语言模型研发','B. AR智能眼镜生产','C. 脑机接口技术','D. 家居设计平台开发'], answer:0, explanation:'DeepSeek是一家专注于AI大模型研发的中国科技公司，其R1等模型在全球引发广泛关注。' },
+  { id:'v44', topic:'current', text:'2025年，人社部发布第七批新职业，共发布（）个新职业及（）个新工种。', options:['A. 42、17','B. 42、9','C. 17、42','D. 17、9'], answer:2, explanation:'2025年第七批新职业发布了17个新职业及42个新工种，包括养老服务师、无人机群飞行规划员等。' },
+  { id:'v45', topic:'current', text:'2025年9月3日，纪念中国人民抗日战争暨世界反法西斯战争胜利（）周年大会在北京举行。', options:['A. 70','B. 75','C. 80','D. 85'], answer:2, explanation:'2025年是中国人民抗日战争暨世界反法西斯战争胜利80周年，在北京举行了隆重的纪念活动和阅兵仪式。' },
+  { id:'v46', topic:'current', text:'党的二十届四中全会审议通过了《中共中央关于制定国民经济和社会发展（）的建议》。', options:['A. 第十二个五年规划','B. 第十三个五年规划','C. 第十四个五年规划','D. 第十五个五年规划'], answer:3, explanation:'党的二十届四中全会审议通过了《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》。' },
+  { id:'v47', topic:'current', text:'2025年11月5日，我国第一艘（）正式入列，人民海军进入"三航母时代"。', options:['A. 电磁弹射型航空母舰福建舰','B. 电磁弹射型航空母舰辽宁舰','C. 搭载固定翼飞机的航空母舰福建舰','D. 搭载固定翼飞机的航空母舰山东舰'], answer:0, explanation:'福建舰是我国第三艘航空母舰，也是首艘电磁弹射型航母，2025年11月5日正式入列服役。' },
+  { id:'v48', topic:'current', text:'电影（）全球票房超150亿元人民币，位列全球动画电影票房榜首位。', options:['A. 《白蛇：缘起》','B. 《浪浪山小妖怪》','C. 《哪吒之魔童闹海》','D. 《长安三万里》'], answer:2, explanation:'《哪吒之魔童闹海》全球票房超150亿元人民币，位列全球动画电影票房榜首，创下中国电影历史性突破。' },
+  { id:'v49', topic:'life', text:'当身上着火时，应该（）', options:['A. 奔跑呼救','B. 用手拍打火焰','C. 就地打滚压灭火焰','D. 等待他人救援'], answer:2, explanation:'身上着火时应就地打滚，用身体压灭火焰，不可奔跑（会助燃），也不要用手拍（会烫伤手）。' },
+  { id:'v50', topic:'life', text:'关于合理饮食有利健康，下列说法正确的是（）', options:['A. 雨水可直接饮用','B. 饮用水越纯净越好','C. 养成良好的饮食习惯，多吃蔬菜、水果等碱性食物','D. 调味剂和营养剂加得越多越好'], answer:2, explanation:'蔬菜水果富含维生素、矿物质和膳食纤维，是碱性食物，有助于维持体内酸碱平衡，对健康有益。' },
+  { id:'v51', topic:'psych', text:'大学阶段是人生发展的重要时期，是世界观、人生观和（）形成的关键时期。', options:['A. 价值观','B. 享乐观','C. 幸福观','D. 进取观'], answer:0, explanation:'大学阶段是"三观"（世界观、人生观、价值观）形成的关键时期，这一时期的教育对人的一生影响深远。' },
+  { id:'v52', topic:'psych', text:'影响喜欢的最稳定因素，也是个体吸引力最重要来源之一的是（）', options:['A. 熟悉','B. 相似','C. 人格品质','D. 外貌'], answer:2, explanation:'心理学研究表明，人格品质（如诚信、善良、能力等）是决定人际吸引的最稳定因素，比外貌和熟悉度更为持久。' },
+  { id:'v53', topic:'psych', text:'"你无法改变天气，却可以改变心情"，这句话告诉我们（）', options:['A. 要有积极向上的生活态度','B. 要学会正确认识与评价自己','C. 要善于调节和控制情绪','D. 要有广泛的兴趣爱好'], answer:2, explanation:'这句话强调面对不可改变的外部环境，应该学会调节和控制自己的情绪，保持心理健康。' },
+  { id:'v54', topic:'psych', text:'神经衰弱失眠常见的状况是（）', options:['A. 睡眠需要量增加而睡眠时间没有增加','B. 夜间睡眠太少','C. 睡眠和觉醒的节律紊乱','D. 对睡眠的过度关注'], answer:2, explanation:'神经衰弱失眠的核心特征是睡眠-觉醒节律紊乱，患者往往昼夜颠倒，夜间难以入睡而白天困倦。' },
+  { id:'v55', topic:'tech', text:'中国探月工程又称"嫦娥工程"，规划三期，简称是（）', options:['A. 绕、落、采','B. 绕、落、回','C. 探、落、回','D. 绕、探、采'], answer:1, explanation:'中国探月工程规划三期，简称"绕、落、回"：绕月飞行、落月探测、采样返回，目前已圆满完成。' },
+  { id:'v56', topic:'tech', text:'人脸识别技术属于人工智能中的（）领域。', options:['A. 自然语言处理','B. 深度学习','C. 计算机视觉','D. 知识图谱'], answer:2, explanation:'人脸识别是通过分析图像中的人脸特征来识别身份的技术，属于人工智能中计算机视觉（Computer Vision）领域。' },
+  { id:'v57', topic:'tech', text:'以下企业中，属于杭州AI"七小龙"且专注于四足机器人研发的是（）', options:['A. 灵伴科技','B. 宇树科技','C. 群核科技','D. 深度求索'], answer:1, explanation:'宇树科技（Unitree）是杭州AI"七小龙"之一，专注于四足机器人研发，其产品在全球具有很高知名度。' },
+  { id:'v58', topic:'tech', text:'（）正在成为新一轮国际竞争的重点领域。', options:['A. 电商经济','B. 数字经济','C. 市场经济','D. 智慧经济'], answer:1, explanation:'数字经济是以数字技术为基础的经济形态，已成为全球新一轮科技革命和产业变革的主要方向和竞争焦点。' },
+];
+
+const ALL_QUESTIONS = { math: MATH_QUESTIONS, chinese: CHINESE_QUESTIONS, vocational: VOCATIONAL_QUESTIONS };
+
+// ============================================
+// STATE
+// ============================================
+let state = {
+  user: null,
+  currentPage: 'dashboard',
+  // Exam state
+  currentExam: null,
+  examAnswers: {},
+  examCurrentQ: 0,
+  examTimer: null,
+  examTimeLeft: 0,
+  examMode: 'exam', // 'exam' or 'practice'
+  // Practice state
+  practiceQuestions: [],
+  practiceIndex: 0,
+  practiceAnswers: {},
+  practiceMode: 'instant',
+  // Stats
+  stats: {
+    totalAnswered: 0,
+    totalCorrect: 0,
+    examCount: 0,
+    mistakeIds: [],
+    examHistory: [],
+    topicStats: {}
+  }
+};
+
+// ============================================
+// AUTH
+// ============================================
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+}
+
+async function doLogin() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value.trim();
+  if (!username || !password) { showToast('请填写账号和密码'); return; }
+
+  try {
+    const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) });
+    if (!data.ok) { showToast(data.message || '登录失败'); return; }
+    localStorage.setItem('token', data.token);
+    state.user = data.user;
+    await fetchUserProfile();
+    localStorage.setItem('lastUser', username);
+    enterMainScreen();
+  } catch (e) {
+    showToast(e.message || '登录失败，请检查网络');
+  }
+}
+
+async function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const subject = document.getElementById('reg-subject').value;
+  const password = document.getElementById('reg-password').value;
+
+  if (!name || !phone || !subject || !password) {
+    showToast('请填写完整信息'); return;
+  }
+  if (password.length < 6) { showToast('密码至少6位'); return; }
+
+  try {
+    const data = await api('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ name, phone, subject, password })
+    });
+    if (!data.ok) { showToast(data.message || '注册失败'); return; }
+    localStorage.setItem('token', data.token);
+    state.user = data.user;
+    await fetchUserProfile();
+    showToast('注册成功！');
+    enterMainScreen();
+  } catch (e) {
+    showToast(e.message || '注册失败，请检查网络');
+  }
+}
+
+function doLogout() {
+  saveUserData();
+  localStorage.removeItem('token');
+  state.user = null;
+  showScreen('auth-screen');
+  document.getElementById('login-form').classList.remove('hidden');
+  document.getElementById('register-form').classList.add('hidden');
+}
+
+async function fetchUserProfile() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  try {
+    const me = await api('/api/users/me');
+    if (me.stats) {
+      state.stats.totalAnswered = me.stats.totalAnswered || 0;
+      state.stats.totalCorrect = me.stats.totalCorrect || 0;
+      state.stats.examCount = me.stats.examCount || 0;
+      state.stats.topicStats = me.stats.topicStats || {};
+    }
+    const hist = await api('/api/users/me/exam-history');
+    if (hist.list && hist.list.length) {
+      state.stats.examHistory = hist.list.map(e => ({
+        name: e.examName,
+        date: e.createdAt ? e.createdAt.slice(0, 10) : '',
+        score: e.score,
+        total: e.total,
+        correct: e.score
+      }));
+    }
+    const mis = await api('/api/users/me/mistakes');
+    if (mis.mistakeIds) state.stats.mistakeIds = mis.mistakeIds;
+  } catch (_) {}
+}
+
+function enterMainScreen() {
+  showScreen('main-screen');
+  updateSidebar();
+  initSubjectGrid();
+  initExamList();
+  showPage('dashboard');
+  updateDashboard();
+  updateCountdown();
+  updateMistakeBadge();
+}
+
+function saveUserData() {
+  if (!state.user) return;
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  const s = state.stats;
+  fetch(API_BASE + '/api/users/me/stats', {
+    method: 'PUT',
+    headers: apiHeaders(),
+    body: JSON.stringify({
+      totalAnswered: s.totalAnswered,
+      totalCorrect: s.totalCorrect,
+      examCount: s.examCount,
+      topicStats: s.topicStats || {}
+    })
+  }).catch(() => {});
+  fetch(API_BASE + '/api/users/me/mistakes', {
+    method: 'PUT',
+    headers: apiHeaders(),
+    body: JSON.stringify({ mistakeIds: s.mistakeIds || [] })
+  }).catch(() => {});
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showPage(page) {
+  state.currentPage = page;
+  const pages = ['dashboard','subjects','exams','practice','mistakes','stats','membership','admin'];
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.classList.toggle('hidden', p !== page);
+  });
+
+  const titles = {
+    dashboard: '学习中心', subjects: '知识点复习',
+    exams: '模拟考试', practice: '专项练习',
+    mistakes: '错题本', stats: '学习报告',
+    membership: '会员中心', admin: '后台管理'
+  };
+  document.getElementById('page-title').textContent = titles[page] || '';
+
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const navMap = {
+    dashboard: 0, subjects: 1, exams: 2, practice: 3, mistakes: 4, stats: 5, membership: 6, admin: 7
+  };
+  const navItems = document.querySelectorAll('.nav-item');
+  const idx = navMap[page];
+  if (idx !== undefined && navItems[idx]) navItems[idx].classList.add('active');
+
+  if (page === 'mistakes') renderMistakes();
+  if (page === 'stats') renderStats();
+  if (page === 'dashboard') updateDashboard();
+  if (page === 'membership') renderMembership();
+  if (page === 'admin') renderAdmin();
+}
+
+// ============================================
+// SIDEBAR / DASHBOARD
+// ============================================
+function updateSidebar() {
+  if (!state.user) return;
+  const u = state.user;
+  const initials = (u.name || u.username || '学').charAt(0);
+  document.getElementById('user-avatar').textContent = initials;
+  document.getElementById('sidebar-username').textContent = u.name || u.username;
+  document.getElementById('sidebar-role').textContent = u.roleLabel || u.role || '普通类考生';
+  document.getElementById('topbar-user').textContent = (u.name || u.username) + ' · ' + (u.roleLabel || u.role);
+  document.getElementById('welcome-name').textContent = u.name || u.username;
+  var mb = document.getElementById('sidebar-membership');
+  if (u.isVip) {
+    mb.textContent = 'VIP会员';
+    mb.className = 'membership-badge vip';
+    mb.style.display = '';
+  } else {
+    mb.textContent = '免费用户';
+    mb.className = 'membership-badge free';
+    mb.style.display = '';
+  }
+  var adminNav = document.getElementById('nav-admin');
+  if (adminNav) adminNav.classList.toggle('hidden', u.role !== 'admin');
+}
+
+function updateDashboard() {
+  const s = state.stats;
+  const total = s.totalAnswered || 0;
+  const correct = s.totalCorrect || 0;
+  const accuracy = total > 0 ? Math.round(correct/total*100) : 0;
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-accuracy').textContent = accuracy + '%';
+  document.getElementById('stat-exams').textContent = s.examCount || 0;
+  document.getElementById('stat-mistakes').textContent = (s.mistakeIds||[]).length;
+
+  // subject progress
+  const mathStats = calcSubjectStats('math');
+  const chineseStats = calcSubjectStats('chinese');
+  const vocationalStats = calcSubjectStats('vocational');
+
+  document.getElementById('math-pct').textContent = mathStats.pct + '%';
+  document.getElementById('math-bar').style.width = mathStats.pct + '%';
+  document.getElementById('chinese-pct').textContent = chineseStats.pct + '%';
+  document.getElementById('chinese-bar').style.width = chineseStats.pct + '%';
+  document.getElementById('vocational-pct').textContent = vocationalStats.pct + '%';
+  document.getElementById('vocational-bar').style.width = vocationalStats.pct + '%';
+
+  // Recent exams
+  const examList = document.getElementById('recent-exams-list');
+  const history = (s.examHistory||[]).slice(-3).reverse();
+  if (history.length === 0) {
+    examList.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-light);font-size:13px;">暂无考试记录，去参加模拟考试吧！</div>';
+  } else {
+    examList.innerHTML = history.map(e => {
+      const pct = Math.round(e.score/e.total*100);
+      const scoreClass = pct >= 80 ? 'score-good' : pct >= 60 ? 'score-mid' : 'score-low';
+      return `<div class="exam-item">
+        <div class="exam-icon">📋</div>
+        <div class="exam-info">
+          <div class="exam-name">${e.name}</div>
+          <div class="exam-meta">${e.date} · ${e.total}题</div>
+        </div>
+        <div class="exam-score ${scoreClass}">${pct}分</div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function calcSubjectStats(subject) {
+  const ts = state.stats.topicStats || {};
+  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
+  const topics = topicsMap[subject] || [];
+  let total = 0, correct = 0;
+  topics.forEach(t => {
+    const stat = ts[subject + '_' + t.id];
+    if (stat) { total += stat.total; correct += stat.correct; }
+  });
+  return { total, correct, pct: total > 0 ? Math.round(correct/total*100) : 0 };
+}
+
+function updateCountdown() {
+  const examDate = new Date('2026-04-01');
+  const now = new Date();
+  const days = Math.max(0, Math.floor((examDate - now) / (1000*60*60*24)));
+  document.getElementById('exam-countdown').textContent = days;
+}
+
+function updateMistakeBadge() {
+  const count = (state.stats.mistakeIds||[]).length;
+  document.getElementById('mistake-count').textContent = count;
+  document.getElementById('stat-mistakes').textContent = count;
+}
+
+// ============================================
+// SUBJECTS & KNOWLEDGE
+// ============================================
+function initSubjectGrid() {
+  const grid = document.getElementById('subject-grid');
+  const subjects = [
+    { key:'math', name:'数学', icon:'📐', color:'#f0f4ff', desc:'集合、函数、三角、数列、解析几何等', topics: MATH_TOPICS },
+    { key:'chinese', name:'语文', icon:'📖', color:'#f5f0ff', desc:'字音字形、成语、语病、文言文、文学常识等', topics: CHINESE_TOPICS },
+    { key:'vocational', name:'职业适应性测试', icon:'🏢', color:'#f0fdf8', desc:'政治理论、历史文化、法律知识、职业道德、时事热点等', topics: VOCATIONAL_TOPICS },
+  ];
+
+  grid.innerHTML = subjects.map(s => `
+    <div class="subject-card" data-subject="${s.key}" onclick="openKnowledge('${s.key}')">
+      <div class="subject-card-header">
+        <div>
+          <h3>${s.name}</h3>
+          <p>${s.desc}</p>
+        </div>
+        <div class="subject-icon-wrap" style="background:${s.color};font-size:24px;">${s.icon}</div>
+      </div>
+      <div class="subject-topics">
+        ${s.topics.map(t => `<span class="topic-chip" style="background:${t.color};color:#374151;" onclick="event.stopPropagation();openKnowledgeTopic('${s.key}','${t.id}')">${t.name}</span>`).join('')}
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:12px;color:var(--text-muted);">掌握度</span>
+          <span style="font-size:12px;font-weight:600;color:var(--primary);">${calcSubjectStats(s.key).pct}%</span>
+        </div>
+        <div class="progress-bar" style="margin-top:6px;">
+          <div class="progress-fill" style="width:${calcSubjectStats(s.key).pct}%;background:${s.key==='math'?'#2563a8':s.key==='chinese'?'#7c3aed':'#0d9488'};"></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterSubject(el, filter) {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const cards = document.querySelectorAll('.subject-card');
+  cards.forEach(card => {
+    const subjectKey = card.dataset.subject;
+    if (filter === 'all') card.style.display = '';
+    else card.style.display = (subjectKey === filter) ? '' : 'none';
+  });
+}
+
+function openKnowledge(subjectKey) {
+  document.getElementById('subject-grid').classList.add('hidden');
+  document.getElementById('knowledge-panel').classList.remove('hidden');
+
+  const subjectNames = { math: '数学', chinese: '语文', vocational: '职业适应性测试' };
+  const subject = subjectNames[subjectKey] || subjectKey;
+  document.getElementById('knowledge-panel-title').textContent = subject + '知识点练习';
+  document.getElementById('ks-subject-name').textContent = subject + '知识点';
+
+  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
+  const topics = topicsMap[subjectKey] || [];
+  const topicList = document.getElementById('topic-list');
+
+  topicList.innerHTML = topics.map(t => {
+    const questions = ALL_QUESTIONS[subjectKey].filter(q => q.topic === t.id);
+    return `<div class="topic-list-item" id="tli-${subjectKey}-${t.id}" onclick="loadTopicQuestions('${subjectKey}','${t.id}')">
+      <div class="topic-dot"></div>
+      <span>${t.name}</span>
+      <span class="topic-count">${questions.length}题</span>
+    </div>`;
+  }).join('');
+}
+
+function openKnowledgeTopic(subjectKey, topicId) {
+  openKnowledge(subjectKey);
+  setTimeout(() => loadTopicQuestions(subjectKey, topicId), 100);
+}
+
+function loadTopicQuestions(subjectKey, topicId) {
+  document.querySelectorAll('.topic-list-item').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById(`tli-${subjectKey}-${topicId}`);
+  if (el) el.classList.add('active');
+
+  const questions = ALL_QUESTIONS[subjectKey].filter(q => q.topic === topicId);
+  const container = document.getElementById('knowledge-main-content');
+
+  if (questions.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">该知识点暂无题目</div>';
+    return;
+  }
+
+  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
+  const topicName = (topicsMap[subjectKey] || []).find(t => t.id === topicId)?.name || '';
+
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--primary);">${topicName}</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:2px;">共 ${questions.length} 道练习题</p>
+      </div>
+    </div>
+    ${questions.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">')}
+  `;
+}
+
+function renderQuestion(q, num, mode) {
+  const letters = ['A','B','C','D'];
+  return `
+    <div id="qcard-${q.id}">
+      <div class="q-header">
+        <div class="q-number">${num}</div>
+        <div class="q-meta">
+          <span class="q-topic-tag">${mode === 'practice' ? '练习题' : '单选题'}</span>
+        </div>
+      </div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-options" id="qopts-${q.id}">
+        ${q.options.map((opt, i) => `
+          <div class="q-option" id="qopt-${q.id}-${i}" onclick="selectAnswer('${q.id}',${i},'${mode}')">
+            <div class="option-letter">${letters[i]}</div>
+            <span>${opt.substring(3)}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="q-answer-reveal" id="qreveal-${q.id}">
+        <div class="q-answer-label">📖 解析</div>
+        <div>${q.explanation}</div>
+      </div>
+    </div>
+  `;
+}
+
+function selectAnswer(qId, optIndex, mode) {
+  if (mode === 'practice') {
+    const q = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS].find(q => q.id === qId);
+    if (!q) return;
+
+    // Check if already answered
+    const opts = document.getElementById('qopts-' + qId);
+    if (opts.querySelector('.correct, .wrong')) return;
+
+    const isCorrect = optIndex === q.answer;
+    const subjectKey = q.id.startsWith('m') ? 'math' : q.id.startsWith('c') ? 'chinese' : 'vocational';
+
+    // Update topic stats
+    const statsKey = subjectKey + '_' + q.topic;
+    if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total:0, correct:0 };
+    state.stats.topicStats[statsKey].total++;
+    state.stats.totalAnswered++;
+
+    if (isCorrect) {
+      state.stats.topicStats[statsKey].correct++;
+      state.stats.totalCorrect++;
+    } else {
+      // Add to mistakes
+      if (!state.stats.mistakeIds.includes(qId)) state.stats.mistakeIds.push(qId);
+    }
+
+    // Update UI
+    document.querySelectorAll(`[id^="qopt-${qId}-"]`).forEach(el => el.classList.add('disabled'));
+    document.getElementById(`qopt-${qId}-${optIndex}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`qopt-${qId}-${q.answer}`).classList.add('correct');
+    document.getElementById('qreveal-' + qId).classList.add('show');
+
+    updateMistakeBadge();
+    saveUserData();
+  }
+}
+
+// ============================================
+// EXAM
+// ============================================
+const EXAM_CONFIGS = [
+  { id:'math-full', name:'数学模拟考试（满题）', subject:'math', count:20, time:60, desc:'覆盖所有数学知识点，模拟真实考试', badge:'完整版', badgeColor:'#dbeafe;color:#1d4ed8' },
+  { id:'chinese-full', name:'语文模拟考试（满题）', subject:'chinese', count:15, time:60, desc:'覆盖语文核心考点，模拟真实考试', badge:'完整版', badgeColor:'#ede9fe;color:#5b21b6' },
+  { id:'vocational-full', name:'职业适应性测试（满题）', subject:'vocational', count:30, time:45, desc:'政治、历史、法律、职业道德、时事等综合测试', badge:'完整版', badgeColor:'#ccfbf1;color:#0f766e' },
+  { id:'math-quick', name:'数学快速测试', subject:'math', count:10, time:30, desc:'10题精选，快速了解数学掌握程度', badge:'快速版', badgeColor:'#dcfce7;color:#166534' },
+  { id:'chinese-quick', name:'语文快速测试', subject:'chinese', count:10, time:30, desc:'10题精选，快速了解语文掌握程度', badge:'快速版', badgeColor:'#fef3c7;color:#92400e' },
+  { id:'vocational-quick', name:'职测快速测试', subject:'vocational', count:15, time:20, desc:'15题精选，快速了解职测掌握程度', badge:'快速版', badgeColor:'#d1fae5;color:#065f46' },
+  { id:'combined', name:'数语联考（混合）', subject:'both', count:20, time:60, desc:'数学+语文各10题，综合模拟', badge:'联考版', badgeColor:'#fce7f3;color:#9d174d' },
+  { id:'all-three', name:'三科综合联考', subject:'all', count:30, time:60, desc:'数学、语文、职测各10题，全面检验备考成果', badge:'全科版', badgeColor:'#fef9c3;color:#713f12' },
+];
+
+function initExamList() {
+  const grid = document.getElementById('exam-select-grid');
+  grid.innerHTML = EXAM_CONFIGS.map(cfg => `
+    <div class="exam-select-card" onclick="startExam('${cfg.id}')">
+      <div class="exam-card-top">
+        <span class="exam-type-badge" style="background:${cfg.badgeColor}">${cfg.badge}</span>
+      </div>
+      <h3>${cfg.name}</h3>
+      <p>${cfg.desc}</p>
+      <div class="exam-meta-row">
+        <span class="exam-meta-item">📝 ${cfg.count}题</span>
+        <span class="exam-meta-item">⏱ ${cfg.time}分钟</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function startExam(examId) {
+  const cfg = EXAM_CONFIGS.find(c => c.id === examId);
+  if (!cfg) return;
+
+  let questions = [];
+  if (cfg.subject === 'both') {
+    const mqs = shuffle([...MATH_QUESTIONS]).slice(0, cfg.count/2);
+    const cqs = shuffle([...CHINESE_QUESTIONS]).slice(0, cfg.count/2);
+    questions = shuffle([...mqs, ...cqs]);
+  } else if (cfg.subject === 'all') {
+    const mqs = shuffle([...MATH_QUESTIONS]).slice(0, Math.floor(cfg.count/3));
+    const cqs = shuffle([...CHINESE_QUESTIONS]).slice(0, Math.floor(cfg.count/3));
+    const vqs = shuffle([...VOCATIONAL_QUESTIONS]).slice(0, cfg.count - Math.floor(cfg.count/3)*2);
+    questions = shuffle([...mqs, ...cqs, ...vqs]);
+  } else {
+    questions = shuffle([...ALL_QUESTIONS[cfg.subject]]).slice(0, cfg.count);
+  }
+
+  state.currentExam = { cfg, questions, startTime: Date.now() };
+  state.examAnswers = {};
+  state.examCurrentQ = 0;
+  state.examMode = 'exam';
+  state.examTimeLeft = cfg.time * 60;
+
+  showScreen('exam-screen');
+  document.getElementById('exam-title-bar').textContent = cfg.name;
+  renderExamQuestion();
+  renderQGrid();
+  startTimer();
+}
+
+function startQuickPractice(subject) {
+  const qBank = subject === 'math' ? MATH_QUESTIONS : subject === 'chinese' ? CHINESE_QUESTIONS : VOCATIONAL_QUESTIONS;
+  const questions = shuffle([...qBank]).slice(0, 10);
+  const nameMap = { math: '数学快速练习', chinese: '语文快速练习', vocational: '职测快速练习' };
+  const cfg = { id:'quick', name: nameMap[subject] || '快速练习', subject, count:10, time:20 };
+
+  state.currentExam = { cfg, questions, startTime: Date.now() };
+  state.examAnswers = {};
+  state.examCurrentQ = 0;
+  state.examMode = 'exam';
+  state.examTimeLeft = 20 * 60;
+
+  showScreen('exam-screen');
+  document.getElementById('exam-title-bar').textContent = cfg.name;
+  renderExamQuestion();
+  renderQGrid();
+  startTimer();
+}
+
+function startPractice() {
+  const subject = document.getElementById('practice-subject').value;
+  const count = parseInt(document.getElementById('practice-count').value);
+  const mode = document.getElementById('practice-mode').value;
+
+  let questions = [];
+  if (subject === 'both') {
+    questions = shuffle([...MATH_QUESTIONS, ...CHINESE_QUESTIONS]).slice(0, count);
+  } else if (subject === 'all') {
+    questions = shuffle([...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS]).slice(0, count);
+  } else {
+    questions = shuffle([...ALL_QUESTIONS[subject]]).slice(0, count);
+  }
+
+  const cfg = { id:'practice', name:'专项练习', subject, count, time: count * 2 };
+  state.currentExam = { cfg, questions, startTime: Date.now() };
+  state.examAnswers = {};
+  state.examCurrentQ = 0;
+  state.examMode = mode;
+  state.examTimeLeft = count * 2 * 60;
+
+  showScreen('exam-screen');
+  document.getElementById('exam-title-bar').textContent = cfg.name;
+  renderExamQuestion();
+  renderQGrid();
+  startTimer();
+}
+
+function renderExamQuestion() {
+  const q = state.currentExam.questions[state.examCurrentQ];
+  const total = state.currentExam.questions.length;
+  const letters = ['A','B','C','D'];
+
+  const answered = state.examAnswers[q.id];
+  const isInstant = state.examMode === 'instant';
+
+  const container = document.getElementById('exam-question-container');
+  container.innerHTML = `
+    <div class="q-header">
+      <div class="q-number">${state.examCurrentQ + 1}</div>
+      <div class="q-meta">
+        <span class="q-topic-tag">单项选择</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-left:auto;">第 ${state.examCurrentQ+1} / ${total} 题</div>
+    </div>
+    <div class="q-text">${q.text}</div>
+    <div class="q-options">
+      ${q.options.map((opt, i) => {
+        let cls = '';
+        if (isInstant && answered !== undefined) {
+          if (i === answered && i === q.answer) cls = 'correct';
+          else if (i === answered && i !== q.answer) cls = 'wrong';
+          else if (i === q.answer) cls = 'correct';
+        } else if (answered === i) cls = 'selected';
+        return `<div class="q-option ${cls} ${isInstant && answered !== undefined ? 'disabled' : ''}"
+          onclick="examSelectAnswer('${q.id}',${i})">
+          <div class="option-letter">${letters[i]}</div>
+          <span>${opt.substring(3)}</span>
+        </div>`;
+      }).join('')}
+    </div>
+    ${isInstant && answered !== undefined ? `
+      <div class="q-answer-reveal show">
+        <div class="q-answer-label">📖 解析</div>
+        <div>${q.explanation}</div>
+      </div>` : ''}
+  `;
+
+  document.getElementById('exam-q-position').textContent = `第 ${state.examCurrentQ+1} 题，共 ${total} 题`;
+  document.getElementById('prev-btn').disabled = state.examCurrentQ === 0;
+  document.getElementById('next-btn').textContent = state.examCurrentQ === total-1 ? '完成 ✓' : '下一题 →';
+}
+
+function examSelectAnswer(qId, optIndex) {
+  const q = state.currentExam.questions[state.examCurrentQ];
+  if (state.examMode === 'instant' && state.examAnswers[qId] !== undefined) return;
+
+  state.examAnswers[qId] = optIndex;
+
+  if (state.examMode === 'instant') {
+    // Update stats immediately
+    const isCorrect = optIndex === q.answer;
+    const subjectKey = q.id.startsWith('m') ? 'math' : q.id.startsWith('c') ? 'chinese' : 'vocational';
+    const statsKey = subjectKey + '_' + q.topic;
+    if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total:0, correct:0 };
+    state.stats.topicStats[statsKey].total++;
+    state.stats.totalAnswered++;
+    if (isCorrect) {
+      state.stats.topicStats[statsKey].correct++;
+      state.stats.totalCorrect++;
+    } else {
+      if (!state.stats.mistakeIds.includes(qId)) state.stats.mistakeIds.push(qId);
+    }
+    updateMistakeBadge();
+  }
+
+  renderExamQuestion();
+  renderQGrid();
+  updateExamProgress();
+}
+
+function examNav(dir) {
+  const total = state.currentExam.questions.length;
+  const newIdx = state.examCurrentQ + dir;
+  if (newIdx >= 0 && newIdx < total) {
+    state.examCurrentQ = newIdx;
+    renderExamQuestion();
+  } else if (newIdx >= total) {
+    confirmSubmit();
+  }
+}
+
+function renderQGrid() {
+  const grid = document.getElementById('q-grid');
+  grid.innerHTML = state.currentExam.questions.map((q, i) => {
+    let cls = '';
+    if (state.examAnswers[q.id] !== undefined) cls = 'answered';
+    if (i === state.examCurrentQ) cls += ' current';
+    return `<div class="q-dot ${cls}" onclick="jumpToQ(${i})">${i+1}</div>`;
+  }).join('');
+}
+
+function jumpToQ(idx) {
+  state.examCurrentQ = idx;
+  renderExamQuestion();
+  renderQGrid();
+}
+
+function updateExamProgress() {
+  const total = state.currentExam.questions.length;
+  const answered = Object.keys(state.examAnswers).length;
+  document.getElementById('exam-progress-info').textContent = `已答 ${answered}/${total} 题`;
+  document.getElementById('exam-progress-fill').style.width = (answered/total*100) + '%';
+}
+
+function startTimer() {
+  if (state.examTimer) clearInterval(state.examTimer);
+  state.examTimer = setInterval(() => {
+    state.examTimeLeft--;
+    updateTimerDisplay();
+    if (state.examTimeLeft <= 0) {
+      clearInterval(state.examTimer);
+      submitExam();
+    }
+  }, 1000);
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const t = state.examTimeLeft;
+  const m = Math.floor(t/60).toString().padStart(2,'0');
+  const s = (t%60).toString().padStart(2,'0');
+  const el = document.getElementById('exam-timer');
+  el.textContent = m + ':' + s;
+  el.classList.toggle('warning', t <= 300);
+}
+
+function confirmSubmit() {
+  const total = state.currentExam.questions.length;
+  const answered = Object.keys(state.examAnswers).length;
+  const unanswered = total - answered;
+
+  if (unanswered > 0) {
+    showModal('确认交卷', `还有 ${unanswered} 题未作答，确定要交卷吗？`, submitExam);
+  } else {
+    submitExam();
+  }
+}
+
+function submitExam() {
+  if (state.examTimer) clearInterval(state.examTimer);
+  closeModal();
+
+  const questions = state.currentExam.questions;
+  let correct = 0, wrong = 0, blank = 0;
+
+  questions.forEach(q => {
+    const ans = state.examAnswers[q.id];
+    if (ans === undefined) {
+      blank++;
+    } else if (ans === q.answer) {
+      correct++;
+      // Track stats if exam mode
+      if (state.examMode === 'exam') {
+        const subjectKey = q.id.startsWith('m') ? 'math' : q.id.startsWith('c') ? 'chinese' : 'vocational';
+        const statsKey = subjectKey + '_' + q.topic;
+        if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total:0, correct:0 };
+        state.stats.topicStats[statsKey].total++;
+        state.stats.topicStats[statsKey].correct++;
+        state.stats.totalAnswered++;
+        state.stats.totalCorrect++;
+      }
+    } else {
+      wrong++;
+      if (state.examMode === 'exam') {
+        const subjectKey = q.id.startsWith('m') ? 'math' : q.id.startsWith('c') ? 'chinese' : 'vocational';
+        const statsKey = subjectKey + '_' + q.topic;
+        if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total:0, correct:0 };
+        state.stats.topicStats[statsKey].total++;
+        state.stats.totalAnswered++;
+        if (!state.stats.mistakeIds.includes(q.id)) state.stats.mistakeIds.push(q.id);
+      }
+    }
+  });
+
+  const score = Math.round(correct / questions.length * 100);
+  const grade = score >= 90 ? '优秀' : score >= 75 ? '良好' : score >= 60 ? '及格' : '需加强';
+
+  // Save exam history
+  state.stats.examCount = (state.stats.examCount||0) + 1;
+  state.stats.examHistory = state.stats.examHistory || [];
+  state.stats.examHistory.push({
+    name: state.currentExam.cfg.name,
+    date: new Date().toLocaleDateString('zh-CN'),
+    score,
+    total: questions.length,
+    correct,
+  });
+
+  saveUserData();
+  updateMistakeBadge();
+
+  var durationSec = state.currentExam.cfg.time * 60 - state.examTimeLeft;
+  if (durationSec < 0) durationSec = 0;
+  fetch(API_BASE + '/api/users/me/exam-record', {
+    method: 'POST',
+    headers: apiHeaders(),
+    body: JSON.stringify({
+      examId: state.currentExam.cfg.id,
+      examName: state.currentExam.cfg.name,
+      score: correct,
+      total: questions.length,
+      answers: state.examAnswers,
+      durationSec: durationSec
+    })
+  }).catch(function() {});
+
+  // Show results
+  document.getElementById('result-score-num').textContent = score;
+  document.getElementById('result-score-den').textContent = '/ 100 分';
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-pct').textContent = `正确率 ${score}%（${correct}/${questions.length}）`;
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-blank').textContent = blank;
+
+  // Render review
+  const reviewList = document.getElementById('result-review-list');
+  reviewList.innerHTML = `<div class="card-header"><div class="card-title">答题详情</div></div>` +
+    questions.map((q, i) => {
+      const ans = state.examAnswers[q.id];
+      const isCorrect = ans === q.answer;
+      const isEmpty = ans === undefined;
+      const letters = ['A','B','C','D'];
+      return `<div class="result-q-item">
+        <span style="width:20px;flex-shrink:0;">${isEmpty ? '<span style="color:#d97706">?</span>' : isCorrect ? '<span class="correct-mark">✓</span>' : '<span class="wrong-mark">✗</span>'}</span>
+        <div style="flex:1;">
+          <div style="font-size:13px;color:var(--text);margin-bottom:3px;">${i+1}. ${q.text.substring(0,40)}...</div>
+          ${!isCorrect && !isEmpty ? `<div style="font-size:12px;color:var(--danger);">你答：${letters[ans]}  正确：${letters[q.answer]}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+  showScreen('result-screen');
+}
+
+function reviewWrongAnswers() {
+  // scroll to review
+  document.getElementById('result-review-list').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================
+// MISTAKES
+// ============================================
+function renderMistakes() {
+  const allQ = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS];
+  const mistakes = allQ.filter(q => mistakeIds.includes(q.id));
+
+  document.getElementById('mistake-total').textContent = `（共 ${mistakes.length} 题）`;
+
+  const container = document.getElementById('mistakes-container');
+  if (mistakes.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
+    return;
+  }
+
+  container.innerHTML = mistakes.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
+}
+
+function practiceAllMistakes() {
+  const allQ = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS];
+  const mistakes = allQ.filter(q => (state.stats.mistakeIds||[]).includes(q.id));
+  if (mistakes.length === 0) { showToast('暂无错题！'); return; }
+
+  const cfg = { id:'mistakes', name:'错题练习', subject:'both', count:mistakes.length, time:mistakes.length*2 };
+  state.currentExam = { cfg, questions: shuffle(mistakes), startTime: Date.now() };
+  state.examAnswers = {};
+  state.examCurrentQ = 0;
+  state.examMode = 'instant';
+  state.examTimeLeft = mistakes.length * 2 * 60;
+
+  showScreen('exam-screen');
+  document.getElementById('exam-title-bar').textContent = '错题练习';
+  renderExamQuestion();
+  renderQGrid();
+  startTimer();
+}
+
+// ============================================
+// STATS
+// ============================================
+function renderStats() {
+  const s = state.stats;
+  const total = s.totalAnswered || 0;
+  const correct = s.totalCorrect || 0;
+
+  document.getElementById('stats-detail').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="stat-card"><div class="stat-label">总答题数</div><div class="stat-value">${total}</div></div>
+      <div class="stat-card"><div class="stat-label">正确率</div><div class="stat-value" style="color:var(--success);">${total>0?Math.round(correct/total*100):0}%</div></div>
+      <div class="stat-card"><div class="stat-label">数学掌握度</div><div class="stat-value" style="font-size:20px;">${calcSubjectStats('math').pct}%</div></div>
+      <div class="stat-card"><div class="stat-label">语文掌握度</div><div class="stat-value" style="font-size:20px;">${calcSubjectStats('chinese').pct}%</div></div>
+      <div class="stat-card" style="grid-column:span 2;"><div class="stat-label">职测掌握度</div><div class="stat-value" style="font-size:20px;color:#0d9488;">${calcSubjectStats('vocational').pct}%</div></div>
+    </div>`;
+
+  // Weak topics
+  const ts = s.topicStats || {};
+  const topicArr = Object.entries(ts)
+    .filter(([k,v]) => v.total > 0)
+    .map(([k,v]) => {
+      const [subj, topicId] = k.split('_');
+      const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
+      const topics = topicsMap[subj] || [];
+      const topic = topics.find(t => t.id === topicId);
+      const subjName = subj === 'math' ? '数学' : subj === 'chinese' ? '语文' : '职测';
+      return { name: topic ? topic.name : topicId, pct: Math.round(v.correct/v.total*100), total: v.total, subj, subjName };
+    })
+    .sort((a,b) => a.pct - b.pct)
+    .slice(0, 5);
+
+  const weakEl = document.getElementById('weak-topics');
+  if (topicArr.length === 0) {
+    weakEl.innerHTML = '<div style="color:var(--text-light);font-size:13px;padding:20px 0;">开始练习后这里将显示薄弱知识点</div>';
+  } else {
+    weakEl.innerHTML = topicArr.map(t => `
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:13px;">${t.subjName} · ${t.name}</span>
+          <span style="font-size:12px;font-weight:600;color:${t.pct<60?'var(--danger)':t.pct<80?'#d97706':'var(--success)'};">${t.pct}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${t.pct}%;background:${t.pct<60?'var(--danger)':t.pct<80?'#f59e0b':'var(--success)'};"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  // Activity chart
+  const chartEl = document.getElementById('activity-chart');
+  const days = 30;
+  const actData = Array.from({length:days}, () => Math.floor(Math.random()*20));
+  const maxVal = Math.max(...actData, 1);
+  chartEl.innerHTML = actData.map((v,i) => `
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:${v>0?'var(--primary-light)':'#f0ece6'};border-radius:3px;height:${Math.max(4,v/maxVal*70)}px;opacity:0.8;"></div>
+      ${i%7===0 ? `<div style="font-size:9px;color:var(--text-light);white-space:nowrap;">${days-i}天前</div>` : '<div style="height:14px;"></div>'}
+    </div>`).join('');
+}
+
+function renderMembership() {
+  var u = state.user;
+  if (!u) return;
+  document.getElementById('membership-status').textContent = u.isVip ? 'VIP 会员' : '免费用户';
+  var exp = document.getElementById('membership-expire');
+  if (u.isVip && u.membershipExpiresAt) {
+    exp.textContent = '到期时间：' + u.membershipExpiresAt.slice(0, 10);
+    exp.style.display = '';
+  } else {
+    exp.textContent = '';
+    exp.style.display = 'none';
+  }
+}
+
+async function renderAdmin() {
+  if (!state.user || state.user.role !== 'admin') return;
+  try {
+    var stats = await api('/api/admin/stats');
+    if (stats.ok) {
+      document.getElementById('admin-user-count').textContent = stats.stats.userCount || 0;
+      document.getElementById('admin-exam-count').textContent = stats.stats.examCount || 0;
+      document.getElementById('admin-vip-count').textContent = stats.stats.vipCount || 0;
+    }
+    var users = await api('/api/admin/users');
+    var listEl = document.getElementById('admin-user-list');
+    if (!users.ok || !users.list.length) {
+      listEl.innerHTML = '<p style="color:var(--text-muted);">暂无用户</p>';
+      return;
+    }
+    listEl.innerHTML = '<table class="admin-table"><thead><tr><th>ID</th><th>账号</th><th>姓名</th><th>角色</th><th>会员</th><th>到期</th><th>操作</th></tr></thead><tbody>' +
+      users.list.map(function(u) {
+        var exp = u.membershipExpiresAt ? u.membershipExpiresAt.slice(0, 10) : '-';
+        return '<tr><td>' + u.id + '</td><td>' + u.username + '</td><td>' + (u.name || '-') + '</td><td>' + (u.roleLabel || u.role) + '</td><td>' + (u.membership === 'vip' ? 'VIP' : '免费') + '</td><td>' + exp + '</td><td><button class="btn-sm" onclick="adminSetVip(' + u.id + ',\'' + (u.membership === 'vip' ? 'free' : 'vip') + '\')">' + (u.membership === 'vip' ? '取消VIP' : '设为VIP') + '</button></td></tr>';
+      }).join('') + '</tbody></table>';
+  } catch (e) {
+    document.getElementById('admin-user-list').innerHTML = '<p style="color:var(--danger);">加载失败：' + (e.message || '') + '</p>';
+  }
+}
+
+async function adminSetVip(userId, membership) {
+  var expiresAt = null;
+  if (membership === 'vip') {
+    var d = new Date();
+    d.setMonth(d.getMonth() + 1);
+    expiresAt = d.toISOString().slice(0, 10);
+  }
+  try {
+    await api('/api/admin/users/' + userId + '/membership', { method: 'PUT', body: JSON.stringify({ membership: membership, membershipExpiresAt: expiresAt }) });
+    showToast('已更新');
+    renderAdmin();
+  } catch (e) {
+    showToast(e.message || '操作失败');
+  }
+}
+
+// ============================================
+// UTILITIES
+// ============================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function showModal(title, body, onConfirm) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  document.getElementById('modal-confirm-btn').onclick = onConfirm;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('token');
+  const lastUser = localStorage.getItem('lastUser');
+  if (lastUser) document.getElementById('login-username').value = lastUser;
+  if (token) {
+    try {
+      const me = await api('/api/users/me');
+      state.user = me.user;
+      if (me.stats) {
+        state.stats.totalAnswered = me.stats.totalAnswered || 0;
+        state.stats.totalCorrect = me.stats.totalCorrect || 0;
+        state.stats.examCount = me.stats.examCount || 0;
+        state.stats.topicStats = me.stats.topicStats || {};
+      }
+      const hist = await api('/api/users/me/exam-history');
+      if (hist.list && hist.list.length) {
+        state.stats.examHistory = hist.list.map(e => ({
+          name: e.examName,
+          date: e.createdAt ? e.createdAt.slice(0, 10) : '',
+          score: e.score,
+          total: e.total,
+          correct: e.score
+        }));
+      }
+      const mis = await api('/api/users/me/mistakes');
+      if (mis.mistakeIds) state.stats.mistakeIds = mis.mistakeIds;
+      enterMainScreen();
+    } catch (_) {
+      localStorage.removeItem('token');
+    }
+  }
+});
+</script>
+</body>
+</html>
