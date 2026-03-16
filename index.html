@@ -1515,7 +1515,7 @@
           模拟考试
           <span class="nav-badge">NEW</span>
         </a>
-        <a href="/practice" class="nav-item" onclick="return navTo(event,'practice')">
+        <a href="/practice" class="nav-item" onclick="return navTo(event,'practice')" style="display:none;">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           专项练习
         </a>
@@ -1682,12 +1682,11 @@
         <div class="exam-select-grid" id="exam-select-grid"></div>
       </div>
 
-      <!-- PRACTICE PAGE -->
+      <!-- PRACTICE PAGE（入口已隐藏，仅保留导航与逻辑） -->
       <div id="page-practice" class="hidden">
         <div class="card" style="max-width:600px;">
           <div class="card-header"><div class="card-title">⚡ 专项随机练习</div></div>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">根据薄弱知识点进行针对性训练</p>
-
           <div class="form-group">
             <label>选择科目</label>
             <select id="practice-subject">
@@ -2012,7 +2011,8 @@ let state = {
   currentKnowledgeQuestions: [],
   currentKnowledgeCategoryId: null,
   categoriesTree: null,
-  categoryNameById: {}
+  categoryNameById: {},
+  mistakeQuestions: []  // 错题本页当前加载的题目列表（供 selectAnswer 使用）
 };
 
 // ============================================
@@ -2436,7 +2436,7 @@ function renderQuestion(q, num, mode) {
 
 function selectAnswer(qId, optIndex, mode) {
   if (mode === 'practice') {
-    const q = (state.currentKnowledgeQuestions || []).find(q => q.id === qId);
+    const q = (state.currentKnowledgeQuestions || []).find(q => q.id === qId) || (state.mistakeQuestions || []).find(q => q.id === qId);
     if (!q) return;
     const subjectKey = state.currentKnowledgeSubjectKey || (q.id.startsWith('math_') ? 'math' : q.id.startsWith('chinese_') ? 'chinese' : 'vocational');
     const statsKey = subjectKey + '_' + (state.currentKnowledgeCategoryId || '');
@@ -2578,7 +2578,6 @@ async function startPractice() {
   const subject = document.getElementById('practice-subject').value;
   const count = parseInt(document.getElementById('practice-count').value);
   const mode = document.getElementById('practice-mode').value;
-
   showToast('加载题目中…');
   let questions = [];
   try {
@@ -2597,14 +2596,12 @@ async function startPractice() {
     return;
   }
   if (questions.length === 0) { showToast('暂无题目'); return; }
-
   const cfg = { id:'practice', name:'专项练习', subject, count: questions.length, time: questions.length * 2 };
   state.currentExam = { cfg, questions, startTime: Date.now() };
   state.examAnswers = {};
   state.examCurrentQ = 0;
   state.examMode = mode;
   state.examTimeLeft = questions.length * 2 * 60;
-
   showScreen('exam-screen');
   document.getElementById('exam-title-bar').textContent = cfg.name;
   renderExamQuestion();
@@ -2856,35 +2853,80 @@ function reviewWrongAnswers() {
 }
 
 // ============================================
-// MISTAKES
+// MISTAKES（错题本：数据来自 GET /api/users/me/mistakes + GET /api/questions/:id，无硬编码）
 // ============================================
 async function renderMistakes() {
-  const mistakeIds = state.stats.mistakeIds || [];
-  document.getElementById('mistake-total').textContent = `（共 ${mistakeIds.length} 题）`;
-
   const container = document.getElementById('mistakes-container');
-  if (mistakeIds.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
+  document.getElementById('mistake-total').textContent = '';
+
+  if (!state.user) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">请先登录后查看错题本</div>';
     return;
   }
 
-  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">加载错题中…</div>';
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">加载中…</div>';
+  let mistakeIds = [];
+  try {
+    const res = await api('/api/users/me/mistakes');
+    mistakeIds = res.mistakeIds || [];
+    state.stats.mistakeIds = mistakeIds;
+  } catch (e) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--danger);">加载错题列表失败，请刷新重试</div>';
+    return;
+  }
+
+  document.getElementById('mistake-total').textContent = `（共 ${mistakeIds.length} 题）`;
+  if (mistakeIds.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
+    state.mistakeQuestions = [];
+    return;
+  }
+
   const questions = [];
   for (const id of mistakeIds) {
     try {
       const res = await api('/api/questions/' + encodeURIComponent(id));
-      if (res.question) questions.push(res.question);
+      if (res && res.question) questions.push(res.question);
     } catch (_) {}
   }
+  state.mistakeQuestions = questions;
+
   if (questions.length === 0) {
     container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
     return;
   }
-  container.innerHTML = questions.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
+
+  // 按科目分类：math -> 数学，chinese -> 语文，vocational -> 职业适应性测试
+  const order = ['math', 'chinese', 'vocational'];
+  const bySubject = {};
+  questions.forEach(q => {
+    const sub = (q.subject || (q.id && q.id.startsWith('chinese_') ? 'chinese' : q.id && q.id.startsWith('vocational_') ? 'vocational' : 'math')) || 'math';
+    if (!bySubject[sub]) bySubject[sub] = [];
+    bySubject[sub].push(q);
+  });
+  let num = 0;
+  const sections = order.filter(sub => (bySubject[sub] || []).length > 0).map(sub => {
+    const list = bySubject[sub];
+    const meta = SUBJECT_META[sub] || { name: sub, icon: '📝' };
+    const block = list.map(q => {
+      num++;
+      return renderQuestion(q, num, 'practice');
+    }).join('<hr style="border:none;border-top:1px solid var(--border);margin:16px 0;">');
+    return '<div class="mistake-section" style="margin-bottom:28px;"><div class="mistake-section-title" style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid ' + (meta.barColor || '#0d9488') + ';">' + (meta.icon || '') + ' ' + (meta.name || sub) + '（' + list.length + ' 题）</div>' + block + '</div>';
+  });
+  container.innerHTML = sections.join('');
 }
 
 async function practiceAllMistakes() {
-  const mistakeIds = state.stats.mistakeIds || [];
+  if (!state.user) { showToast('请先登录'); return; }
+  let mistakeIds = state.stats.mistakeIds || [];
+  if (mistakeIds.length === 0) {
+    try {
+      const res = await api('/api/users/me/mistakes');
+      mistakeIds = res.mistakeIds || [];
+      state.stats.mistakeIds = mistakeIds;
+    } catch (_) {}
+  }
   if (mistakeIds.length === 0) { showToast('暂无错题！'); return; }
 
   showToast('加载错题中…');
@@ -2892,7 +2934,7 @@ async function practiceAllMistakes() {
   for (const id of mistakeIds) {
     try {
       const res = await api('/api/questions/' + encodeURIComponent(id));
-      if (res.question) questions.push(res.question);
+      if (res && res.question) questions.push(res.question);
     } catch (_) {}
   }
   if (questions.length === 0) { showToast('暂无错题！'); return; }
