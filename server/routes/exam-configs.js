@@ -8,7 +8,7 @@ router.get(['/', ''], (req, res) => {
   try {
     const db = getDb();
     const rows = db.prepare(
-      `SELECT id, name, subject, count, time, desc, badge, badge_color, sort_order
+      `SELECT id, name, subject, count, time, "desc", badge, badge_color, sort_order
        FROM exam_configs ORDER BY sort_order ASC, id ASC`
     ).all();
     const list = rows.map(r => ({
