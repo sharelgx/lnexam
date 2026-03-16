@@ -44,26 +44,35 @@ router.post('/login', (req, res) => {
   });
 });
 
+const phoneRegex = /^1[3-9]\d{9}$/;
+
 router.post('/register', (req, res) => {
-  const { name, phone, subject, password } = req.body || {};
-  if (!name || !phone || !subject || !password) {
+  const { name, phone, password } = req.body || {};
+  if (!name || !phone || !password) {
     return res.status(400).json({ ok: false, message: '请填写完整信息' });
+  }
+  const nameStr = String(name).trim();
+  if (nameStr.length < 2 || nameStr.length > 20) {
+    return res.status(400).json({ ok: false, message: '姓名请填写2-20个字符' });
+  }
+  const username = String(phone).trim();
+  if (!phoneRegex.test(username)) {
+    return res.status(400).json({ ok: false, message: '请输入正确的11位手机号' });
   }
   if (password.length < 6) {
     return res.status(400).json({ ok: false, message: '密码至少6位' });
   }
-  const username = String(phone).trim();
   const db = getDb();
   const exists = db.prepare('SELECT id FROM users WHERE username = ?').get(username);
   if (exists) {
     return res.status(400).json({ ok: false, message: '该手机号已注册' });
   }
-  const role = subject === 'common' ? 'common' : subject === 'math' ? 'math' : 'chinese';
+  const role = 'common';
   const password_hash = bcrypt.hashSync(password, 10);
   const stmt = db.prepare(
     'INSERT INTO users (username, password_hash, name, phone, role) VALUES (?, ?, ?, ?, ?)'
   );
-  stmt.run(username, password_hash, String(name).trim(), username, role);
+  stmt.run(username, password_hash, nameStr, username, role);
   const newUser = db.prepare(
     'SELECT id, username, name, phone, role, membership, membership_expires_at FROM users WHERE id = ?'
   ).get(db.prepare('SELECT last_insert_rowid()').get()['last_insert_rowid()']);
