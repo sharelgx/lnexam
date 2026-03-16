@@ -318,6 +318,14 @@
   .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .admin-table th, .admin-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
   .admin-table th { background: var(--bg); color: var(--text-muted); font-weight: 600; }
+  .admin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .admin-tab { padding: 8px 16px; border: 1px solid var(--border); background: #fff; border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; }
+  .admin-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .admin-cat-item { padding: 8px 12px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .admin-cat-item .level-1 { font-weight: 600; color: var(--primary); }
+  .admin-cat-item .level-2 { padding-left: 16px; }
+  .admin-cat-item .level-3 { padding-left: 32px; font-size: 13px; color: var(--text-muted); }
+  .admin-cat-item .actions { display: flex; gap: 6px; }
 
   .sidebar-nav {
     flex: 1;
@@ -339,6 +347,7 @@
     padding: 8px 12px 4px;
   }
 
+  .sidebar a.nav-item { text-decoration: none; color: inherit; }
   .nav-item {
     display: flex;
     align-items: center;
@@ -1492,44 +1501,44 @@
     <nav class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-label">主菜单</div>
-        <div class="nav-item active" onclick="showPage('dashboard')">
+        <a href="/dashboard" class="nav-item" onclick="return navTo(event,'dashboard')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1z"/></svg>
           学习中心
-        </div>
-        <div class="nav-item" onclick="showPage('subjects')">
+        </a>
+        <a href="/subjects" class="nav-item" onclick="return navTo(event,'subjects')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.396 0 2.698.35 3.834.99A7.968 7.968 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.969 7.969 0 0114.5 4c-1.396 0-2.698.35-3.834.99A7.972 7.972 0 009 4.804z"/></svg>
           知识点复习
-        </div>
-        <div class="nav-item" onclick="showPage('exams')">
+        </a>
+        <a href="/exams" class="nav-item" onclick="return navTo(event,'exams')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"/></svg>
           模拟考试
           <span class="nav-badge">NEW</span>
-        </div>
-        <div class="nav-item" onclick="showPage('practice')">
+        </a>
+        <a href="/practice" class="nav-item" onclick="return navTo(event,'practice')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           专项练习
-        </div>
+        </a>
       </div>
 
       <div class="nav-section">
         <div class="nav-label">我的学习</div>
-        <div class="nav-item" onclick="showPage('mistakes')">
+        <a href="/mistakes" class="nav-item" onclick="return navTo(event,'mistakes')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
           错题本
           <span class="nav-badge" id="mistake-count">0</span>
-        </div>
-        <div class="nav-item" onclick="showPage('stats')">
+        </a>
+        <a href="/stats" class="nav-item" onclick="return navTo(event,'stats')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
           学习报告
-        </div>
-        <div class="nav-item" onclick="showPage('membership')">
+        </a>
+        <a href="/membership" class="nav-item" onclick="return navTo(event,'membership')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           会员中心
-        </div>
-        <div class="nav-item nav-item-admin hidden" id="nav-admin" onclick="showPage('admin')">
+        </a>
+        <a href="/admin" class="nav-item nav-item-admin hidden" id="nav-admin" onclick="return navTo(event,'admin')">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
           后台管理
-        </div>
+        </a>
       </div>
     </nav>
 
@@ -1755,13 +1764,67 @@
       <div id="page-admin" class="hidden">
         <div class="card">
           <div class="card-header"><div class="card-title">后台管理</div></div>
-          <div class="grid-2" style="margin-bottom:20px;">
-            <div class="stat-card"><div class="stat-label">用户总数</div><div class="stat-value" id="admin-user-count">0</div></div>
-            <div class="stat-card"><div class="stat-label">考试次数</div><div class="stat-value" id="admin-exam-count">0</div></div>
-            <div class="stat-card"><div class="stat-label">VIP 会员数</div><div class="stat-value" id="admin-vip-count">0</div></div>
+          <div class="admin-tabs">
+            <button type="button" class="admin-tab active" data-tab="users" onclick="switchAdminTab('users')">用户管理</button>
+            <button type="button" class="admin-tab" data-tab="categories" onclick="switchAdminTab('categories')">分类管理</button>
           </div>
-          <div class="card-title" style="margin-bottom:12px;">用户列表</div>
-          <div id="admin-user-list" style="overflow-x:auto;"></div>
+          <div id="admin-tab-users">
+            <div class="grid-2" style="margin-bottom:20px;">
+              <div class="stat-card"><div class="stat-label">用户总数</div><div class="stat-value" id="admin-user-count">0</div></div>
+              <div class="stat-card"><div class="stat-label">考试次数</div><div class="stat-value" id="admin-exam-count">0</div></div>
+              <div class="stat-card"><div class="stat-label">VIP 会员数</div><div class="stat-value" id="admin-vip-count">0</div></div>
+            </div>
+            <div class="card-title" style="margin-bottom:12px;">用户列表</div>
+            <div id="admin-user-list" style="overflow-x:auto;"></div>
+          </div>
+          <div id="admin-tab-categories" class="hidden">
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">一级分类为科目（数学/语文/职业适应性测试），二、三级为知识点。</p>
+            <div class="grid-2" style="gap:24px;">
+              <div>
+                <div class="card-title" style="margin-bottom:12px;">分类列表</div>
+                <div id="admin-category-tree" style="max-height:400px;overflow-y:auto;"></div>
+              </div>
+              <div>
+                <div class="card-title" style="margin-bottom:12px;" id="admin-cat-form-title">新增分类</div>
+                <form id="admin-category-form" onsubmit="return saveCategory(event);">
+                  <input type="hidden" id="admin-cat-id" value="">
+                  <div class="form-group">
+                    <label>上级分类</label>
+                    <select id="admin-cat-parent">
+                      <option value="0">— 一级（科目）—</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>名称</label>
+                    <input type="text" id="admin-cat-name" required placeholder="如：数学、集合">
+                  </div>
+                  <div class="form-group">
+                    <label>层级</label>
+                    <select id="admin-cat-level">
+                      <option value="1">一级（科目）</option>
+                      <option value="2">二级（知识点）</option>
+                      <option value="3">三级（子知识点）</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>科目标识（仅一级填）</label>
+                    <select id="admin-cat-subject-key">
+                      <option value="">—</option>
+                      <option value="math">math</option>
+                      <option value="chinese">chinese</option>
+                      <option value="vocational">vocational</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>排序</label>
+                    <input type="number" id="admin-cat-sort" value="0" min="0">
+                  </div>
+                  <button type="submit" class="btn-sm">保存</button>
+                  <button type="button" class="btn-outline" onclick="resetCategoryForm()" style="margin-left:8px;">取消</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1874,155 +1937,43 @@ async function api(path, options = {}) {
   return data;
 }
 
-// ============================================
-// DATA: Question Banks
-// ============================================
-const MATH_TOPICS = [
-  { id: 'sets', name: '集合', color: '#dbeafe' },
-  { id: 'inequalities', name: '不等式', color: '#dcfce7' },
-  { id: 'functions', name: '函数', color: '#fef3c7' },
-  { id: 'sequences', name: '数列', color: '#fce7f3' },
-  { id: 'trig', name: '三角函数', color: '#ede9fe' },
-  { id: 'vectors', name: '向量', color: '#d1fae5' },
-  { id: 'lines', name: '直线与平面', color: '#fff7ed' },
-  { id: 'conics', name: '圆锥曲线', color: '#f0fdf4' },
-  { id: 'probability', name: '概率与统计', color: '#fdf2f8' },
-  { id: 'permcomb', name: '排列组合', color: '#ecfdf5' },
-  { id: 'limits', name: '数列极限', color: '#fefce8' },
-  { id: 'exponents', name: '指数对数', color: '#eff6ff' },
-];
+// 分类与题目均从接口 /api/categories、/api/questions 获取，无硬编码题库
+const SUBJECT_META = {
+  math: { name: '数学', icon: '📐', color: '#f0f4ff', desc: '集合、函数、三角、数列、解析几何等', barColor: '#2563a8' },
+  chinese: { name: '语文', icon: '📖', color: '#f5f0ff', desc: '字音字形、成语、语病、文言文、文学常识等', barColor: '#7c3aed' },
+  vocational: { name: '职业适应性测试', icon: '🏢', color: '#f0fdf8', desc: '政治理论、历史文化、法律知识、职业道德、时事热点等', barColor: '#0d9488' }
+};
+const TOPIC_CHIP_COLORS = ['#dbeafe', '#dcfce7', '#fef3c7', '#fce7f3', '#ede9fe', '#d1fae5', '#fff7ed', '#f0fdf4', '#fdf2f8', '#ecfdf5', '#fefce8', '#eff6ff'];
 
-const CHINESE_TOPICS = [
-  { id: 'phonetics', name: '字音字形', color: '#dbeafe' },
-  { id: 'idioms', name: '成语运用', color: '#dcfce7' },
-  { id: 'grammar', name: '语病辨析', color: '#fef3c7' },
-  { id: 'punctuation', name: '标点符号', color: '#fce7f3' },
-  { id: 'rhetoric', name: '修辞手法', color: '#ede9fe' },
-  { id: 'classical', name: '文言文阅读', color: '#d1fae5' },
-  { id: 'poetry', name: '诗词鉴赏', color: '#fff7ed' },
-  { id: 'literary', name: '文学常识', color: '#f0fdf4' },
-  { id: 'reading', name: '现代文阅读', color: '#fdf2f8' },
-  { id: 'senorder', name: '句子排序', color: '#ecfdf5' },
-];
+async function getCategoriesTree() {
+  if (state.categoriesTree) return state.categoriesTree;
+  const data = await api('/api/categories');
+  const tree = data.tree || [];
+  state.categoriesTree = tree;
+  const map = {};
+  function walk(nodes) {
+    (nodes || []).forEach(n => {
+      map[n.id] = n.name;
+      if (n.children && n.children.length) walk(n.children);
+    });
+  }
+  walk(tree);
+  state.categoryNameById = map;
+  return tree;
+}
 
-// Sample questions from the PDFs
-const MATH_QUESTIONS = [
-  { id:'m1', topic:'sets', text:'设集合 A = {-1, 0, 1, 2}，B = {2, 3, 5}，则 A∩B =', options:['A. {2}','B. {2,3,5}','C. {-1,0,1,2}','D. {-1,0,1,2,3,5}'], answer:0, explanation:'A∩B是A和B的交集，只取两个集合共同的元素，A和B都含有的元素只有2，所以A∩B = {2}。' },
-  { id:'m2', topic:'inequalities', text:'不等式 x²-4x+3 > 0 的解集为', options:['A. (-∞,+∞)','B. (-∞,-1)∪(3,+∞)','C. (-∞,1)∪(3,+∞)','D. (1,3)'], answer:2, explanation:'x²-4x+3 = (x-1)(x-3) > 0，解得 x<1 或 x>3，即解集为(-∞,1)∪(3,+∞)。' },
-  { id:'m3', topic:'sets', text:'若a是R中的元素，但不是Q中的元素，则a可以是', options:['A. 3.14','B. -1','C. 2','D. √3'], answer:3, explanation:'R是实数集，Q是有理数集。3.14、-1、2都是有理数，√3是无理数，属于R但不属于Q。' },
-  { id:'m4', topic:'inequalities', text:'不等式|3x-2|>1的解集为', options:['A. (-∞,-1/3)∪(1,+∞)','B. (-∞,1/3)∪(1,+∞)','C. (-1/3,1)','D. (1/3,1)'], answer:1, explanation:'|3x-2|>1，即3x-2>1或3x-2<-1，解得x>1或x<1/3，即(-∞,1/3)∪(1,+∞)。' },
-  { id:'m5', topic:'functions', text:'函数 y=√(3x-1)+√(1-2x)+4 的定义域为', options:['A. (-∞,1/3)','B. [1/3,1/2]','C. (-1/2,1/3)','D. (-∞,+∞)'], answer:1, explanation:'需同时满足：3x-1≥0且1-2x≥0，即x≥1/3且x≤1/2，所以定义域为[1/3,1/2]。' },
-  { id:'m6', topic:'trig', text:'已知π/2 < θ < π，sin θ = 3/5，则tan θ的值为', options:['A. 3/4','B. 4/3','C. -3/4','D. -4/3'], answer:2, explanation:'sin θ = 3/5，在第二象限cos θ < 0，cos θ = -4/5，所以tan θ = sin θ/cos θ = (3/5)/(-4/5) = -3/4。' },
-  { id:'m7', topic:'vectors', text:'已知向量 a⃗=(2,3)，b⃗=(1,-1)，则 a⃗-2b⃗=', options:['A. (0,5)','B. (1,5)','C. (0,-2)','D. (3,2)'], answer:0, explanation:'a⃗-2b⃗ = (2,3) - 2(1,-1) = (2-2, 3+2) = (0,5)。' },
-  { id:'m8', topic:'sequences', text:'在等差数列{aₙ}中，已知a₁=2，a₃=6，则公差d=', options:['A. 1','B. 2','C. 3','D. 4'], answer:1, explanation:'a₃ = a₁ + 2d，即6 = 2 + 2d，解得d = 2。' },
-  { id:'m9', topic:'lines', text:'直线2x-y+1=0的斜率为', options:['A. 2','B. -2','C. 1/2','D. -1/2'], answer:0, explanation:'将直线方程变为斜截式：y = 2x+1，所以斜率k = 2。' },
-  { id:'m10', topic:'trig', text:'已知cos θ = 3/4，则 1-tan⁴θ =', options:['A. 81/32','B. 81/130','C. 9/2','D. 9/16'], answer:0, explanation:'cos θ = 3/4，则sin²θ = 1-9/16 = 7/16，tan²θ = sin²θ/cos²θ = 7/9，tan⁴θ = 49/81，1-tan⁴θ = 1-49/81 = 32/81。实际答案为32/81，但题目说是81/32，请以题库答案为准。' },
-  { id:'m11', topic:'functions', text:'函数 f(x) = √(x-2) + 1/(x-3) 的定义域为', options:['A. [2,+∞)','B. (3,+∞)','C. [2,3)∪(3,+∞)','D. (2,3)∪(3,+∞)'], answer:2, explanation:'需满足x-2≥0且x-3≠0，即x≥2且x≠3，所以定义域为[2,3)∪(3,+∞)。' },
-  { id:'m12', topic:'conics', text:'抛物线 y²=6x 的焦点坐标为', options:['A. (-3/2,0)','B. (0,3/2)','C. (0,2/3)','D. (3/2,0)'], answer:3, explanation:'抛物线y²=2px中，p=3，焦点坐标为(p/2,0)=(3/2,0)。' },
-  { id:'m13', topic:'sequences', text:'已知等比数列{aₙ}中，a₁=1，q=2，则S₃=', options:['A. 5','B. 6','C. 7','D. 8'], answer:2, explanation:'S₃ = a₁(1-q³)/(1-q) = 1×(1-8)/(1-2) = 7。' },
-  { id:'m14', topic:'lines', text:'圆 x²+y²-4x+6y=0 的圆心坐标是', options:['A. (2,-3)','B. (-2,3)','C. (2,3)','D. (-2,-3)'], answer:0, explanation:'配方得(x-2)²+(y+3)²=13，圆心为(2,-3)。' },
-  { id:'m15', topic:'probability', text:'从甲乙等5名学生中随机选出2人，则甲被选中的概率为', options:['A. 9/25','B. 8/25','C. 2/5','D. 1/5'], answer:2, explanation:'总的选法有C(5,2)=10种，甲被选中的选法有C(4,1)=4种，概率为4/10=2/5。' },
-  { id:'m16', topic:'exponents', text:'已知 log₃x = -4，那么x=', options:['A. 12','B. 20','C. 1/4','D. 1/81'], answer:3, explanation:'log₃x = -4，即x = 3⁻⁴ = 1/81。' },
-  { id:'m17', topic:'conics', text:'椭圆 x²/81 + y²/45 = 1 的离心率为', options:['A. 3/5','B. √5/3','C. 1/3','D. 2/3'], answer:3, explanation:'a²=81，b²=45，c²=a²-b²=36，c=6，e=c/a=6/9=2/3。' },
-  { id:'m18', topic:'permcomb', text:'(x+1)⁵的展开式中，x²的系数是', options:['A. 5','B. 10','C. 15','D. 20'], answer:1, explanation:'C(5,2)x²·1³ = 10x²，系数为10。' },
-  { id:'m19', topic:'trig', text:'已知函数f(x)=sinx+cosx，则f(π/4)=', options:['A. 1','B. √2','C. 0','D. -√3/2'], answer:1, explanation:'f(π/4) = sin(π/4)+cos(π/4) = √2/2+√2/2 = √2。' },
-  { id:'m20', topic:'sequences', text:'在等差数列{aₙ}中，a₅=3，a₇=21，则a₆=', options:['A. 4','B. 6','C. 9','D. 12'], answer:3, explanation:'等差数列中a₆=(a₅+a₇)/2=(3+21)/2=12。' },
-];
-
-const CHINESE_QUESTIONS = [
-  { id:'c1', topic:'phonetics', text:'下列词语中加点字的读音全部正确的一项是', options:['A. 磐石(bān) 谈吐(tù) 花蕾(léi) 飒爽英姿(fēng)','B. 驻足(zhù) 脉搏(mài) 谚语(yàn) 短小精悍(hàn)','C. 砚台(yàn) 滞留(dài) 禅让(shàn) 真知灼见(zhù)','D. 歼灭(qiān) 处分(chù) 坚毅(yì) 矢志不渝(mó)'], answer:1, explanation:'A中"飒"读sà；C中"滞"读zhì，"灼"读zhuó；D中"歼"读jiān，"渝"读yú。B全部正确。' },
-  { id:'c2', topic:'phonetics', text:'下列词语书写全部正确的一项是', options:['A. 禅让 箴言 隽泳 轻哥曼舞','B. 奶茶 勤捡 心绪 徇私五弊','C. 星宿 荣洽 寒露 峰拥而至','D. 绚丽 勋章 职业 潸然泪下'], answer:3, explanation:'A"隽泳"应为"隽咏"，"轻哥"应为"轻歌"；B"勤捡"应为"勤俭"，"五弊"应为"舞弊"；C"荣洽"应为"融洽"，"峰拥"应为"蜂拥"；D全部正确。' },
-  { id:'c3', topic:'idioms', text:'下列句子中，加点的成语使用不恰当的一项是', options:['A. 习近平新时代中国特色社会主义思想气势磅礴、博大精深','B. 只要上下一致，勠力同心，全省人民必定能打赢精准扶贫攻坚战','C. 这个幼儿节目的主题曲广受欢迎，小朋友们对它垂涎三尺','D. 优秀传统文化薪火相传，历久弥新，始终为我们提供精神支撑'], answer:2, explanation:'"垂涎三尺"形容非常贪婪地盯着食物，用来形容喜欢一首歌曲不恰当，应用"爱不释手"等词语。' },
-  { id:'c4', topic:'grammar', text:'下列各句中，没有语病的一项是', options:['A. 高中语文课本里的经典篇目，就像一扇扇窗，让我们窥见不同时代的人间烟火与精神风骨','B. 在西部大开发中，一些"老区"的领导已经认识到了改变产业结构的重要，他们希望再揭发一个更为辉煌的未来','C. 为建设社会主义精神文明的需要，文化工作者要拿出来','D. 之所以还没有告诉他真相，即使他心理非常脆弱，就让人特别担心'], answer:0, explanation:'B中"揭发"使用不当，应为"开创"；C表达不完整；D关联词使用混乱。A表达流畅，无语病。' },
-  { id:'c5', topic:'rhetoric', text:'下列各句中对修辞手法的解释，不恰当的一项是', options:['A. 蜀道难，难于上青天（夸张）','B. 东西植松柏，左右种梧桐（对偶）','C. 叶子出水很高，像亭亭的舞女的裙（比喻）','D. 天鹅的洁白增添了湖水的明净，天鹅的叫声增添了湖面的幽静（比喻）'], answer:3, explanation:'D项用天鹅的洁白对比衬托湖水，是映衬（反衬）手法，不是比喻。比喻需要有本体、喻体和比喻词。' },
-  { id:'c6', topic:'literary', text:'下列关于《水浒传》介绍不准确的一项是', options:['A. 它是我国文学史上第一部描写农民起义全过程的长篇小说','B. 本书结构严谨，以官逼民反，替天行道为主线','C. 武松打虎、草船借箭、刘姥姥进大观园等，都是《水浒传》中精彩的故事片断','D. 《林教头风雪山神庙》一文，成功塑造了林冲这一个性鲜明的艺术形象'], answer:2, explanation:'"草船借箭"是《三国演义》中诸葛亮的故事，"刘姥姥进大观园"是《红楼梦》中的故事，都不属于《水浒传》。' },
-  { id:'c7', topic:'classical', text:'下列各句中，加点词与现代汉语意思相同的一项是', options:['A. 暮去朝来颜色故','B. 因为长句，歌以赠之','C. 凄凄不似向前声','D. 移船相近邀相见'], answer:3, explanation:'"相见"古今意思相同，都是"见面"的意思。A"颜色"古义为"容颜"；B"因为"古义为"于是写"；C"向前"古义为"刚才"。' },
-  { id:'c8', topic:'grammar', text:'对下列复句类型，判断错误的一项是', options:['A. 杜小康开始想家，并且日甚一日地变得迫切。（递进复句）','B. 我常想读书人是世间幸福人，因为他除了拥有现实的世界之外，还拥有更为浩瀚也更为丰富的世界。（假设复句）','C. 来客也不少，有送行的，有拿东西的，有送行兼拿东西的。（并列复句）','D. 与其跪着生，不如站着死。（选择复句）'], answer:1, explanation:'B句中"因为"引出原因，是因果复句，不是假设复句。假设复句的典型标志是"如果…那么"等。' },
-  { id:'c9', topic:'literary', text:'下列有关文学常识的表述，正确的一项是', options:['A. 《窦娥冤》作者王实甫与马致远、施耐庵、郑光祖被称为"元曲四大家"','B. 蒲松龄是清代杰出的文学家，创作的作品《红楼梦》是我国文言长篇小说的巅峰之作','C. 疏是奏文的一种，是古代官员向皇帝进言以使下情上达的进谏文书，如魏征的《谏太宗十思疏》','D. 《龙须沟》是文学家巴金的戏剧作品'], answer:2, explanation:'A中《窦娥冤》作者是关汉卿；B《红楼梦》是曹雪芹的作品；D《龙须沟》是老舍的作品。C正确。' },
-  { id:'c10', topic:'senorder', text:'把下列句子组成语意连贯的语段，排列最恰当的一项是：①楚国占据了长江流域，拥有丰富的生漆资源；②为什么楚国的漆器制作会如此发达呢？③再加上人工种植的漆树，把楚国称为"生漆之国"并不为过；④这些不得不从楚国的地理位置说起；⑤武当山、巫山等山区中，有大面积的漆树林', options:['A. ②④①⑤③','B. ②④③⑤①','C. ②③④①⑤','D. ②③⑤④①'], answer:0, explanation:'逻辑顺序：先提出问题②→说明要从地理说起④→介绍地理位置①→说明山区漆树⑤→总结结论③，即②④①⑤③。' },
-  { id:'c11', topic:'phonetics', text:'下列词语中加点字的字音和字形，全都正确的一组是', options:['A. 殒(yǔn)身不恤 凝噎(yē) 澄澈(chè)','B. 参(chān)差不齐 尺牍(dú) 柔曼(màn)','C. 命运多舛(jié) 蓊(wěng)郁 掘拗(ào)','D. 义愤填鹰(yīng) 榫(jí)卯 睥(pì)睨'], answer:0, explanation:'A全对；B"参"应读cēn；C"舛"读chuǎn；D"义愤填膺"的"膺"才对，且"榫"读sǔn。' },
-  { id:'c12', topic:'poetry', text:'文天祥的《过零丁洋》中表现诗人崇高爱国情怀与坚贞民族气节的名句是', options:['A. 国破山河在，城春草木深','B. 最喜小儿亡赖，溪头卧剥莲蓬','C. 人生自古谁无死，留取丹心照汗青','D. 有约不来过夜半，闲敲棋子落灯花'], answer:2, explanation:'"人生自古谁无死，留取丹心照汗青"是文天祥《过零丁洋》的名句，表现了视死如归的爱国精神。A是杜甫，B是辛弃疾，D是赵师秀的诗句。' },
-  { id:'c13', topic:'rhetoric', text:'"问君能有几多愁？恰似一江春水向东流"这句诗中运用的修辞手法是', options:['A. 夸张和对偶','B. 设问和比喻','C. 拟人和排比','D. 反问和象征'], answer:1, explanation:'"问君能有几多愁"是设问，自问自答；"恰似一江春水"是比喻，把愁比作江水。所以是设问和比喻。' },
-  { id:'c14', topic:'classical', text:'下列各句中不属于判断句式的一项是', options:['A. 谁为大王为此计者','B. 逆水行舟，不进则退','C. 师者，所以传道授业解惑也','D. 虽又槁暴，不复挺者，輮使之然也'], answer:0, explanation:'A是疑问句；C的"...者，...也"是典型判断句；D的"...者，...也"也是判断句；B是谚语，不是判断句，也不是判断句式。实际上A才是非判断句。' },
-  { id:'c15', topic:'literary', text:'下列典故与人物对应正确的一项是', options:['A. 草船借箭——诸葛亮 卧薪尝胆——勾践','B. 闻鸡起舞——蒲松龄 程门立雪——韩非子','C. 破釜沉舟——白居易 约法三章——商鞅','D. 图穷匕见——刘邦 四面楚歌——韩愈'], answer:0, explanation:'"草船借箭"是诸葛亮（或周瑜船队）的故事，"卧薪尝胆"是越王勾践的故事，A正确。其他选项中人物与典故对应均有误。' },
-];
-
-// All questions combined
-const VOCATIONAL_TOPICS = [
-  { id: 'politics', name: '政治理论', color: '#fce7f3' },
-  { id: 'history', name: '历史文化', color: '#fff7ed' },
-  { id: 'science', name: '科学常识', color: '#dcfce7' },
-  { id: 'law', name: '法律知识', color: '#dbeafe' },
-  { id: 'ethics', name: '职业道德', color: '#ede9fe' },
-  { id: 'school', name: '学校知识', color: '#fef3c7' },
-  { id: 'current', name: '时事热点', color: '#d1fae5' },
-  { id: 'life', name: '生活常识', color: '#fdf2f8' },
-  { id: 'psych', name: '心理健康', color: '#ecfdf5' },
-  { id: 'tech', name: '科技前沿', color: '#f0fdf4' },
-];
-
-const VOCATIONAL_QUESTIONS = [
-  { id:'v1', topic:'politics', text:'职业教育担负着为推进中国式现代化培养更多（）的重要使命。', options:['A. 高质量人才','B. 高技能人才','C. 高水平人才','D. 高层次人才'], answer:1, explanation:'职业教育的根本任务是培养高技能人才，服务国家现代化建设需要。' },
-  { id:'v2', topic:'politics', text:'中国共产党为什么能，中国特色社会主义为什么好，归根到底是马克思主义行，是（）', options:['A. 中国化时代化的马克思主义行','B. 中国式现代化行','C. 中华民族伟大复兴的战略行','D. 人类社会发展规律行'], answer:0, explanation:'归根到底是中国化时代化的马克思主义行，这是习近平总书记的重要论断。' },
-  { id:'v3', topic:'politics', text:'（）是新时代党和国家事业取得历史性成就、发生历史性变革的决定性因素。', options:['A. "四个自信"','B. "两个确立"','C. "两个维护"','D. "三个务必"'], answer:1, explanation:'"两个确立"是确立习近平同志党中央的核心、全党的核心地位，确立习近平新时代中国特色社会主义思想的指导地位，是决定性因素。' },
-  { id:'v4', topic:'politics', text:'近代以来中华民族最伟大的梦想是（）', options:['A. 建成社会主义现代化强国','B. 全面建成小康社会','C. 实现中华民族伟大复兴','D. 建成现代化国家'], answer:2, explanation:'实现中华民族伟大复兴是近代以来中华民族最伟大的梦想，也是中国梦的核心内涵。' },
-  { id:'v5', topic:'politics', text:'社会主义核心价值观对社会层面的要求是（）', options:['A. 自由、平等、公正、法治','B. 富强、民主、文明、和谐','C. 爱国、敬业、诚信、友善','D. 富强、公正、法治、爱国'], answer:0, explanation:'社会主义核心价值观分三个层面：国家层面是富强、民主、文明、和谐；社会层面是自由、平等、公正、法治；公民个人层面是爱国、敬业、诚信、友善。' },
-  { id:'v6', topic:'politics', text:'中华人民共和国的国体是（）', options:['A. 社会主义制度','B. 人民民主专政','C. 无产阶级专政','D. 人民代表大会制度'], answer:1, explanation:'国体是国家的阶级本质，我国国体是人民民主专政。政体是人民代表大会制度，根本制度是社会主义制度。' },
-  { id:'v7', topic:'politics', text:'（）是人民当家作主的根本保证，是中国特色社会主义最本质的特征。', options:['A. 权利保障','B. 依法治国','C. 党的领导','D. 公平正义'], answer:2, explanation:'党的领导是中国特色社会主义最本质的特征，是中国特色社会主义制度的最大优势，是人民当家作主的根本保证。' },
-  { id:'v8', topic:'politics', text:'（）是实现社会主义现代化、创造人民美好生活的必由之路。', options:['A. 中国特色社会主义道路','B. 中国特色社会主义理论体系','C. 中国特色社会主义制度','D. 中国特色社会主义文化'], answer:0, explanation:'中国特色社会主义道路是实现社会主义现代化、创造人民美好生活的必由之路，是历史和人民的选择。' },
-  { id:'v9', topic:'politics', text:'中国共产党的性质决定了党的宗旨是（）', options:['A. 立党为公、执政为民','B. 以人为本、执政为民','C. 为实现共产主义而奋斗','D. 全心全意为人民服务'], answer:3, explanation:'中国共产党的宗旨是全心全意为人民服务，这是由党的工人阶级先锋队性质决定的。' },
-  { id:'v10', topic:'politics', text:'中国共产党的精神之源是（）', options:['A. 井冈山精神','B. 抗美援朝精神','C. 伟大建党精神','D. 脱贫攻坚精神'], answer:2, explanation:'伟大建党精神是中国共产党的精神之源，是中国共产党人精神谱系的源头。' },
-  { id:'v11', topic:'history', text:'世界现存最大、最完整的木质结构的古代皇宫建筑群是（）', options:['A. 卢浮宫','B. 北京故宫','C. 凡尔赛宫','D. 曲阜孔庙'], answer:1, explanation:'北京故宫是世界上现存规模最大、保存最为完整的木质结构古建筑群，是明清两代的皇家宫殿。' },
-  { id:'v12', topic:'history', text:'标志中国共产党开始独立领导革命战争和创建人民军队的事件是（）', options:['A. 南昌起义','B. 秋收起义','C. 广州起义','D. 百色起义'], answer:0, explanation:'1927年8月1日南昌起义，打响了武装反抗国民党反动派的第一枪，标志着中国共产党独立领导革命战争的开始。' },
-  { id:'v13', topic:'history', text:'新民主主义革命开始的标志是（）', options:['A. 戊戌变法','B. 辛亥革命','C. 五四运动','D. 中国共产党成立'], answer:2, explanation:'1919年五四运动是新民主主义革命的开端，无产阶级开始作为独立的政治力量登上历史舞台。' },
-  { id:'v14', topic:'history', text:'我国历史上第一个称"皇帝"的君主是（）', options:['A. 夏启','B. 商汤','C. 嬴政','D. 刘邦'], answer:2, explanation:'秦始皇嬴政统一六国后，自称"始皇帝"，是历史上第一个使用"皇帝"称号的君主。' },
-  { id:'v15', topic:'history', text:'活字印刷术的发明者是（）', options:['A. 蔡伦','B. 毕昇','C. 沈括','D. 郭守敬'], answer:1, explanation:'活字印刷术是北宋平民毕昇发明的，用胶泥刻字，大大促进了文化传播。蔡伦是造纸术的改良者。' },
-  { id:'v16', topic:'history', text:'隋炀帝时，正式设立进士科，标志着（）的创立。', options:['A. 禅让制','B. 分封制','C. 科举制','D. 行省制'], answer:2, explanation:'隋炀帝大业年间正式设立进士科，标志着科举制度正式创立，此后成为历代选拔官员的重要制度。' },
-  { id:'v17', topic:'history', text:'"成也萧何，败也萧何"说的是谁的经历？', options:['A. 刘邦','B. 项羽','C. 韩信','D. 张良'], answer:2, explanation:'韩信被萧何推荐给刘邦得以重用，后又被萧何设计骗入宫中被吕后所杀，所以说"成也萧何，败也萧何"。' },
-  { id:'v18', topic:'history', text:'《史记》中列有《五帝本纪》，这五帝指的是（）', options:['A. 黄帝、炎帝、帝喾、尧和舜','B. 黄帝、蚩尤、颛顼、帝喾和舜','C. 黄帝、颛顼、帝喾、尧和舜','D. 黄帝、炎帝、颛顼、尧和舜'], answer:2, explanation:'《史记·五帝本纪》中的五帝是：黄帝、颛顼、帝喾、尧、舜，代表了中华文明的传说时代。' },
-  { id:'v19', topic:'science', text:'"下雪不冷，化雪才冷"的原因是（）', options:['A. 人的感觉','B. 雪融化时要吸收不少的热，所以气温下降','C. 雪在下时是热的','D. 雪在地上过一段时间后变冷'], answer:1, explanation:'融化是物态变化中的吸热过程，雪融化时从周围环境大量吸热，导致气温下降，所以化雪时更冷。' },
-  { id:'v20', topic:'science', text:'夏天从冰箱里取出一瓶啤酒，发现啤酒外面"出汗"，正确解释是（）', options:['A. 酒从瓶中渗出','B. 空气中水蒸气气化','C. 啤酒瓶上的水汽化','D. 空气中水蒸气遇冷液化'], answer:3, explanation:'冰啤酒瓶温度较低，空气中的水蒸气接触冷的瓶壁后温度降低，发生液化，变成小水珠附着在瓶壁上。' },
-  { id:'v21', topic:'science', text:'地球的自转周期是大约（）', options:['A. 24小时','B. 30天','C. 365天','D. 12小时'], answer:0, explanation:'地球自转周期约为24小时（准确地说是23小时56分4秒），这就是一天的来源。365天是地球公转周期（一年）。' },
-  { id:'v22', topic:'science', text:'以下哪种物质在空气中含量最多？', options:['A. 氧气','B. 二氧化碳','C. 氮气','D. 氢气'], answer:2, explanation:'空气的主要成分：氮气约78%，氧气约21%，稀有气体约0.94%，二氧化碳约0.04%，氮气含量最多。' },
-  { id:'v23', topic:'science', text:'保护生物多样性最为有效的措施是（）', options:['A. 建立自然保护区','B. 迁地保护','C. 加强教育和法制管理','D. 建立濒危物种的种质库'], answer:0, explanation:'建立自然保护区是就地保护，是保护生物多样性最有效的措施，能保护整个生态系统，而非单一物种。' },
-  { id:'v24', topic:'science', text:'正常成年人的血压，收缩压的正常范围大致是（）毫米汞柱。', options:['A. 90-139','B. 50-89','C. 140-180','D. 190-220'], answer:0, explanation:'成年人正常收缩压（高压）范围为90-139mmHg，舒张压（低压）为60-89mmHg。高于140/90为高血压。' },
-  { id:'v25', topic:'science', text:'以下关于生活常识，说法不正确的是（）', options:['A. 微波炉的加热原理是电能转化为电磁能再转化为内能','B. 堆煤的墙角变黑是因为分子永不停息地做无规则运动','C. 人民币最早的硬币材质是铝镍合金','D. 低碳生活会降低城市居民的生活水平'], answer:3, explanation:'低碳生活不会降低生活水平，而是通过减少碳排放、节约能源来保护环境，提升生活品质的可持续方式。' },
-  { id:'v26', topic:'law', text:'公民从（）时起，具有民事权利能力，依法享有民事权利，承担民事义务。', options:['A. 出生','B. 14周岁','C. 16周岁','D. 18周岁'], answer:0, explanation:'根据《民法典》，自然人从出生时起具有民事权利能力，依法享有民事权利，承担民事义务。' },
-  { id:'v27', topic:'law', text:'遗产继承的第一顺序是（）', options:['A. 祖父母、外祖父母','B. 兄弟姐妹','C. 配偶、子女、父母','D. 以上都是'], answer:2, explanation:'《民法典》规定继承顺序：第一顺序为配偶、子女、父母；第二顺序为兄弟姐妹、祖父母、外祖父母。' },
-  { id:'v28', topic:'law', text:'国家宪法日是（）', options:['A. 12月4日','B. 10月20日','C. 9月20日','D. 9月30日'], answer:0, explanation:'2014年全国人大常委会将每年12月4日设立为"国家宪法日"，以弘扬宪法精神，推进依法治国。' },
-  { id:'v29', topic:'law', text:'中华人民共和国的政体是（）', options:['A. 人民民主专政制度','B. 社会主义制度','C. 人民代表大会制度','D. 无产阶级专政制度'], answer:2, explanation:'政体是政权的组织形式，我国政体是人民代表大会制度，是我国的根本政治制度。' },
-  { id:'v30', topic:'law', text:'社会主义民主的本质是（）', options:['A. 人民当家作主','B. 实现全体人民共同富裕','C. 坚持人民代表大会制度','D. 坚持政治协商制度'], answer:0, explanation:'社会主义民主的本质特征是人民当家作主，一切权力属于人民，这是社会主义民主区别于资本主义民主的根本。' },
-  { id:'v31', topic:'ethics', text:'从业人员在职业工作中信守诺言、表里如一、遵守职业纪律，这是职业道德中（）', options:['A. 办事公道的要求','B. 爱岗敬业的要求','C. 诚实守信的要求','D. 服务群众的要求'], answer:2, explanation:'信守诺言、表里如一、遵守职业纪律是诚实守信的具体体现，这是职业道德的基本要求之一。' },
-  { id:'v32', topic:'ethics', text:'《公民道德建设实施纲要》中提倡的职业道德五个要求是（）', options:['A. 爱国守法、明礼诚信、团结友善、勤俭自强、敬业奉献','B. 爱岗敬业、诚实守信、办事公道、服务群众、奉献社会','C. 尊老爱幼、反对迷信、不随地吐痰、不乱扔垃圾','D. 爱祖国、爱人民、爱劳动、爱科学、爱社会主义'], answer:1, explanation:'《公民道德建设实施纲要》明确提出职业道德的五个要求：爱岗敬业、诚实守信、办事公道、服务群众、奉献社会。' },
-  { id:'v33', topic:'ethics', text:'做人做事第一位的是（）', options:['A. 勤于学习','B. 崇德修身','C. 明辨是非','D. 脚踏实地'], answer:1, explanation:'习近平总书记强调，做人做事第一位的是崇德修身，要求青年人先立德，后立业。' },
-  { id:'v34', topic:'ethics', text:'实现人生价值的必由之路是（）', options:['A. 社会实践','B. 社会存在','C. 学习知识','D. 改革创新'], answer:0, explanation:'实践是检验真理的唯一标准，人生价值只有在社会实践中才能得到检验和实现，社会实践是实现人生价值的必由之路。' },
-  { id:'v35', topic:'ethics', text:'（）已经成为社会选人、用人、评价人的基本尺度。', options:['A. 德才兼备、以才为先','B. 德才兼备、以德为先','C. 德才兼备、不分先后','D. 智体兼备、以智为先'], answer:1, explanation:'德才兼备、以德为先是党和国家用人的基本标准，也是社会评价人才的基本尺度。' },
-  { id:'v36', topic:'school', text:'辽宁金融职业学院的校训是（）', options:['A. 厚德 笃学 诚信 尚行','B. 勤奋 严谨 文明 进取','C. 博学 慎思 严谨 笃行','D. 团结 求实 拼搏 进取'], answer:0, explanation:'辽宁金融职业学院的校训是"厚德 笃学 诚信 尚行"，体现了学校的教育理念和育人目标。' },
-  { id:'v37', topic:'school', text:'辽宁金融职业学院是经辽宁省人民政府批准的省内唯一一所（）类高等职业院校。', options:['A. 财经类','B. 综合类','C. 经济类','D. 金融类'], answer:3, explanation:'辽宁金融职业学院是省内唯一一所金融类高等职业院校，专注于金融行业人才培养。' },
-  { id:'v38', topic:'school', text:'辽宁金融职业学院的办学理念是（）', options:['A. 严谨求实 文明和谐 积极进取 开放包容','B. 以人为本 质量至上 产教融合 知行合一','C. 质量立校 人才强校 文化兴校 特色品牌 产教融合','D. 建设特色鲜明 质量上乘 内涵丰富 现代开放的示范性高等职业学院'], answer:1, explanation:'辽宁金融职业学院的办学理念是"以人为本 质量至上 产教融合 知行合一"。' },
-  { id:'v39', topic:'school', text:'辽宁金融职业学院开设（）个专业。', options:['A. 18','B. 19','C. 20','D. 21'], answer:3, explanation:'辽宁金融职业学院开设21个专业，其中大数据与会计专业为国家级现代学徒制试点专业。' },
-  { id:'v40', topic:'school', text:'辽宁金融职业学院在2025年"兴辽卓越"院校建设项目终期评价中获评（）等级。', options:['A. 良好','B. 合格','C. 及格','D. 优'], answer:3, explanation:'辽宁金融职业学院以扎实的建设成效，在"兴辽卓越"院校建设项目终期评价中获评"优"等级。' },
-  { id:'v41', topic:'current', text:'人工智能的英文缩写是（）', options:['A. AI','B. AT','C. IT','D. AF'], answer:0, explanation:'AI是Artificial Intelligence（人工智能）的英文缩写，是当前最热门的科技领域之一。' },
-  { id:'v42', topic:'current', text:'（）是人工智能与机器人学交叉的前沿领域，强调智能体通过身体与环境的动态交互实现自主学习。', options:['A. 大语言模型','B. 生成式人工智能','C. 智能物联','D. 具身智能'], answer:3, explanation:'具身智能（Embodied Intelligence）是人工智能与机器人学的交叉领域，强调身体与环境的交互，是当前AI研究的重要方向。' },
-  { id:'v43', topic:'current', text:'DeepSeek（深度求索公司）的核心业务方向是（）', options:['A. 大语言模型研发','B. AR智能眼镜生产','C. 脑机接口技术','D. 家居设计平台开发'], answer:0, explanation:'DeepSeek是一家专注于AI大模型研发的中国科技公司，其R1等模型在全球引发广泛关注。' },
-  { id:'v44', topic:'current', text:'2025年，人社部发布第七批新职业，共发布（）个新职业及（）个新工种。', options:['A. 42、17','B. 42、9','C. 17、42','D. 17、9'], answer:2, explanation:'2025年第七批新职业发布了17个新职业及42个新工种，包括养老服务师、无人机群飞行规划员等。' },
-  { id:'v45', topic:'current', text:'2025年9月3日，纪念中国人民抗日战争暨世界反法西斯战争胜利（）周年大会在北京举行。', options:['A. 70','B. 75','C. 80','D. 85'], answer:2, explanation:'2025年是中国人民抗日战争暨世界反法西斯战争胜利80周年，在北京举行了隆重的纪念活动和阅兵仪式。' },
-  { id:'v46', topic:'current', text:'党的二十届四中全会审议通过了《中共中央关于制定国民经济和社会发展（）的建议》。', options:['A. 第十二个五年规划','B. 第十三个五年规划','C. 第十四个五年规划','D. 第十五个五年规划'], answer:3, explanation:'党的二十届四中全会审议通过了《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》。' },
-  { id:'v47', topic:'current', text:'2025年11月5日，我国第一艘（）正式入列，人民海军进入"三航母时代"。', options:['A. 电磁弹射型航空母舰福建舰','B. 电磁弹射型航空母舰辽宁舰','C. 搭载固定翼飞机的航空母舰福建舰','D. 搭载固定翼飞机的航空母舰山东舰'], answer:0, explanation:'福建舰是我国第三艘航空母舰，也是首艘电磁弹射型航母，2025年11月5日正式入列服役。' },
-  { id:'v48', topic:'current', text:'电影（）全球票房超150亿元人民币，位列全球动画电影票房榜首位。', options:['A. 《白蛇：缘起》','B. 《浪浪山小妖怪》','C. 《哪吒之魔童闹海》','D. 《长安三万里》'], answer:2, explanation:'《哪吒之魔童闹海》全球票房超150亿元人民币，位列全球动画电影票房榜首，创下中国电影历史性突破。' },
-  { id:'v49', topic:'life', text:'当身上着火时，应该（）', options:['A. 奔跑呼救','B. 用手拍打火焰','C. 就地打滚压灭火焰','D. 等待他人救援'], answer:2, explanation:'身上着火时应就地打滚，用身体压灭火焰，不可奔跑（会助燃），也不要用手拍（会烫伤手）。' },
-  { id:'v50', topic:'life', text:'关于合理饮食有利健康，下列说法正确的是（）', options:['A. 雨水可直接饮用','B. 饮用水越纯净越好','C. 养成良好的饮食习惯，多吃蔬菜、水果等碱性食物','D. 调味剂和营养剂加得越多越好'], answer:2, explanation:'蔬菜水果富含维生素、矿物质和膳食纤维，是碱性食物，有助于维持体内酸碱平衡，对健康有益。' },
-  { id:'v51', topic:'psych', text:'大学阶段是人生发展的重要时期，是世界观、人生观和（）形成的关键时期。', options:['A. 价值观','B. 享乐观','C. 幸福观','D. 进取观'], answer:0, explanation:'大学阶段是"三观"（世界观、人生观、价值观）形成的关键时期，这一时期的教育对人的一生影响深远。' },
-  { id:'v52', topic:'psych', text:'影响喜欢的最稳定因素，也是个体吸引力最重要来源之一的是（）', options:['A. 熟悉','B. 相似','C. 人格品质','D. 外貌'], answer:2, explanation:'心理学研究表明，人格品质（如诚信、善良、能力等）是决定人际吸引的最稳定因素，比外貌和熟悉度更为持久。' },
-  { id:'v53', topic:'psych', text:'"你无法改变天气，却可以改变心情"，这句话告诉我们（）', options:['A. 要有积极向上的生活态度','B. 要学会正确认识与评价自己','C. 要善于调节和控制情绪','D. 要有广泛的兴趣爱好'], answer:2, explanation:'这句话强调面对不可改变的外部环境，应该学会调节和控制自己的情绪，保持心理健康。' },
-  { id:'v54', topic:'psych', text:'神经衰弱失眠常见的状况是（）', options:['A. 睡眠需要量增加而睡眠时间没有增加','B. 夜间睡眠太少','C. 睡眠和觉醒的节律紊乱','D. 对睡眠的过度关注'], answer:2, explanation:'神经衰弱失眠的核心特征是睡眠-觉醒节律紊乱，患者往往昼夜颠倒，夜间难以入睡而白天困倦。' },
-  { id:'v55', topic:'tech', text:'中国探月工程又称"嫦娥工程"，规划三期，简称是（）', options:['A. 绕、落、采','B. 绕、落、回','C. 探、落、回','D. 绕、探、采'], answer:1, explanation:'中国探月工程规划三期，简称"绕、落、回"：绕月飞行、落月探测、采样返回，目前已圆满完成。' },
-  { id:'v56', topic:'tech', text:'人脸识别技术属于人工智能中的（）领域。', options:['A. 自然语言处理','B. 深度学习','C. 计算机视觉','D. 知识图谱'], answer:2, explanation:'人脸识别是通过分析图像中的人脸特征来识别身份的技术，属于人工智能中计算机视觉（Computer Vision）领域。' },
-  { id:'v57', topic:'tech', text:'以下企业中，属于杭州AI"七小龙"且专注于四足机器人研发的是（）', options:['A. 灵伴科技','B. 宇树科技','C. 群核科技','D. 深度求索'], answer:1, explanation:'宇树科技（Unitree）是杭州AI"七小龙"之一，专注于四足机器人研发，其产品在全球具有很高知名度。' },
-  { id:'v58', topic:'tech', text:'（）正在成为新一轮国际竞争的重点领域。', options:['A. 电商经济','B. 数字经济','C. 市场经济','D. 智慧经济'], answer:1, explanation:'数字经济是以数字技术为基础的经济形态，已成为全球新一轮科技革命和产业变革的主要方向和竞争焦点。' },
-];
-
-const ALL_QUESTIONS = { math: MATH_QUESTIONS, chinese: CHINESE_QUESTIONS, vocational: VOCATIONAL_QUESTIONS };
+function flatCategoriesForSubject(tree, subjectKey) {
+  const node = tree.find(n => n.subjectKey === subjectKey);
+  const flat = [];
+  function collect(nodes) {
+    (nodes || []).forEach(n => {
+      flat.push({ id: String(n.id), name: n.name });
+      if (n.children && n.children.length) collect(n.children);
+    });
+  }
+  if (node && node.children) collect(node.children);
+  return flat;
+}
 
 // ============================================
 // STATE
@@ -2030,7 +1981,8 @@ const ALL_QUESTIONS = { math: MATH_QUESTIONS, chinese: CHINESE_QUESTIONS, vocati
 let state = {
   user: null,
   currentPage: 'dashboard',
-  // Exam state
+  // Exam state（考试配置列表由 /api/exam-configs 加载后写入 examConfigs）
+  examConfigs: [],
   currentExam: null,
   examAnswers: {},
   examCurrentQ: 0,
@@ -2050,7 +2002,11 @@ let state = {
     mistakeIds: [],
     examHistory: [],
     topicStats: {}
-  }
+  },
+  currentKnowledgeQuestions: [],
+  currentKnowledgeCategoryId: null,
+  categoriesTree: null,
+  categoryNameById: {}
 };
 
 // ============================================
@@ -2076,6 +2032,7 @@ async function doLogin() {
     await fetchUserProfile();
     localStorage.setItem('lastUser', username);
     enterMainScreen();
+    if (window.history && window.history.replaceState) history.replaceState({}, '', '/dashboard');
   } catch (e) {
     showToast(e.message || '登录失败，请检查网络');
   }
@@ -2103,6 +2060,7 @@ async function doRegister() {
     await fetchUserProfile();
     showToast('注册成功！');
     enterMainScreen();
+    if (window.history && window.history.replaceState) history.replaceState({}, '', '/dashboard');
   } catch (e) {
     showToast(e.message || '注册失败，请检查网络');
   }
@@ -2287,12 +2245,10 @@ function updateDashboard() {
 
 function calcSubjectStats(subject) {
   const ts = state.stats.topicStats || {};
-  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
-  const topics = topicsMap[subject] || [];
   let total = 0, correct = 0;
-  topics.forEach(t => {
-    const stat = ts[subject + '_' + t.id];
-    if (stat) { total += stat.total; correct += stat.correct; }
+  const prefix = subject + '_';
+  Object.entries(ts).forEach(([k, v]) => {
+    if (k.startsWith(prefix)) { total += v.total; correct += v.correct; }
   });
   return { total, correct, pct: total > 0 ? Math.round(correct/total*100) : 0 };
 }
@@ -2313,37 +2269,40 @@ function updateMistakeBadge() {
 // ============================================
 // SUBJECTS & KNOWLEDGE
 // ============================================
-function initSubjectGrid() {
+async function initSubjectGrid() {
   const grid = document.getElementById('subject-grid');
-  const subjects = [
-    { key:'math', name:'数学', icon:'📐', color:'#f0f4ff', desc:'集合、函数、三角、数列、解析几何等', topics: MATH_TOPICS },
-    { key:'chinese', name:'语文', icon:'📖', color:'#f5f0ff', desc:'字音字形、成语、语病、文言文、文学常识等', topics: CHINESE_TOPICS },
-    { key:'vocational', name:'职业适应性测试', icon:'🏢', color:'#f0fdf8', desc:'政治理论、历史文化、法律知识、职业道德、时事热点等', topics: VOCATIONAL_TOPICS },
-  ];
-
-  grid.innerHTML = subjects.map(s => `
-    <div class="subject-card" data-subject="${s.key}" onclick="openKnowledge('${s.key}')">
-      <div class="subject-card-header">
-        <div>
-          <h3>${s.name}</h3>
-          <p>${s.desc}</p>
+  grid.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted);">加载分类中…</div>';
+  try {
+    const tree = await getCategoriesTree();
+    const subjectKeys = ['math', 'chinese', 'vocational'];
+    grid.innerHTML = subjectKeys.map(key => {
+      const s = SUBJECT_META[key] || { name: key, icon: '📝', color: '#f0f0f0', desc: '', barColor: '#666' };
+      const topics = flatCategoriesForSubject(tree, key);
+      return `<div class="subject-card" data-subject="${key}" onclick="openKnowledge('${key}')">
+        <div class="subject-card-header">
+          <div>
+            <h3>${s.name}</h3>
+            <p>${s.desc}</p>
+          </div>
+          <div class="subject-icon-wrap" style="background:${s.color};font-size:24px;">${s.icon}</div>
         </div>
-        <div class="subject-icon-wrap" style="background:${s.color};font-size:24px;">${s.icon}</div>
-      </div>
-      <div class="subject-topics">
-        ${s.topics.map(t => `<span class="topic-chip" style="background:${t.color};color:#374151;" onclick="event.stopPropagation();openKnowledgeTopic('${s.key}','${t.id}')">${t.name}</span>`).join('')}
-      </div>
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span style="font-size:12px;color:var(--text-muted);">掌握度</span>
-          <span style="font-size:12px;font-weight:600;color:var(--primary);">${calcSubjectStats(s.key).pct}%</span>
+        <div class="subject-topics">
+          ${topics.map((t, i) => `<span class="topic-chip" style="background:${TOPIC_CHIP_COLORS[i % TOPIC_CHIP_COLORS.length]};color:#374151;" onclick="event.stopPropagation();openKnowledgeTopic('${key}','${t.id}')">${t.name}</span>`).join('')}
         </div>
-        <div class="progress-bar" style="margin-top:6px;">
-          <div class="progress-fill" style="width:${calcSubjectStats(s.key).pct}%;background:${s.key==='math'?'#2563a8':s.key==='chinese'?'#7c3aed':'#0d9488'};"></div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;color:var(--text-muted);">掌握度</span>
+            <span style="font-size:12px;font-weight:600;color:var(--primary);">${calcSubjectStats(key).pct}%</span>
+          </div>
+          <div class="progress-bar" style="margin-top:6px;">
+            <div class="progress-fill" style="width:${calcSubjectStats(key).pct}%;background:${s.barColor};"></div>
+          </div>
         </div>
-      </div>
-    </div>
-  `).join('');
+      </div>`;
+    }).join('');
+  } catch (e) {
+    grid.innerHTML = '<div style="padding:24px;text-align:center;color:var(--danger);">加载失败，请刷新重试</div>';
+  }
 }
 
 function filterSubject(el, filter) {
@@ -2357,27 +2316,30 @@ function filterSubject(el, filter) {
   });
 }
 
-function openKnowledge(subjectKey) {
+async function openKnowledge(subjectKey) {
   document.getElementById('subject-grid').classList.add('hidden');
   document.getElementById('knowledge-panel').classList.remove('hidden');
 
-  const subjectNames = { math: '数学', chinese: '语文', vocational: '职业适应性测试' };
-  const subject = subjectNames[subjectKey] || subjectKey;
+  const subject = (SUBJECT_META[subjectKey] && SUBJECT_META[subjectKey].name) || subjectKey;
   document.getElementById('knowledge-panel-title').textContent = subject + '知识点练习';
   document.getElementById('ks-subject-name').textContent = subject + '知识点';
 
-  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
-  const topics = topicsMap[subjectKey] || [];
   const topicList = document.getElementById('topic-list');
+  topicList.innerHTML = '<div style="padding:12px;color:var(--text-muted);">加载分类中…</div>';
+  document.getElementById('knowledge-main-content').innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text-light);"><div style="font-size:48px;margin-bottom:12px;">👈</div><div>从左侧选择知识点开始练习</div></div>';
 
-  topicList.innerHTML = topics.map(t => {
-    const questions = ALL_QUESTIONS[subjectKey].filter(q => q.topic === t.id);
-    return `<div class="topic-list-item" id="tli-${subjectKey}-${t.id}" onclick="loadTopicQuestions('${subjectKey}','${t.id}')">
-      <div class="topic-dot"></div>
-      <span>${t.name}</span>
-      <span class="topic-count">${questions.length}题</span>
-    </div>`;
-  }).join('');
+  try {
+    const tree = await getCategoriesTree();
+    const flat = flatCategoriesForSubject(tree, subjectKey);
+    topicList.innerHTML = flat.map(t => `
+      <div class="topic-list-item" id="tli-${subjectKey}-${t.id}" onclick="loadTopicQuestions('${subjectKey}','${t.id}')">
+        <div class="topic-dot"></div>
+        <span>${t.name}</span>
+        <span class="topic-count">—</span>
+      </div>`).join('');
+  } catch (e) {
+    topicList.innerHTML = '<div style="padding:12px;color:var(--danger);">加载失败，请刷新重试</div>';
+  }
 }
 
 function openKnowledgeTopic(subjectKey, topicId) {
@@ -2385,31 +2347,38 @@ function openKnowledgeTopic(subjectKey, topicId) {
   setTimeout(() => loadTopicQuestions(subjectKey, topicId), 100);
 }
 
-function loadTopicQuestions(subjectKey, topicId) {
+async function loadTopicQuestions(subjectKey, topicId) {
   document.querySelectorAll('.topic-list-item').forEach(el => el.classList.remove('active'));
   const el = document.getElementById(`tli-${subjectKey}-${topicId}`);
   if (el) el.classList.add('active');
 
-  const questions = ALL_QUESTIONS[subjectKey].filter(q => q.topic === topicId);
   const container = document.getElementById('knowledge-main-content');
-
-  if (questions.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">该知识点暂无题目</div>';
-    return;
-  }
-
-  const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
-  const topicName = (topicsMap[subjectKey] || []).find(t => t.id === topicId)?.name || '';
-
-  container.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <div>
-        <h3 style="font-size:17px;font-weight:700;color:var(--primary);">${topicName}</h3>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:2px;">共 ${questions.length} 道练习题</p>
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">加载题目中…</div>';
+  try {
+    const res = await api('/api/questions?subject=' + encodeURIComponent(subjectKey) + '&category_id=' + encodeURIComponent(topicId));
+    const questions = (res && res.questions) ? res.questions : [];
+    state.currentKnowledgeQuestions = questions;
+    state.currentKnowledgeCategoryId = topicId;
+    state.currentKnowledgeSubjectKey = subjectKey;
+    const topicName = el && el.querySelector('span') ? el.querySelector('span').textContent : (state.categoryNameById[topicId] || '该知识点');
+    if (questions.length === 0) {
+      container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">该知识点暂无题目</div>';
+      return;
+    }
+    const countEl = el ? el.querySelector('.topic-count') : null;
+    if (countEl) countEl.textContent = questions.length + '题';
+    container.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div>
+          <h3 style="font-size:17px;font-weight:700;color:var(--primary);">${topicName}</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:2px;">共 ${questions.length} 道练习题</p>
+        </div>
       </div>
-    </div>
-    ${questions.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">')}
-  `;
+      ${questions.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">')}
+    `;
+  } catch (err) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--danger);">加载失败，请刷新重试</div>';
+  }
 }
 
 function renderQuestion(q, num, mode) {
@@ -2433,7 +2402,7 @@ function renderQuestion(q, num, mode) {
       </div>
       <div class="q-answer-reveal" id="qreveal-${q.id}">
         <div class="q-answer-label">📖 解析</div>
-        <div>${q.explanation}</div>
+        <div>${q.explanation || '暂无解析'}</div>
       </div>
     </div>
   `;
@@ -2441,18 +2410,16 @@ function renderQuestion(q, num, mode) {
 
 function selectAnswer(qId, optIndex, mode) {
   if (mode === 'practice') {
-    const q = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS].find(q => q.id === qId);
+    const q = (state.currentKnowledgeQuestions || []).find(q => q.id === qId);
     if (!q) return;
+    const subjectKey = state.currentKnowledgeSubjectKey || (q.id.startsWith('math_') ? 'math' : q.id.startsWith('chinese_') ? 'chinese' : 'vocational');
+    const statsKey = subjectKey + '_' + (state.currentKnowledgeCategoryId || '');
 
     // Check if already answered
     const opts = document.getElementById('qopts-' + qId);
-    if (opts.querySelector('.correct, .wrong')) return;
+    if (opts && opts.querySelector('.correct, .wrong')) return;
 
     const isCorrect = optIndex === q.answer;
-    const subjectKey = q.id.startsWith('m') ? 'math' : q.id.startsWith('c') ? 'chinese' : 'vocational';
-
-    // Update topic stats
-    const statsKey = subjectKey + '_' + q.topic;
     if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total:0, correct:0 };
     state.stats.topicStats[statsKey].total++;
     state.stats.totalAnswered++;
@@ -2477,52 +2444,68 @@ function selectAnswer(qId, optIndex, mode) {
 }
 
 // ============================================
-// EXAM
+// EXAM（考试配置由 GET /api/exam-configs 提供，仅保留 4 个）
 // ============================================
-const EXAM_CONFIGS = [
-  { id:'math-full', name:'数学模拟考试（满题）', subject:'math', count:20, time:60, desc:'覆盖所有数学知识点，模拟真实考试', badge:'完整版', badgeColor:'#dbeafe;color:#1d4ed8' },
-  { id:'chinese-full', name:'语文模拟考试（满题）', subject:'chinese', count:15, time:60, desc:'覆盖语文核心考点，模拟真实考试', badge:'完整版', badgeColor:'#ede9fe;color:#5b21b6' },
-  { id:'vocational-full', name:'职业适应性测试（满题）', subject:'vocational', count:30, time:45, desc:'政治、历史、法律、职业道德、时事等综合测试', badge:'完整版', badgeColor:'#ccfbf1;color:#0f766e' },
-  { id:'math-quick', name:'数学快速测试', subject:'math', count:10, time:30, desc:'10题精选，快速了解数学掌握程度', badge:'快速版', badgeColor:'#dcfce7;color:#166534' },
-  { id:'chinese-quick', name:'语文快速测试', subject:'chinese', count:10, time:30, desc:'10题精选，快速了解语文掌握程度', badge:'快速版', badgeColor:'#fef3c7;color:#92400e' },
-  { id:'vocational-quick', name:'职测快速测试', subject:'vocational', count:15, time:20, desc:'15题精选，快速了解职测掌握程度', badge:'快速版', badgeColor:'#d1fae5;color:#065f46' },
-  { id:'combined', name:'数语联考（混合）', subject:'both', count:20, time:60, desc:'数学+语文各10题，综合模拟', badge:'联考版', badgeColor:'#fce7f3;color:#9d174d' },
-  { id:'all-three', name:'三科综合联考', subject:'all', count:30, time:60, desc:'数学、语文、职测各10题，全面检验备考成果', badge:'全科版', badgeColor:'#fef9c3;color:#713f12' },
-];
 
-function initExamList() {
+async function initExamList() {
   const grid = document.getElementById('exam-select-grid');
-  grid.innerHTML = EXAM_CONFIGS.map(cfg => `
-    <div class="exam-select-card" onclick="startExam('${cfg.id}')">
-      <div class="exam-card-top">
-        <span class="exam-type-badge" style="background:${cfg.badgeColor}">${cfg.badge}</span>
+  grid.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">加载中…</div>';
+  try {
+    const res = await api('/api/exam-configs');
+    const list = (res && res.list) ? res.list : [];
+    state.examConfigs = list;
+    if (list.length === 0) {
+      grid.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">暂无模拟考试配置</div>';
+      return;
+    }
+    grid.innerHTML = list.map(cfg => `
+      <div class="exam-select-card" onclick="startExam('${cfg.id}')">
+        <div class="exam-card-top">
+          <span class="exam-type-badge" style="background:${cfg.badgeColor || '#eee'}">${cfg.badge || '模拟'}</span>
+        </div>
+        <h3>${cfg.name}</h3>
+        <p>${cfg.desc || ''}</p>
+        <div class="exam-meta-row">
+          <span class="exam-meta-item">📝 ${cfg.count}题</span>
+          <span class="exam-meta-item">⏱ ${cfg.time}分钟</span>
+        </div>
       </div>
-      <h3>${cfg.name}</h3>
-      <p>${cfg.desc}</p>
-      <div class="exam-meta-row">
-        <span class="exam-meta-item">📝 ${cfg.count}题</span>
-        <span class="exam-meta-item">⏱ ${cfg.time}分钟</span>
-      </div>
-    </div>
-  `).join('');
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = '<div style="text-align:center;padding:24px;color:var(--danger);">加载考试列表失败，请刷新重试</div>';
+    state.examConfigs = [];
+  }
 }
 
-function startExam(examId) {
-  const cfg = EXAM_CONFIGS.find(c => c.id === examId);
-  if (!cfg) return;
+async function startExam(examId) {
+  const cfg = (state.examConfigs || []).find(c => c.id === examId);
+  if (!cfg) {
+    showToast('未找到该考试配置，请刷新页面');
+    return;
+  }
 
+  showToast('正在组卷…');
   let questions = [];
-  if (cfg.subject === 'both') {
-    const mqs = shuffle([...MATH_QUESTIONS]).slice(0, cfg.count/2);
-    const cqs = shuffle([...CHINESE_QUESTIONS]).slice(0, cfg.count/2);
-    questions = shuffle([...mqs, ...cqs]);
-  } else if (cfg.subject === 'all') {
-    const mqs = shuffle([...MATH_QUESTIONS]).slice(0, Math.floor(cfg.count/3));
-    const cqs = shuffle([...CHINESE_QUESTIONS]).slice(0, Math.floor(cfg.count/3));
-    const vqs = shuffle([...VOCATIONAL_QUESTIONS]).slice(0, cfg.count - Math.floor(cfg.count/3)*2);
-    questions = shuffle([...mqs, ...cqs, ...vqs]);
-  } else {
-    questions = shuffle([...ALL_QUESTIONS[cfg.subject]]).slice(0, cfg.count);
+  try {
+    if (cfg.subject === 'all') {
+      const [mr, cr, vr] = await Promise.all([api('/api/questions?subject=math'), api('/api/questions?subject=chinese'), api('/api/questions?subject=vocational')]);
+      const n = Math.floor(cfg.count / 3);
+      const mqs = shuffle((mr.questions || []).slice()).slice(0, n);
+      const cqs = shuffle((cr.questions || []).slice()).slice(0, n);
+      const vqs = shuffle((vr.questions || []).slice()).slice(0, cfg.count - n * 2);
+      questions = shuffle([...mqs, ...cqs, ...vqs]);
+    } else {
+      const res = await api('/api/questions?subject=' + encodeURIComponent(cfg.subject));
+      questions = shuffle((res.questions || []).slice()).slice(0, cfg.count);
+    }
+  } catch (e) {
+    showToast('加载题目失败，请刷新重试');
+    return;
+  }
+
+  if (questions.length === 0) {
+    showToast('暂无题目，请稍后再试');
+    return;
   }
 
   state.currentExam = { cfg, questions, startTime: Date.now() };
@@ -2538,45 +2521,59 @@ function startExam(examId) {
   startTimer();
 }
 
-function startQuickPractice(subject) {
-  const qBank = subject === 'math' ? MATH_QUESTIONS : subject === 'chinese' ? CHINESE_QUESTIONS : VOCATIONAL_QUESTIONS;
-  const questions = shuffle([...qBank]).slice(0, 10);
-  const nameMap = { math: '数学快速练习', chinese: '语文快速练习', vocational: '职测快速练习' };
-  const cfg = { id:'quick', name: nameMap[subject] || '快速练习', subject, count:10, time:20 };
-
-  state.currentExam = { cfg, questions, startTime: Date.now() };
-  state.examAnswers = {};
-  state.examCurrentQ = 0;
-  state.examMode = 'exam';
-  state.examTimeLeft = 20 * 60;
-
-  showScreen('exam-screen');
-  document.getElementById('exam-title-bar').textContent = cfg.name;
-  renderExamQuestion();
-  renderQGrid();
-  startTimer();
+async function startQuickPractice(subject) {
+  showToast('加载题目中…');
+  try {
+    const res = await api('/api/questions?subject=' + encodeURIComponent(subject));
+    const questions = shuffle((res.questions || []).slice()).slice(0, 10);
+    if (questions.length === 0) { showToast('该科目暂无题目'); return; }
+    const nameMap = { math: '数学快速练习', chinese: '语文快速练习', vocational: '职测快速练习' };
+    const cfg = { id:'quick', name: nameMap[subject] || '快速练习', subject, count: questions.length, time:20 };
+    state.currentExam = { cfg, questions, startTime: Date.now() };
+    state.examAnswers = {};
+    state.examCurrentQ = 0;
+    state.examMode = 'exam';
+    state.examTimeLeft = 20 * 60;
+    showScreen('exam-screen');
+    document.getElementById('exam-title-bar').textContent = cfg.name;
+    renderExamQuestion();
+    renderQGrid();
+    startTimer();
+  } catch (e) {
+    showToast('加载题目失败');
+  }
 }
 
-function startPractice() {
+async function startPractice() {
   const subject = document.getElementById('practice-subject').value;
   const count = parseInt(document.getElementById('practice-count').value);
   const mode = document.getElementById('practice-mode').value;
 
+  showToast('加载题目中…');
   let questions = [];
-  if (subject === 'both') {
-    questions = shuffle([...MATH_QUESTIONS, ...CHINESE_QUESTIONS]).slice(0, count);
-  } else if (subject === 'all') {
-    questions = shuffle([...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS]).slice(0, count);
-  } else {
-    questions = shuffle([...ALL_QUESTIONS[subject]]).slice(0, count);
+  try {
+    if (subject === 'both') {
+      const [mr, cr] = await Promise.all([api('/api/questions?subject=math'), api('/api/questions?subject=chinese')]);
+      questions = shuffle([...(mr.questions || []), ...(cr.questions || [])]).slice(0, count);
+    } else if (subject === 'all') {
+      const [mr, cr, vr] = await Promise.all([api('/api/questions?subject=math'), api('/api/questions?subject=chinese'), api('/api/questions?subject=vocational')]);
+      questions = shuffle([...(mr.questions || []), ...(cr.questions || []), ...(vr.questions || [])]).slice(0, count);
+    } else {
+      const res = await api('/api/questions?subject=' + encodeURIComponent(subject));
+      questions = shuffle((res.questions || []).slice()).slice(0, count);
+    }
+  } catch (e) {
+    showToast('加载题目失败');
+    return;
   }
+  if (questions.length === 0) { showToast('暂无题目'); return; }
 
-  const cfg = { id:'practice', name:'专项练习', subject, count, time: count * 2 };
+  const cfg = { id:'practice', name:'专项练习', subject, count: questions.length, time: questions.length * 2 };
   state.currentExam = { cfg, questions, startTime: Date.now() };
   state.examAnswers = {};
   state.examCurrentQ = 0;
   state.examMode = mode;
-  state.examTimeLeft = count * 2 * 60;
+  state.examTimeLeft = questions.length * 2 * 60;
 
   showScreen('exam-screen');
   document.getElementById('exam-title-bar').textContent = cfg.name;
@@ -2621,7 +2618,7 @@ function renderExamQuestion() {
     ${isInstant && answered !== undefined ? `
       <div class="q-answer-reveal show">
         <div class="q-answer-label">📖 解析</div>
-        <div>${q.explanation}</div>
+        <div>${q.explanation || '暂无解析'}</div>
       </div>` : ''}
   `;
 
@@ -2831,32 +2828,51 @@ function reviewWrongAnswers() {
 // ============================================
 // MISTAKES
 // ============================================
-function renderMistakes() {
-  const allQ = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS];
-  const mistakes = allQ.filter(q => mistakeIds.includes(q.id));
-
-  document.getElementById('mistake-total').textContent = `（共 ${mistakes.length} 题）`;
+async function renderMistakes() {
+  const mistakeIds = state.stats.mistakeIds || [];
+  document.getElementById('mistake-total').textContent = `（共 ${mistakeIds.length} 题）`;
 
   const container = document.getElementById('mistakes-container');
-  if (mistakes.length === 0) {
+  if (mistakeIds.length === 0) {
     container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
     return;
   }
 
-  container.innerHTML = mistakes.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">加载错题中…</div>';
+  const questions = [];
+  for (const id of mistakeIds) {
+    try {
+      const res = await api('/api/questions/' + encodeURIComponent(id));
+      if (res.question) questions.push(res.question);
+    } catch (_) {}
+  }
+  if (questions.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);">暂无错题记录 🎉</div>';
+    return;
+  }
+  container.innerHTML = questions.map((q, i) => renderQuestion(q, i+1, 'practice')).join('<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
 }
 
-function practiceAllMistakes() {
-  const allQ = [...MATH_QUESTIONS, ...CHINESE_QUESTIONS, ...VOCATIONAL_QUESTIONS];
-  const mistakes = allQ.filter(q => (state.stats.mistakeIds||[]).includes(q.id));
-  if (mistakes.length === 0) { showToast('暂无错题！'); return; }
+async function practiceAllMistakes() {
+  const mistakeIds = state.stats.mistakeIds || [];
+  if (mistakeIds.length === 0) { showToast('暂无错题！'); return; }
 
-  const cfg = { id:'mistakes', name:'错题练习', subject:'both', count:mistakes.length, time:mistakes.length*2 };
-  state.currentExam = { cfg, questions: shuffle(mistakes), startTime: Date.now() };
+  showToast('加载错题中…');
+  const questions = [];
+  for (const id of mistakeIds) {
+    try {
+      const res = await api('/api/questions/' + encodeURIComponent(id));
+      if (res.question) questions.push(res.question);
+    } catch (_) {}
+  }
+  if (questions.length === 0) { showToast('暂无错题！'); return; }
+
+  const cfg = { id:'mistakes', name:'错题练习', subject:'both', count: questions.length, time: questions.length*2 };
+  state.currentExam = { cfg, questions: shuffle(questions), startTime: Date.now() };
   state.examAnswers = {};
   state.examCurrentQ = 0;
   state.examMode = 'instant';
-  state.examTimeLeft = mistakes.length * 2 * 60;
+  state.examTimeLeft = questions.length * 2 * 60;
 
   showScreen('exam-screen');
   document.getElementById('exam-title-bar').textContent = '错题练习';
@@ -2868,7 +2884,8 @@ function practiceAllMistakes() {
 // ============================================
 // STATS
 // ============================================
-function renderStats() {
+async function renderStats() {
+  try { await getCategoriesTree(); } catch (_) {}
   const s = state.stats;
   const total = s.totalAnswered || 0;
   const correct = s.totalCorrect || 0;
@@ -2888,11 +2905,9 @@ function renderStats() {
     .filter(([k,v]) => v.total > 0)
     .map(([k,v]) => {
       const [subj, topicId] = k.split('_');
-      const topicsMap = { math: MATH_TOPICS, chinese: CHINESE_TOPICS, vocational: VOCATIONAL_TOPICS };
-      const topics = topicsMap[subj] || [];
-      const topic = topics.find(t => t.id === topicId);
-      const subjName = subj === 'math' ? '数学' : subj === 'chinese' ? '语文' : '职测';
-      return { name: topic ? topic.name : topicId, pct: Math.round(v.correct/v.total*100), total: v.total, subj, subjName };
+      const subjName = (SUBJECT_META[subj] && SUBJECT_META[subj].name) || subj;
+      const name = (state.categoryNameById && (state.categoryNameById[topicId] || state.categoryNameById[Number(topicId)])) || ('知识点 ' + topicId);
+      return { name, pct: Math.round(v.correct/v.total*100), total: v.total, subj, subjName };
     })
     .sort((a,b) => a.pct - b.pct)
     .slice(0, 5);
@@ -2980,6 +2995,109 @@ async function adminSetVip(userId, membership) {
   }
 }
 
+function switchAdminTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.toggle('active', t.getAttribute('data-tab') === tab); });
+  document.getElementById('admin-tab-users').classList.toggle('hidden', tab !== 'users');
+  document.getElementById('admin-tab-categories').classList.toggle('hidden', tab !== 'categories');
+  if (tab === 'categories') loadAdminCategories();
+}
+
+var adminCategoryList = [];
+
+async function loadAdminCategories() {
+  try {
+    var data = await api('/api/admin/categories');
+    adminCategoryList = data.list || [];
+    renderCategoryTree();
+    fillCategoryParentSelect();
+  } catch (e) {
+    document.getElementById('admin-category-tree').innerHTML = '<p style="color:var(--danger);">加载失败</p>';
+  }
+}
+
+function fillCategoryParentSelect() {
+  var sel = document.getElementById('admin-cat-parent');
+  sel.innerHTML = '<option value="0">— 一级（科目）—</option>';
+  adminCategoryList.filter(function(c) { return c.level === 1; }).forEach(function(c) {
+    sel.innerHTML += '<option value="' + c.id + '">' + c.name + '</option>';
+  });
+  adminCategoryList.filter(function(c) { return c.level === 2; }).forEach(function(c) {
+    var p = adminCategoryList.find(function(x) { return x.id === c.parentId; });
+    sel.innerHTML += '<option value="' + c.id + '">' + (p ? p.name + ' → ' : '') + c.name + '</option>';
+  });
+}
+
+function renderCategoryTree() {
+  var level1 = adminCategoryList.filter(function(c) { return c.level === 1; }).sort(function(a,b) { return (a.sortOrder||0) - (b.sortOrder||0); });
+  var html = '';
+  level1.forEach(function(c1) {
+    html += '<div class="admin-cat-item level-1"><span class="level-1">' + c1.name + '</span><div class="actions"><button class="btn-sm" onclick="editCategory(' + c1.id + ')">编辑</button><button class="btn-outline" onclick="deleteCategory(' + c1.id + ')">删</button></div></div>';
+    adminCategoryList.filter(function(c) { return c.parentId === c1.id; }).sort(function(a,b) { return (a.sortOrder||0) - (b.sortOrder||0); }).forEach(function(c2) {
+      html += '<div class="admin-cat-item level-2"><span class="level-2">' + c2.name + '</span><div class="actions"><button class="btn-sm" onclick="editCategory(' + c2.id + ')">编辑</button><button class="btn-outline" onclick="deleteCategory(' + c2.id + ')">删</button></div></div>';
+      adminCategoryList.filter(function(c) { return c.parentId === c2.id; }).sort(function(a,b) { return (a.sortOrder||0) - (b.sortOrder||0); }).forEach(function(c3) {
+        html += '<div class="admin-cat-item level-3"><span class="level-3">' + c3.name + '</span><div class="actions"><button class="btn-sm" onclick="editCategory(' + c3.id + ')">编辑</button><button class="btn-outline" onclick="deleteCategory(' + c3.id + ')">删</button></div></div>';
+      });
+    });
+  });
+  document.getElementById('admin-category-tree').innerHTML = html || '<p style="color:var(--text-muted);">暂无分类，请在右侧新增。</p>';
+}
+
+function editCategory(id) {
+  var c = adminCategoryList.find(function(x) { return x.id === id; });
+  if (!c) return;
+  document.getElementById('admin-cat-id').value = c.id;
+  document.getElementById('admin-cat-form-title').textContent = '编辑分类';
+  document.getElementById('admin-cat-parent').value = c.parentId || 0;
+  document.getElementById('admin-cat-name').value = c.name;
+  document.getElementById('admin-cat-level').value = c.level;
+  document.getElementById('admin-cat-subject-key').value = c.subjectKey || '';
+  document.getElementById('admin-cat-sort').value = c.sortOrder != null ? c.sortOrder : 0;
+}
+
+function resetCategoryForm() {
+  document.getElementById('admin-cat-id').value = '';
+  document.getElementById('admin-cat-form-title').textContent = '新增分类';
+  document.getElementById('admin-category-form').reset();
+  document.getElementById('admin-cat-sort').value = 0;
+}
+
+async function saveCategory(e) {
+  e.preventDefault();
+  var id = document.getElementById('admin-cat-id').value;
+  var payload = {
+    parentId: document.getElementById('admin-cat-parent').value || 0,
+    name: document.getElementById('admin-cat-name').value.trim(),
+    level: parseInt(document.getElementById('admin-cat-level').value, 10),
+    subjectKey: document.getElementById('admin-cat-subject-key').value || null,
+    sortOrder: parseInt(document.getElementById('admin-cat-sort').value, 10) || 0
+  };
+  try {
+    if (id) {
+      await api('/api/admin/categories/' + id, { method: 'PUT', body: JSON.stringify(payload) });
+      showToast('已更新');
+    } else {
+      await api('/api/admin/categories', { method: 'POST', body: JSON.stringify(payload) });
+      showToast('已添加');
+    }
+    resetCategoryForm();
+    loadAdminCategories();
+  } catch (err) {
+    showToast(err.message || '保存失败');
+  }
+  return false;
+}
+
+async function deleteCategory(id) {
+  if (!confirm('确定删除该分类？若有子分类请先删除子分类。')) return;
+  try {
+    await api('/api/admin/categories/' + id, { method: 'DELETE' });
+    showToast('已删除');
+    loadAdminCategories();
+  } catch (e) {
+    showToast(e.message || '删除失败');
+  }
+}
+
 // ============================================
 // UTILITIES
 // ============================================
@@ -3011,10 +3129,30 @@ function showToast(msg) {
 }
 
 // ============================================
+// 按访问路径分页
+// ============================================
+var PATH_TO_PAGE = { '/dashboard':'dashboard', '/subjects':'subjects', '/exams':'exams', '/practice':'practice', '/mistakes':'mistakes', '/stats':'stats', '/membership':'membership', '/admin':'admin', '/exam':'exam', '/result':'result' };
+function navTo(e, page) {
+  if (e) e.preventDefault();
+  var path = '/' + (page === 'dashboard' ? 'dashboard' : page);
+  if (window.history && window.history.pushState) history.pushState({}, '', path);
+  showPage(page);
+  return false;
+}
+window.addEventListener('popstate', function() {
+  var page = PATH_TO_PAGE[location.pathname] || 'dashboard';
+  if (state.user) { showPage(page); }
+});
+
+// ============================================
 // INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', async () => {
-  const token = localStorage.getItem('token');
+  var pathname = location.pathname.replace(/\/$/, '') || '/';
+  var token = localStorage.getItem('token');
+  if (pathname !== '/' && pathname !== '/index.html' && PATH_TO_PAGE[pathname] && !token) {
+    location.href = '/'; return;
+  }
   const lastUser = localStorage.getItem('lastUser');
   if (lastUser) document.getElementById('login-username').value = lastUser;
   if (token) {
@@ -3040,6 +3178,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const mis = await api('/api/users/me/mistakes');
       if (mis.mistakeIds) state.stats.mistakeIds = mis.mistakeIds;
       enterMainScreen();
+      var page = PATH_TO_PAGE[pathname] || 'dashboard';
+      if (pathname !== '/' && pathname !== '/index.html') showPage(page);
+      else if (window.history && window.history.replaceState) history.replaceState({}, '', '/dashboard');
     } catch (_) {
       localStorage.removeItem('token');
     }

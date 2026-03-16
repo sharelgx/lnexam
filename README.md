@@ -7,7 +7,8 @@
 - **用户系统**：注册、登录（JWT）
 - **会员系统**：免费用户 / VIP 会员（到期时间可配置）
 - **做题与统计**：知识点复习、专项练习、模拟考试、错题本、学习报告
-- **后台管理**（管理员）：用户列表、设置 VIP、数据概览
+- **后台管理**（管理员）：用户列表、设置 VIP、**分类管理**（一级=科目，二/三级=知识点）、数据概览
+- **按路径分页**：`/` 登录，`/dashboard` 学习中心，`/subjects` 知识点复习，`/exams` 模拟考试，`/practice` 专项练习，`/mistakes` 错题本，`/stats` 学习报告，`/membership` 会员中心，`/admin` 后台管理
 
 ## 快速启动
 
@@ -62,8 +63,10 @@ lnexam/
 - `PUT /api/users/me/mistakes` — 同步错题
 - `GET /api/users/me/exam-history` — 考试记录
 - `POST /api/users/me/exam-record` — 提交考试记录
+- `GET /api/categories` — 分类树（一级科目、二三级知识点）
 - `GET /api/admin/users` — 用户列表（管理员）
 - `PUT /api/admin/users/:id/membership` — 设置会员（管理员）
 - `GET /api/admin/stats` — 后台概览（管理员）
+- `GET/POST/PUT/DELETE /api/admin/categories` — 分类管理（管理员）
 
 生产环境部署时请设置环境变量 `JWT_SECRET` 和 `PORT`。
