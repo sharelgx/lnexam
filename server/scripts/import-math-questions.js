@@ -3,17 +3,6 @@
  * 题号→知识点映射以知识点总结第一部分为主，其余按题干推断。
  * 用法：先运行 node scripts/seed-categories.js，再 node scripts/import-math-questions.js
  */
-const { getDb, initSchema } = require('../db');
-
-initSchema(getDb());
-const db = getDb();
-
-// 确保 questions 表有 category_id 列（兼容旧库）
-try {
-  db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
-} catch (e) {
-  if (!e.message.includes('duplicate column')) throw e;
-}
 
 // 题号 → 知识点名称（与 categories 表中 name 一致，二级或三级）
 // 来源：知识点分类总结第一部分明确标注 + 题干推断
@@ -206,23 +195,28 @@ const MATH_QUESTIONS_DATA = [
   { no: 150, text: '圆 x²+y²+2x+4y-3=0 的圆心到直线 x+y+1=0 的距离是', options: ['A. √2/2', 'B. √2', 'C. 2√2', 'D. 2'], answer: 1 },
 ];
 
-function getCategoryIdByName(name) {
-  const row = db.prepare('SELECT id FROM categories WHERE name = ?').get(name);
-  return row ? row.id : null;
-}
-
 function run() {
+  const { getDb, initSchema } = require('../db');
+  initSchema(getDb());
+  const db = getDb();
+  try {
+    db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
+  } catch (e) {
+    if (!e.message.includes('duplicate column')) throw e;
+  }
+  function getCategoryIdByName(name) {
+    const row = db.prepare('SELECT id FROM categories WHERE name = ?').get(name);
+    return row ? row.id : null;
+  }
   const existing = db.prepare('SELECT COUNT(*) as c FROM categories WHERE subject_key = ?').get('math');
   if (!existing || existing.c === 0) {
     console.log('请先运行: node scripts/seed-categories.js');
     process.exit(1);
   }
-
   const ins = db.prepare(
     `INSERT OR REPLACE INTO questions (id, subject, topic, text, options, answer, explanation, category_id)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
   );
-
   let inserted = 0;
   for (const q of MATH_QUESTIONS_DATA) {
     const knowledge = QUESTION_TO_KNOWLEDGE[q.no];
@@ -233,8 +227,8 @@ function run() {
     ins.run(id, 'math', topicSlug, q.text, optionsStr, q.answer, null, categoryId);
     inserted++;
   }
-
   console.log(`已导入 ${inserted} 道数学题并关联到知识点分类。`);
 }
 
-run();
+if (require.main === module) run();
+module.exports = { QUESTION_TO_KNOWLEDGE, MATH_QUESTIONS_DATA };

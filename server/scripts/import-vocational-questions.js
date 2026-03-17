@@ -3,29 +3,6 @@
  * 来源：《2026年单独招生普通类-职业适应性测试题库.pdf》单选题 1-150
  * 用法：node scripts/import-vocational-questions.js
  */
-const { getDb, initSchema } = require('../db');
-
-initSchema(getDb());
-const db = getDb();
-
-try {
-  db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
-} catch (e) {
-  if (!e.message.includes('duplicate column')) throw e;
-}
-
-// 知识点名称→ category_id 缓存
-const catCache = {};
-function getCatId(name) {
-  if (!name) return null;
-  if (catCache[name] !== undefined) return catCache[name];
-  let row = db.prepare("SELECT id FROM categories WHERE name = ?").get(name);
-  if (!row) {
-    row = db.prepare("SELECT id FROM categories WHERE name LIKE ?").get('%' + name + '%');
-  }
-  catCache[name] = row ? row.id : null;
-  return catCache[name];
-}
 
 // 题号 → 职测知识点
 const Q2K = {
@@ -335,26 +312,39 @@ const VOCATIONAL_QUESTIONS = [
 ];
 
 function run() {
-  const existing = db.prepare("SELECT COUNT(*) as c FROM questions WHERE subject = 'vocational'").get().c;
-  if (existing > 0) {
-    db.prepare("DELETE FROM questions WHERE subject = 'vocational'").run();
+  const { getDb, initSchema } = require('../db');
+  initSchema(getDb());
+  const db = getDb();
+  try {
+    db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
+  } catch (e) {
+    if (!e.message.includes('duplicate column')) throw e;
   }
-
+  const catCache = {};
+  function getCatId(name) {
+    if (!name) return null;
+    if (catCache[name] !== undefined) return catCache[name];
+    let row = db.prepare("SELECT id FROM categories WHERE name = ?").get(name);
+    if (!row) row = db.prepare("SELECT id FROM categories WHERE name LIKE ?").get('%' + name + '%');
+    catCache[name] = row ? row.id : null;
+    return catCache[name];
+  }
+  const existing = db.prepare("SELECT COUNT(*) as c FROM questions WHERE subject = 'vocational'").get().c;
+  if (existing > 0) db.prepare("DELETE FROM questions WHERE subject = 'vocational'").run();
   const ins = db.prepare(
     `INSERT OR REPLACE INTO questions (id, subject, topic, text, options, answer, explanation, category_id)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
   );
-
   let inserted = 0;
   for (const q of VOCATIONAL_QUESTIONS) {
     const knowledge = Q2K[q.no];
     const catId = knowledge ? getCatId(knowledge) : null;
     const topicSlug = (knowledge || 'other').replace(/[（）/、\s]/g, '_').slice(0, 30);
-    const id = `vocational_${q.no}`;
-    ins.run(id, 'vocational', topicSlug, q.text, JSON.stringify(q.options), q.answer, null, catId);
+    ins.run(`vocational_${q.no}`, 'vocational', topicSlug, q.text, JSON.stringify(q.options), q.answer, null, catId);
     inserted++;
   }
   console.log(`已导入 ${inserted} 道职业适应性测试题并关联到知识点分类。`);
 }
 
-run();
+if (require.main === module) run();
+module.exports = { Q2K, VOCATIONAL_QUESTIONS };

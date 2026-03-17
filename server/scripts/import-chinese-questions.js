@@ -3,22 +3,6 @@
  * 来源：《辽宁金融职业学院2026单独招生考试题库普通类-语文.pdf》单选题 1-165
  * 用法：node scripts/import-chinese-questions.js
  */
-const { getDb, initSchema } = require('../db');
-
-initSchema(getDb());
-const db = getDb();
-
-try {
-  db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
-} catch (e) {
-  if (!e.message.includes('duplicate column')) throw e;
-}
-
-// 分类名 → category_id
-function getCategoryIdByName(name) {
-  const row = db.prepare('SELECT id FROM categories WHERE name = ? AND (subject_key IS NULL OR subject_key != \'math\')').get(name);
-  return row ? row.id : null;
-}
 
 // 题号 → 语文知识点（与 categories 表 name 一致）
 const Q2K = {
@@ -96,21 +80,6 @@ const Q2K = {
   163: '古诗文默写与诗词鉴赏', 164: '文言文基础（实词/虚词/句式/翻译）',
   165: '字形辨析',
 };
-
-// 知识点名称→ category_id 缓存
-const catCache = {};
-function getCatId(name) {
-  if (!name) return null;
-  if (catCache[name] !== undefined) return catCache[name];
-  // 先精确匹配
-  let row = db.prepare("SELECT id FROM categories WHERE name = ?").get(name);
-  if (!row) {
-    // 模糊包含匹配（应对"文化常识识记"→"文学常识、文化常识识记"）
-    row = db.prepare("SELECT id FROM categories WHERE name LIKE ?").get('%' + name + '%');
-  }
-  catCache[name] = row ? row.id : null;
-  return catCache[name];
-}
 
 const CHINESE_QUESTIONS = [
   { no:1, text:'下列词语中加点字的读音全部正确的一项是', options:['A. 磐石(bān) 谈吐(tù) 花蕾(léi) 飒爽英姿(fēng)', 'B. 驻足(zhù) 脉搏(mài) 谚语(yàn) 短小精悍(hàn)', 'C. 砚台(yàn) 滞留(dài) 禅让(shàn) 真知灼见(zhù)', 'D. 歼灭(qiān) 处分(chù) 坚毅(yì) 矢志不渝(mó)'], answer:1 },
@@ -281,26 +250,39 @@ const CHINESE_QUESTIONS = [
 ];
 
 function run() {
-  const existing = db.prepare("SELECT COUNT(*) as c FROM questions WHERE subject = 'chinese'").get().c;
-  if (existing > 0) {
-    db.prepare("DELETE FROM questions WHERE subject = 'chinese'").run();
+  const { getDb, initSchema } = require('../db');
+  initSchema(getDb());
+  const db = getDb();
+  try {
+    db.prepare('ALTER TABLE questions ADD COLUMN category_id INTEGER').run();
+  } catch (e) {
+    if (!e.message.includes('duplicate column')) throw e;
   }
-
+  const catCache = {};
+  function getCatId(name) {
+    if (!name) return null;
+    if (catCache[name] !== undefined) return catCache[name];
+    let row = db.prepare("SELECT id FROM categories WHERE name = ?").get(name);
+    if (!row) row = db.prepare("SELECT id FROM categories WHERE name LIKE ?").get('%' + name + '%');
+    catCache[name] = row ? row.id : null;
+    return catCache[name];
+  }
+  const existing = db.prepare("SELECT COUNT(*) as c FROM questions WHERE subject = 'chinese'").get().c;
+  if (existing > 0) db.prepare("DELETE FROM questions WHERE subject = 'chinese'").run();
   const ins = db.prepare(
     `INSERT OR REPLACE INTO questions (id, subject, topic, text, options, answer, explanation, category_id)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
   );
-
   let inserted = 0;
   for (const q of CHINESE_QUESTIONS) {
     const knowledge = Q2K[q.no];
     const catId = knowledge ? getCatId(knowledge) : null;
     const topicSlug = (knowledge || 'other').replace(/[（）/、\s]/g, '_').slice(0, 30);
-    const id = `chinese_${q.no}`;
-    ins.run(id, 'chinese', topicSlug, q.text, JSON.stringify(q.options), q.answer, null, catId);
+    ins.run(`chinese_${q.no}`, 'chinese', topicSlug, q.text, JSON.stringify(q.options), q.answer, null, catId);
     inserted++;
   }
   console.log(`已导入 ${inserted} 道语文题并关联到知识点分类。`);
 }
 
-run();
+if (require.main === module) run();
+module.exports = { Q2K, CHINESE_QUESTIONS };
