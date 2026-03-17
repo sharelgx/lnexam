@@ -1,0 +1,2809 @@
+[
+  {
+    "no": 1,
+    "text": "设集合A= x -2< x<3 ，B = x1 x5 ，则A∪B = ( ) { } { } { } { }",
+    "options": [
+      "A. x -2< x<5",
+      "B. x -2< x5",
+      "C. x 3< x5",
+      "D. x -2< x1"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 2,
+    "text": "若sinα+cosα= ，则sinα·cosα=（ ） 4 4 3 8",
+    "options": [
+      "A. -",
+      "B. C. - 9 9 9 9 3 4 ( 2 1) ( 1 5) -"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 3,
+    "text": "计算(2342) (2 248) =（ ） ( ) ( )",
+    "options": [
+      "A. 64",
+      "B. 128",
+      "C. 256",
+      "D. 512"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 4,
+    "text": "计算5sin90°-2cos0°+ 3tan180°+cos180°=（ ）",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 5"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 5,
+    "text": "已知直线l ： y =3x+1与直线l ：ax+ y+1=0垂直，则a的值为（ ） 1 2 1 1",
+    "options": [
+      "A. -",
+      "B. C. -3",
+      "D. 3 3 3 x2 y2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 6,
+    "text": "椭圆 + =1的离心率为（ ） 25 16 3 4 4 3",
+    "options": [
+      "A. B.",
+      "C. D. 5 5 3 4 x-2 7"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 7,
+    "text": "不等式2 ( x+1 )+ > x-1的解集为（ ） 3 2 { } { } { } { }",
+    "options": [
+      "A. x x>2",
+      "B. x x<2",
+      "C. x x>-2",
+      "D. x x<-2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 8,
+    "text": "抛物线 y2 =6x的焦点坐标为（ ） ( 3 ) ( 3) ( 2) (3 )",
+    "options": [
+      "A. ( - ,0)",
+      "B. (0, )",
+      "C. (0, )",
+      "D. ( ,0) ( 2 ) ( 2) ( 3) (2 ) 3sinα+4cosα"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 9,
+    "text": "已知tanα=2，则 =（ ） 2sinα-cosα 10 1 10 1",
+    "options": [
+      "A. B.",
+      "C. -",
+      "D. - 3 3 3 10"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 10,
+    "text": "圆心为点C ( 3,-1 )，半径为 11的圆的方程为（ ）",
+    "options": [
+      "C. ( x-3 )2 +( y+1 )2 = 11",
+      "D. ( x-3 )2 +( y+1 )2 =11 (1 2)"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 11,
+    "text": "已知角α的终边经过点( ,- )，则tanα=（ ） ( ) (2 2 ) 1 2 3",
+    "options": [
+      "A. B. -",
+      "C. -",
+      "D. - 2 2 2 2 { } { } { }"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 12,
+    "text": "设全集U = 1,2,3,4,5,6 ,集合M = 1,2,3 ，集合N = 2,3,4,5 ，则C (M ∩N)=（ ） u { } { } { } { }",
+    "options": [
+      "A. 6",
+      "B. 1,3,4",
+      "C. 4,5,6",
+      "D. 1,4,5,6"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 13,
+    "text": "p:△ABC是等腰三角形, q:△ABC是等边三角形，则 p是q的（ ）",
+    "options": [
+      "A. 充分条件",
+      "B. 必要条件",
+      "C. 充要条件",
+      "D. 无关条件"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 14,
+    "text": "函数 y = 1-log x 的定义域是( ) ( ] ( ]",
+    "options": [
+      "C. 0,2",
+      "D. 1,2 1 1 - 1 7"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 15,
+    "text": "0.027 3 -(- ) -2 +(2 )2 -(1- 2)0 =（ ） 7 9",
+    "options": [
+      "A. 45",
+      "B. -35",
+      "C. -45",
+      "D. -40"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 16,
+    "text": "已知sinα=- ,且α是第四象限角，则tanα的值为（ ） 4 4 4 3",
+    "options": [
+      "A. B．-",
+      "C. -",
+      "D. - 5 5 3 4 { }"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 17,
+    "text": "若数列 a 为等差数列，且a +a +a +a =16，则a +a =（ ） n 2 4 6 8 3 7",
+    "options": [
+      "A. 6",
+      "B. 7",
+      "C. 8",
+      "D. 9"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 18,
+    "text": "下面两条直线互相平行的是（ ）",
+    "options": [
+      "C. 不可能相交",
+      "D. 异面、 共面都有可能"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 20,
+    "text": "在△ABC中，A=600,BC =3 3,AC =2,则sinB =（ ） 1 3 1",
+    "options": [
+      "A. B．",
+      "C. 3 3 3 9 2"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 21,
+    "text": "设全集U = { x x是小于10的正整数} ，A={ 1,2,4,5,6 }，则C A=（ ） U",
+    "options": [
+      "A. { 3,7,8,9 }",
+      "B. { 7,8,9 }",
+      "C. { 1,2,4,5,6 }",
+      "D. { 1,2,4 }"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 22,
+    "text": "“方程x2 -5x-6=0的解集”用列举法可表示为（ ）",
+    "options": [
+      "A. {-1,6 }",
+      "B. { 1,-6 }",
+      "C. { 2,3 }",
+      "D. { 2,-3 }"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 23,
+    "text": "已知数列{ a }的通项公式为a =(-1 )n ，则a =（ ） n n 2n 5 1 1 1 1",
+    "options": [
+      "A. -",
+      "B. C.- 16 16 32 32"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 24,
+    "text": "不等式 5x-2 ≥3的解集为（ ） { 1 } { 1 }",
+    "options": [
+      "C. {x x- 或x≥1}",
+      "D. {x - < x<1} { 5 } { 5 }"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 25,
+    "text": "已知角α终边上一点P (-4,3 )，则sinα+cosα+tanα=（ ） 4 19 3 3",
+    "options": [
+      "A. -",
+      "B. -",
+      "C. - 5 20 4 5"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 26,
+    "text": "计算log 6-log 3+log 2+log =（ ） 2 2 7 7 2",
+    "options": [
+      "A. -2",
+      "B. -1",
+      "C. 1",
+      "D. 2"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 27,
+    "text": "在等差数列{ a }中，已知S =36，则a =（ ） n 3 2",
+    "options": [
+      "A. 6",
+      "B. 8",
+      "C. 9",
+      "D. 12"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 28,
+    "text": "若函数 y =log x的图像经过点( 2,-1 )，则底a =（ ） a 1 1",
+    "options": [
+      "A. -",
+      "B. C.-2",
+      "D. 2 2 2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 29,
+    "text": "过点P (-1,2 )，且倾斜角为60°的直线方程为（ ）",
+    "options": [
+      "C. 3x+ y+ 3 =0",
+      "D. 3x+ y+2+ 3 =0"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 30,
+    "text": "圆心为点C ( 3,-1 )，半径为 11的圆的方程为（ ）",
+    "options": [
+      "C. ( x-3 )2 +( y+1 )2 = 11",
+      "D. ( x-3 )2 +( y+1 )2 =11"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 31,
+    "text": "p:a<-3, q:a<-1，则 p是q的（ ）",
+    "options": [
+      "A. 充分条件",
+      "B. 必要条件",
+      "C. 充要条件",
+      "D. 无关条件 ( 3 1)"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 32,
+    "text": "已知角的终边上一点的坐标为(- , )，则α是( ) ( ) ( 2 2)",
+    "options": [
+      "A. 第一象限的角",
+      "B. 第二象限的角",
+      "C. 第三象限的角",
+      "D. 第四象限的角"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 33,
+    "text": "集合 A= [ 2,9 ] ,B = ( a,+∞ ) ,且A∩B =φ,则a的取值范围是( )",
+    "options": [
+      "C. a≥9",
+      "D. 无法确定"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 34,
+    "text": "已经log x=-4，那么x=（ ）.",
+    "options": [
+      "A. 12",
+      "B. 20 1 1",
+      "C. D． 4 81 π 3"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 35,
+    "text": "已知 <θ<π,sinθ= ,则tanθ的值为( ) 2 5 3 4 3 4",
+    "options": [
+      "A. B.",
+      "C. -",
+      "D. - 4 3 4 3"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 36,
+    "text": "在等差数列{a }中，已知a =2，a =6，则公差d=( ) n 1 3",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 37,
+    "text": "已知向量 a =2,b =1,ab= 3,则<a,b>=（ ） π π π π",
+    "options": [
+      "A. B． C D． 6 4 3 2"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 38,
+    "text": "直线x+ y-2=0与圆x2 + y2 -6x=0的位置关系是( )",
+    "options": [
+      "C. 相切",
+      "D. 相交或相切"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 39,
+    "text": "如果直线a,b没有公共点,那么a与b ( )",
+    "options": [
+      "C. 异面直线",
+      "D. 可能平行,也可能是异面直线"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 40,
+    "text": "若x=-2是关于 x 的一元二次方程x2 - ax+a2 =0的一个根，则a的值为（ ）",
+    "options": [
+      "A. 1或4",
+      "B. -1或-4",
+      "C. -1或4",
+      "D. 1或-4"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 41,
+    "text": "函数 y =log (1-2x)的定义域是（ ） ( 1) (1 )",
+    "options": [
+      "C.  ，+∞)",
+      "D. (-∞, ) 2 ) ( 2)"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 42,
+    "text": "-6与-7的等比中项为（ ）",
+    "options": [
+      "A. - 42",
+      "B. 42",
+      "C. ± 42",
+      "D. 42"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 43,
+    "text": "下列函数中，是奇函数的是（ ）",
+    "options": [
+      "A. f ( x )= x2 -x",
+      "B. f ( x )= x3 +x",
+      "C. f ( x )=5x+3",
+      "D. f ( x )= x2 +x4 3 4 5 6 7"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 44,
+    "text": "根据数列 , , , , ,的前5项，写出数列的一个通项公式为（ ） 5 8 11 14 17 n+2 n+2 n+2 2n+1",
+    "options": [
+      "A. B.",
+      "C. D. 3n+2 2n+2 n+3 3n+2"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 45,
+    "text": "在等比数列{ a }中，已知a =2，a =6，则a =（ ） n 2 5 8",
+    "options": [
+      "A. 10",
+      "B. 12",
+      "C. 18",
+      "D. 24"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 46,
+    "text": "函数 y =2+sinx，x∑R的最小值为（ ）",
+    "options": [
+      "A. 0",
+      "B. 1",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 47,
+    "text": "若集合A={ 1,2,3 }，B ={ 1,3,4 }，C ={ 2,3,5 }，则A∩ ( B∩C )=（ ）",
+    "options": [
+      "A. { 3 }",
+      "B. { 1,2,3 }",
+      "C. { 1,3,4 }",
+      "D. { 2,3,5 }"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 48,
+    "text": "不等式 x ≥7的解集为( )",
+    "options": [
+      "A. (-∞,-21 ] ∪ [ 21,+∞) B.(-∞,-21 ] C.[ 21,+∞) D.(-21，21 )"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 49,
+    "text": "已知角α终边上一点P (-4,3 )，则sinα=（ ） 4 3 3 4",
+    "options": [
+      "A. -",
+      "B. -",
+      "C. D. 5 5 5 5"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 50,
+    "text": "抛物线x2 =-8y的焦点坐标为（ ）",
+    "options": [
+      "A. (-2,0 )",
+      "B. ( 0,-2 )",
+      "C. ( 0,2 )",
+      "D. ( 2,0 )"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 51,
+    "text": "由x> y得到ax >ay的条件是（ ）",
+    "options": [
+      "A. a >0",
+      "B. a<0",
+      "C. a≥0",
+      "D. a0"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 52,
+    "text": "在等差数列{ a }中，已知a =10，a =31，则公差d =（ ） n 5 12",
+    "options": [
+      "A. -2",
+      "B. -3",
+      "C. 3",
+      "D. 5"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 53,
+    "text": "下列各组函数中表示相同函数的一组是（ B ）",
+    "options": [
+      "C. y = x+2和y =",
+      "D. y= x和 y = x x-2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 54,
+    "text": "(lg5)2 +lg2lg25+(lg2)2 =（ ）",
+    "options": [
+      "A. 0",
+      "B. 1",
+      "C. 2",
+      "D. 3 3 4"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 55,
+    "text": "lg 与lg 的关系是（ ） 4 3",
+    "options": [
+      "A. 互为倒数",
+      "B. 互为相反数",
+      "C. 乘积为零",
+      "D. 商为lg"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 56,
+    "text": "已知等差数列{ a }中，a =-8，a =106，则S =( ) n 1 20 20",
+    "options": [
+      "A. 900",
+      "B. 980",
+      "C. 1080",
+      "D. 1180"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 57,
+    "text": "下列各三角函数值中为负值的是( )",
+    "options": [
+      "A. sin1100°",
+      "B. cos (-3000°)",
+      "C. tan (-115°)",
+      "D. tan π { }"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 58,
+    "text": "在等差数列 a 中，a =10，a =19，则a =（ ） n 4 7 1",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 59,
+    "text": "方程x2 + y2 +2x-4y-4=0表示的圆的圆心坐标为（ ）",
+    "options": [
+      "A. (1,2)",
+      "B. (-1,2)",
+      "C. (1,-2)",
+      "D. (-1,-2)"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 60,
+    "text": "sin 3 (-α)cos(2π+α)tan(-α-π)=( )",
+    "options": [
+      "A. sin3α",
+      "B. cos4α",
+      "C. -sin4α",
+      "D. sin 4α { } { } { }"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 61,
+    "text": "设全集U = a,b,c,d,e, f ，A= a,c,d ，B = b,d,e ，则C (A∩B)=( ) U",
+    "options": [
+      "A. { b,e, f } B.{ d } C.{ f } D.{ a,b,c,e, f }"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 62,
+    "text": "已知集合M ={大于-2且小于1的实数} ，则下列关系式正确的是（ ） π",
+    "options": [
+      "A. 5∑M",
+      "B. 0∉M",
+      "C. 1∑M",
+      "D. - ∑M"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 63,
+    "text": "函数 y = 3x -27 的定义域是（ ）",
+    "options": [
+      "A. (-∞,+∞)",
+      "B. (-∞,-3 ]",
+      "C. [-3,+∞)",
+      "D. [ 3,+∞)"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 64,
+    "text": "计算log 81+log =（ ） 3 1 8",
+    "options": [
+      "A. 3",
+      "B. 6",
+      "C. 7",
+      "D. 10"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 65,
+    "text": "下列选项正确的是（ ）",
+    "options": [
+      "C. 零与负数无对数",
+      "D. ( log 2 )3 =3log 2 a a"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 66,
+    "text": "已知指数函数 f ( x )=ax满足条件 f (-3 )= ，则a =（ ） 2 2 3 3",
+    "options": [
+      "A. -",
+      "B. C.- 3 3 2 2"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 67,
+    "text": "等比数列1.2， 2.4， 4.8，的第5项为（ ）",
+    "options": [
+      "A. 9.6",
+      "B. 19.2",
+      "C. 38.4",
+      "D. 76.8 x2 y2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 68,
+    "text": "椭圆 + =1的焦点为（ ） 3 4",
+    "options": [
+      "A. ( 0,-2 )和( 0,2 )",
+      "B. ( 0,-1 )和( 0,1 )",
+      "C. (-1,0 )和( 1,0 )",
+      "D. ( 0,-3 )和( 0,3 )"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 69,
+    "text": "下列命题正确的是（ ）",
+    "options": [
+      "C. 如果a >b,则ac2 >bc2",
+      "D. 如果a >b,则 > c2 c2"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 70,
+    "text": "圆心为C (-2,-4 )，且相切于y轴的圆的方程是（ ）",
+    "options": [
+      "C. ( x+2 )2 +( y+4 )2 =2",
+      "D. ( x+2 )2 +( y+4 )2 =4"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 71,
+    "text": "二次函数 y = x2 -4x-7的顶点坐标是（ ）",
+    "options": [
+      "A. ( 2,-11 )",
+      "B. (-2,7 )",
+      "C. ( 2,11 )",
+      "D. (-2,4 ) x2 y2"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 72,
+    "text": "双曲线 - =1的焦距为（ ） 18 14",
+    "options": [
+      "A. 2 2",
+      "B. 4 2",
+      "C. 8 2",
+      "D. 16 2"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 73,
+    "text": "已知点Q ( 4,n )是点P ( m,2 )和点R ( 3,8 )连线的中点，则m、n的值分别为（ ）",
+    "options": [
+      "A. m=5，n=5",
+      "B. m=2，n=-5",
+      "C. m=8，n=5",
+      "D. m=5，n=7"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 74,
+    "text": "函数 y = ( x-2 )2 的对称轴是（ ）",
+    "options": [
+      "A. y=-2",
+      "B. y=2",
+      "C. x =-2",
+      "D. x =2"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 75,
+    "text": "不等式(5-x)(x+4)<0的解集是（ ）",
+    "options": [
+      "A. (-∞,-4 )",
+      "B. ( 5,+∞)",
+      "C. (-∞,-4 ) ∪ ( 5,+∞) D.(-4，5 )"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 76,
+    "text": "在0°360°之间，与-960°角终边相同的角的度数为（ C ）",
+    "options": [
+      "A. 60°",
+      "B. 90°",
+      "C. 120°",
+      "D. 200°"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 77,
+    "text": "已经角α的终边经过点P(3,4),则sinα+cosα+tanα=（ ） 43 23 7 41",
+    "options": [
+      "A. B．",
+      "C. D． 20 20 4 15"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 78,
+    "text": "设向量a =(-2,3 )，b=( 1,1 )，则-2a+3b=（ ）",
+    "options": [
+      "A. ( 7,-3 )",
+      "B. (-7,4 )",
+      "C. ( 7,2 )",
+      "D. ( 7,3 ) π 3π"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 79,
+    "text": "cos +sin +tanπ=（ ） 2 2",
+    "options": [
+      "A. 0",
+      "B. -1",
+      "C. -2",
+      "D. 2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 80,
+    "text": "从甲乙等5名学生中随机选出2人，则甲被选中的概率为( ) 9 8 2 1",
+    "options": [
+      "A. B.",
+      "C. D. 25 25 5 5"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 81,
+    "text": "给出下面五个关系：3∑R，0.7∉Q，0∑{ 0 }，0∑N ，3∑ { 2,3,4 } ，其中正确的个 数是（ ）",
+    "options": [
+      "A. 5",
+      "B. 4",
+      "C. 3",
+      "D. 1"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 82,
+    "text": "双曲线的焦点在 y轴上，焦距为8，双曲线上一点到两个焦点的距离之差为6，则该双 曲线的标准方程为（ ） y2 x2 x2 y2 x2 y2 y2 x2",
+    "options": [
+      "A. - =1",
+      "B. - =1",
+      "C. - =1",
+      "D. - =1 8 7 9 7 9 8 9 7"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 83,
+    "text": "下列四个集合中，是空集的是( )",
+    "options": [
+      "C. {x|x2 0}",
+      "D. {x|x2 -x+1=0,x∑R}"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 84,
+    "text": "函数 y= 2x-3+ 7-x的定义域是（ ） (3 ) 3  ( 3)",
+    "options": [
+      "A. ( ,7)",
+      "B.  ,7 ",
+      "C. ( -∞, )",
+      "D. [ 7,+∞) (2 ) 2  ( 2)"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 85,
+    "text": "函数 f(x)= 4- x-3 的定义域是（ ）",
+    "options": [
+      "A. (7,+∞)",
+      "B. [-1,7]",
+      "C. (-1,7)",
+      "D. (-4,-1]"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 86,
+    "text": "若a >b>0，则下列不等式中正确的是（ ） 1 1",
+    "options": [
+      "A. >",
+      "B. a2 >b2",
+      "C. 2a <2b",
+      "D. lga<lgb a b"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 87,
+    "text": "偶函数 f ( x )= x2 +1的图像必经过的点是（ ）",
+    "options": [
+      "A. (-1,2 )，( 1,2 )",
+      "B. (-1,-2 )，( 1,-2 )",
+      "C. ( 1,2 )，( 1,-2 )",
+      "D. (-1,2 )，( 1,-2 )"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 88,
+    "text": "函数 y =3x2 +2x+1的最小值为（ ） 1 2",
+    "options": [
+      "A. -",
+      "B. C.1",
+      "D. 3 3 3"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 89,
+    "text": "设函数 f(x)=(2a-1)x+b是R上的减函数，则有( ) 1 1 1 1",
+    "options": [
+      "A. a >",
+      "B. a<",
+      "C. a≥",
+      "D. a 2 2 2 2"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 90,
+    "text": "f(x)是奇函数，且f(-3)=20,则f(3)=（ ）",
+    "options": [
+      "A. 20",
+      "B. 3",
+      "C. -20",
+      "D. -3 π π"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 91,
+    "text": "计算cos2 -sin2 =（ ） 8 8 2 3 1",
+    "options": [
+      "A. B.",
+      "C. D. 1 2 2 2"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 92,
+    "text": "已知指数函数 y = ax的图像经过点(-2,81 )，则a =（ ） 1 1",
+    "options": [
+      "A. -9",
+      "B. 9",
+      "C. - 9 9"
+    ],
+    "answer": 3,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 93,
+    "text": "下列函数中，是偶函数的是（ ）",
+    "options": [
+      "A. f(x)=3x+2",
+      "B. f(x)= x",
+      "C. f(x)= x2 -x+1",
+      "D. f(x)= x -3"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 94,
+    "text": "指数函数 f ( x )=ax，若 f ( 4 )=16，则下列说法正确的是（ ）",
+    "options": [
+      "C. a =2，函数是增函数",
+      "D. a=±2，增减性不定"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 95,
+    "text": "7+3 5与7-3 5的等比中项为（ ）",
+    "options": [
+      "A. ±2",
+      "B. -2",
+      "C. 2",
+      "D. 7"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 96,
+    "text": "终边在 y轴上的所有的角是（ ）",
+    "options": [
+      "A. 90°",
+      "B. 270°",
+      "C. 90°+k·180°，k∑Z",
+      "D. 90°+k·360°，k∑Z"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 97,
+    "text": "若cosθ= ,则1-tan4θ=（ ） 32 130 2 16",
+    "options": [
+      "A. B．",
+      "C. D． 81 81 9 9 9π"
+    ],
+    "answer": 0,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 98,
+    "text": "sin(- )=( ) 1 1 2 2",
+    "options": [
+      "A. -",
+      "B. C. - 2 2 2 2"
+    ],
+    "answer": 2,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 99,
+    "text": "过点 (-2,5 ) ，且与直线4x-3y+9=0垂直的直线方程为（ ）",
+    "options": [
+      "C. 3x+ y+5=0",
+      "D. 3x+4y+2=0"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 100,
+    "text": "椭圆9x2 + y2 =81的离心率是( ) 2 2 2",
+    "options": [
+      "A. B.",
+      "C. 2 2",
+      "D. 2 3 3"
+    ],
+    "answer": 1,
+    "type": "single",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 101,
+    "original_no": 1,
+    "text": "若集合A={-1,1 }，B = { x x2-1=0 } ，则A= B。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 102,
+    "original_no": 2,
+    "text": "2 是有理数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 103,
+    "original_no": 3,
+    "text": "0是自然数。 1 3 7",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 104,
+    "original_no": 4,
+    "text": "数列 ， ，1， ， 是等差数列。 5 5 5 x2 y2",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 105,
+    "original_no": 5,
+    "text": "双曲线 - =1的焦点在x轴上。 16 9",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 106,
+    "original_no": 6,
+    "text": "若向量a与b的模相等，则有a =b。 2cos2α-1",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 107,
+    "original_no": 7,
+    "text": "= 2。 1-2sin2α",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 108,
+    "original_no": 8,
+    "text": "180°角不属于任何象限。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 109,
+    "original_no": 9,
+    "text": "某小组有7人，选出3人参加植树劳动，有21种不同的选法。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 110,
+    "original_no": 10,
+    "text": "如果事件A、B互斥，则有P ( A+B )= P ( A )+P ( B )。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 111,
+    "original_no": 11,
+    "text": "“世界著名的科学家”所指的对象可以组成集合。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 112,
+    "original_no": 12,
+    "text": "“a是2的倍数”是a是4的倍数的必要条件。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 113,
+    "original_no": 13,
+    "text": "函数 y = 4x-x2 -4 的定义域为全体实数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 114,
+    "original_no": 14,
+    "text": "如果-a >-b，那么3a >3b。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 115,
+    "original_no": 15,
+    "text": "若 1-sin2θ=-cosθ，则θ为第二象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 116,
+    "original_no": 16,
+    "text": "cos2500 <cos2550。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 117,
+    "original_no": 17,
+    "text": "在等比数列中 { a } 中,a =5,a =10,a =15 。 n 1 2 3",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 118,
+    "original_no": 18,
+    "text": "两个非零向量a,b的内积仍然是一个向量。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 119,
+    "original_no": 19,
+    "text": "两条直线都有斜率时，如果它们互相垂直，那么它们的斜率互为负倒数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 120,
+    "original_no": 20,
+    "text": "如果 x ,x 是方程x2 -2x-1=0的两个根，那么x +x 的值2 。 1 2 1 2",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 121,
+    "original_no": 21,
+    "text": "“所有小于10的自然数”可以组成集合。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 122,
+    "original_no": 22,
+    "text": "1.23 <1.23.6。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 123,
+    "original_no": 23,
+    "text": "直线的倾斜角可以为180°。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 124,
+    "original_no": 24,
+    "text": "已知点A ( 2,3 )，B ( 8,-3 )，则线段AB的中点坐标为( 5,3 )。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 125,
+    "original_no": 25,
+    "text": "把指数等式2x =0.5改写成对数式为log 0.5= x。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 126,
+    "original_no": 26,
+    "text": "任何一条直线都有斜率。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 127,
+    "original_no": 27,
+    "text": "C96 +C97 =C97 。 99 99 100",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 128,
+    "original_no": 28,
+    "text": "一个口袋中装有大小相同的6只红球和4只白球，现从中任意摸出3只，则至少有1只白 球的概率为 。 α",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 129,
+    "original_no": 29,
+    "text": "若α是第二象限角，则 一定是第一象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 130,
+    "original_no": 30,
+    "text": "A ( 1,1 )，B ( 5,7 )两点间的距离为 13。 { }",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 131,
+    "original_no": 31,
+    "text": "设A= xx< 5 ,则{ π } ∑A。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 132,
+    "original_no": 32,
+    "text": "因为-1>-2,所以a-1>a-2。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 133,
+    "original_no": 33,
+    "text": "第一象限的角一定是正角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 134,
+    "original_no": 34,
+    "text": "sin(-3900)=- 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 135,
+    "original_no": 35,
+    "text": "sin 700 > sin550。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 136,
+    "original_no": 36,
+    "text": "y =3cosx-2的最大值是1。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 137,
+    "original_no": 37,
+    "text": "在等差数列{a }中，若a +a =a +a 。 n 1 8 3 6",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 138,
+    "original_no": 38,
+    "text": "当一条直线的斜率存在而另一条直线的斜率不存在时,这两条直线相交。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 139,
+    "original_no": 39,
+    "text": "每个数列都有通项公式。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 140,
+    "original_no": 40,
+    "text": "抛物线x2 =-12y的准线方程为 y=-3 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 141,
+    "original_no": 41,
+    "text": "C2 =C3。 6 6",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 142,
+    "original_no": 42,
+    "text": "任何实数都有偶次方根。 1 1",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 143,
+    "original_no": 43,
+    "text": "0.0013 = 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 144,
+    "original_no": 44,
+    "text": "一个口袋中装有大小相同的6只红球和4只白球，现从中任意摸出3只，则恰好有1只白 球的概率为 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 145,
+    "original_no": 45,
+    "text": "( x+a )12 的展开式中的倒数第4项是220x4a8。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 146,
+    "original_no": 46,
+    "text": "已知集合M ={ 0,1,2 }，则M 的子集的个数是7。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 147,
+    "original_no": 47,
+    "text": "log ( 35·9-2 ) =0。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 148,
+    "original_no": 48,
+    "text": "双曲线5x2 -4y2 =20的离线率为 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 149,
+    "original_no": 49,
+    "text": "若集合A= { a,b } ，B = { b,a } ，则A=B。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 150,
+    "original_no": 50,
+    "text": "双曲线5x2 -4y2 =20的虚半轴长5。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 151,
+    "original_no": 51,
+    "text": "“x=-1”是“x =1”的必要条件。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 152,
+    "original_no": 52,
+    "text": "如果函数 y = f(x)在区间(2,7)内是增函数，则必有f(3)> f(4)。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 153,
+    "original_no": 53,
+    "text": "如果x2 >4,那么x>±2。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 154,
+    "original_no": 54,
+    "text": "2700角是第三象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 155,
+    "original_no": 55,
+    "text": "1,2,3,4与4,3,2,1是同一数列。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 156,
+    "original_no": 56,
+    "text": "已知a = { 3,2 } ,b= { 1,-1 } ,则5a3b= { 18,7 } 。 1 1 1 1 1 1",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 157,
+    "original_no": 57,
+    "text": "数列 , , , , ,的通项公式为 。 1×2 2×3 3×4 4×5 5×6 n(n+1)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 158,
+    "original_no": 58,
+    "text": "函数 y=cosx+x是偶函数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 159,
+    "original_no": 59,
+    "text": "从3个黑球2个白球中，任取2个球，则取出的全是黑球的概率是 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 160,
+    "original_no": 60,
+    "text": "椭圆的离心率0<e<1。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 161,
+    "original_no": 61,
+    "text": "集合{ 0 }中不含元素。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 162,
+    "original_no": 62,
+    "text": "任何实数都有奇次方根。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 163,
+    "original_no": 63,
+    "text": "函数 y =0.9x在(-∞,+∞)内是减函数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 164,
+    "original_no": 64,
+    "text": "30.8 <30.7。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 165,
+    "original_no": 65,
+    "text": "“方程x2 -3=0的所有解”可以组成集合。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 166,
+    "original_no": 66,
+    "text": "函数 f ( x )=2x -2-x是奇函数。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 167,
+    "original_no": 67,
+    "text": "对数 y =2log x与 y =log x2的定义域相同。 a a",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 168,
+    "original_no": 68,
+    "text": "设全集U=R，A= { x x6 } ，则C A= { x x>6 } 。 U ( π)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 169,
+    "original_no": 69,
+    "text": "函数 y =10cos(2x+ )，x∑R的最大值是10。 ( 4)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 170,
+    "original_no": 70,
+    "text": "平行于x轴的直线的倾斜角为90°。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 171,
+    "original_no": 71,
+    "text": "锐角一定是第一象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 172,
+    "original_no": 72,
+    "text": "小于900角一定是锐角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 173,
+    "original_no": 73,
+    "text": "ac >bca >b。 { }",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 174,
+    "original_no": 74,
+    "text": "22是数列n2 -n-20中的项，并且是第6项。 1 3 7",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 175,
+    "original_no": 75,
+    "text": "数列 ，，1，，是等差数列。 5 5 5 1 (π ) 4 3",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 176,
+    "original_no": 76,
+    "text": "已知sin(π-α)= ，α∑( ，π)，则cosα= 。 7 ( 2 ) 7",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 177,
+    "original_no": 77,
+    "text": "△ABC的顶点坐标分别为点A(-1,2),B =(3,1),C(2,-3),则△ABC 是直角三角形。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 178,
+    "original_no": 78,
+    "text": "1,1,3,3,9,9,是等比数列。 π",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 179,
+    "original_no": 79,
+    "text": "已知a =4,b =6,<a,b>= ,则ab=12 2",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 180,
+    "original_no": 80,
+    "text": "圆x2 + y2 =4的半径r =4。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 181,
+    "original_no": 81,
+    "text": "空集是任何集合的子集。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 182,
+    "original_no": 82,
+    "text": "因为3>2,所以3a>2a。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 183,
+    "original_no": 83,
+    "text": "-500角的终边在第四象限。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 184,
+    "original_no": 84,
+    "text": "已知2(a+x)=3(b-x),则x= (3b-2a)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 185,
+    "original_no": 85,
+    "text": "数列的通项公式为a =2(-1)n+1+n,则a =8 n 10",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 186,
+    "original_no": 86,
+    "text": "已知b是a与c的等比中项，且abc=27，则b=3。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 187,
+    "original_no": 87,
+    "text": "集合 { -1,0,1 } 一共有5个真子集。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 188,
+    "original_no": 88,
+    "text": "9是数列{ 3(2n-7) }中的项，并且是第5项 (5 3)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 189,
+    "original_no": 89,
+    "text": "点A(2,-1)、B(3,4)的中点坐标为( , ) (2 2)",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 190,
+    "original_no": 90,
+    "text": "直线3y =-2x+1的纵截距是",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 191,
+    "original_no": 91,
+    "text": "直线 y = x-2与圆x2 + y2 =2相离。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 192,
+    "original_no": 92,
+    "text": "200〇角是第四象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 193,
+    "original_no": 93,
+    "text": "π是第二象限角。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 194,
+    "original_no": 94,
+    "text": "y= x与y=log a ax是相同函数 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 195,
+    "original_no": 95,
+    "text": "25和-13的等差中项为8。 3 3",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 196,
+    "original_no": 96,
+    "text": "函数 y =1+ cosx,x∑R的最大值是 2 2",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 197,
+    "original_no": 97,
+    "text": "抛物线 y2 =2px ( p >0 )的顶点就是坐标原点。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 198,
+    "original_no": 98,
+    "text": "双曲线9x2 -4y2 =36的实半轴长4。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 199,
+    "original_no": 99,
+    "text": "平面内两个定点的距离是8，则到这两个定点距离的和是10的动点的轨迹方程为 x2 y2 + =1。 5 4",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 1,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  },
+  {
+    "no": 200,
+    "original_no": 100,
+    "text": "函数 f(x) = x2 +1在区间(-∞,0 ]内单调递减 。",
+    "options": [
+      "A. 正确（√）",
+      "B. 错误（×）"
+    ],
+    "answer": 0,
+    "type": "judge",
+    "category_name": "数学",
+    "year": "2024",
+    "source": "2024单招题库"
+  }
+]
