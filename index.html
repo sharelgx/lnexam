@@ -1644,20 +1644,26 @@
 
       <!-- SUBJECTS PAGE -->
       <div id="page-subjects" class="hidden">
-        <div class="filter-row">
-          <div class="filter-chip active" onclick="filterSubject(this,'all')">全部科目</div>
-          <div class="filter-chip" onclick="filterSubject(this,'math')">数学</div>
-          <div class="filter-chip" onclick="filterSubject(this,'chinese')">语文</div>
-          <div class="filter-chip" onclick="filterSubject(this,'vocational')">职业适应性测试</div>
+        <div class="filter-row" id="subjects-filter-row">
+          <div class="filter-chip active" data-filter="all" onclick="filterSubject(this,'all')">全部科目</div>
+          <div class="filter-chip" data-filter="math" onclick="filterSubject(this,'math')">数学</div>
+          <div class="filter-chip" data-filter="chinese" onclick="filterSubject(this,'chinese')">语文</div>
+          <div class="filter-chip" data-filter="vocational" onclick="filterSubject(this,'vocational')">职业适应性测试</div>
         </div>
 
         <div class="subject-grid" id="subject-grid"></div>
 
         <!-- Knowledge drill panel -->
         <div id="knowledge-panel" class="hidden">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-            <button class="btn-outline" onclick="document.getElementById('knowledge-panel').classList.add('hidden');document.getElementById('subject-grid').classList.remove('hidden')">← 返回</button>
-            <h3 style="font-size:16px;color:var(--primary);" id="knowledge-panel-title">知识点练习</h3>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <button class="btn-outline" onclick="filterSubject(document.querySelector('#page-subjects .filter-chip[data-filter=\'all\']'),'all')">← 返回</button>
+            <h3 style="font-size:16px;color:var(--primary);margin-right:8px;" id="knowledge-panel-title">知识点练习</h3>
+            <div class="filter-row" id="knowledge-panel-nav" style="margin:0;flex:1;justify-content:flex-start;">
+              <div class="filter-chip" data-filter="all" onclick="filterSubject(this,'all')">全部科目</div>
+              <div class="filter-chip" data-filter="math" onclick="filterSubject(this,'math')">数学</div>
+              <div class="filter-chip" data-filter="chinese" onclick="filterSubject(this,'chinese')">语文</div>
+              <div class="filter-chip" data-filter="vocational" onclick="filterSubject(this,'vocational')">职业适应性测试</div>
+            </div>
           </div>
           <div class="knowledge-layout">
             <div class="knowledge-sidebar">
@@ -2341,20 +2347,38 @@ async function initSubjectGrid() {
 }
 
 function filterSubject(el, filter) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  const cards = document.querySelectorAll('.subject-card');
-  cards.forEach(card => {
-    const subjectKey = card.dataset.subject;
-    if (filter === 'all') card.style.display = '';
-    else card.style.display = (subjectKey === filter) ? '' : 'none';
-  });
+  var page = document.getElementById('page-subjects');
+  if (!page) return;
+  page.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  page.querySelectorAll('.filter-chip[data-filter="' + filter + '"]').forEach(c => c.classList.add('active'));
+  var panel = document.getElementById('knowledge-panel');
+  var grid = document.getElementById('subject-grid');
+  var isInKnowledge = panel && !panel.classList.contains('hidden');
+  if (filter === 'all') {
+    if (isInKnowledge) {
+      panel.classList.add('hidden');
+      grid.classList.remove('hidden');
+    }
+    document.querySelectorAll('.subject-card').forEach(card => { card.style.display = ''; });
+  } else {
+    if (isInKnowledge) {
+      openKnowledge(filter);
+      return;
+    }
+    document.querySelectorAll('.subject-card').forEach(card => {
+      card.style.display = (card.dataset.subject === filter) ? '' : 'none';
+    });
+  }
 }
 
 async function openKnowledge(subjectKey) {
   document.getElementById('subject-grid').classList.add('hidden');
   document.getElementById('knowledge-panel').classList.remove('hidden');
-
+  var page = document.getElementById('page-subjects');
+  if (page) {
+    page.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    page.querySelectorAll('.filter-chip[data-filter="' + subjectKey + '"]').forEach(c => c.classList.add('active'));
+  }
   const subject = (SUBJECT_META[subjectKey] && SUBJECT_META[subjectKey].name) || subjectKey;
   document.getElementById('knowledge-panel-title').textContent = subject + '知识点练习';
   document.getElementById('ks-subject-name').textContent = subject + '知识点';

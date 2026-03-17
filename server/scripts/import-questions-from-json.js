@@ -83,17 +83,21 @@ function run() {
     }
   }
 
-  // 分文件：math.json, chinese.json, vocational.json
+  // 分文件：优先带解析文件名 *_with_explanations.json，否则 math.json 等
   const files = [
-    { file: 'math.json', subject: 'math' },
-    { file: 'chinese.json', subject: 'chinese' },
-    { file: 'vocational.json', subject: 'vocational' }
+    { subject: 'math' },
+    { subject: 'chinese' },
+    { subject: 'vocational' }
   ];
 
-  for (const { file, subject } of files) {
-    const list = loadJson(file);
+  for (const { subject } of files) {
+    const withExpl = subject + '_with_explanations.json';
+    const normal = subject + '.json';
+    const list = loadJson(withExpl) || loadJson(normal);
     if (!Array.isArray(list) || list.length === 0) {
-      if (fs.existsSync(path.join(DATA_DIR, file))) console.warn(`  ${file}: 非数组或为空，已跳过`);
+      const p = path.join(DATA_DIR, withExpl);
+      const p2 = path.join(DATA_DIR, normal);
+      if (fs.existsSync(p) || fs.existsSync(p2)) console.warn(`  ${subject}: 非数组或为空，已跳过`);
       continue;
     }
     let count = 0;
@@ -107,7 +111,7 @@ function run() {
       count++;
       total++;
     }
-    console.log(`  ${file}: 导入 ${count} 题`);
+    console.log(`  ${subject}: 导入 ${count} 题`);
   }
 
   console.log(`共导入 ${total} 道题。`);
