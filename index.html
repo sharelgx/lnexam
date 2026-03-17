@@ -594,6 +594,10 @@
     transition: width 0.6s ease;
   }
 
+  .knowledge-weight-table tbody tr:hover { background: rgba(0,0,0,0.03); }
+  .knowledge-weight-table tbody tr.score-low td:last-child { color: var(--danger); }
+  .knowledge-weight-table tbody tr.score-mid td:last-child { color: #d97706; }
+
   /* Recent exams */
   .exam-item {
     display: flex;
@@ -1595,6 +1599,43 @@
           </div>
         </div>
 
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <div class="card-title">知识点能力雷达图</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:11px;color:var(--text-muted);">考卷占比</span>
+              <span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:rgba(124,58,237,0.5);border:1px solid rgba(124,58,237,0.7);"></span>
+              <span style="font-size:11px;color:var(--text-muted);margin-right:12px;">我的掌握</span>
+              <span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:rgba(37,99,235,0.4);border:1px solid var(--primary);"></span>
+              <select id="radar-subject" onchange="updateRadarChart()" style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:13px;background:white;">
+                <option value="math">数学</option>
+                <option value="chinese">语文</option>
+                <option value="vocational">职测</option>
+              </select>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--text-muted);margin:0 20px 12px;">结合真题知识点分值分布与你的答题正确率，了解各模块强弱</p>
+          <div style="padding:0 16px 16px;">
+            <canvas id="radar-canvas" width="400" height="320" style="width:100%;max-width:400px;height:320px;display:block;margin:0 auto;"></canvas>
+            <p id="radar-axis-labels" style="margin:12px 0 0;font-size:12px;color:#374151;line-height:1.6;text-align:center;"></p>
+          </div>
+          <div style="padding:0 16px 20px 20px;overflow-x:auto;">
+            <table class="knowledge-weight-table" id="radar-knowledge-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+              <thead>
+                <tr style="background:var(--bg);border-bottom:2px solid var(--border);">
+                  <th style="text-align:left;padding:10px 12px;">知识点</th>
+                  <th style="text-align:center;padding:10px 12px;white-space:nowrap;">考卷分值占比</th>
+                  <th style="text-align:center;padding:10px 12px;white-space:nowrap;">我的掌握</th>
+                  <th style="text-align:center;padding:10px 12px;white-space:nowrap;">答题情况</th>
+                </tr>
+              </thead>
+              <tbody id="radar-knowledge-tbody">
+                <tr><td colspan="4" style="text-align:center;padding:16px;color:var(--text-muted);">选择科目后显示</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="grid-2">
           <div class="card">
             <div class="card-header">
@@ -1963,6 +2004,40 @@ const SUBJECT_META = {
 };
 const TOPIC_CHIP_COLORS = ['#dbeafe', '#dcfce7', '#fef3c7', '#fce7f3', '#ede9fe', '#d1fae5', '#fff7ed', '#f0fdf4', '#fdf2f8', '#ecfdf5', '#fefce8', '#eff6ff'];
 
+// 三科考试真卷/题库知识点分值占比（依据 documents：数学=《单独招生考试数学试题知识点总结与分布分析》，语文=《2026单招语文题库知识点分类总结》题量占比，职测=《单独招生考试职业适应性测试试题知识点总结与分布分析》）
+const EXAM_KNOWLEDGE_WEIGHTS = {
+  math: [
+    { name: '集合与常用逻辑用语', weight: 8 },
+    { name: '不等式', weight: 4 },
+    { name: '函数（定义域/单调性/奇偶性）', weight: 8 },
+    { name: '函数最值与零点', weight: 8 },
+    { name: '三角函数', weight: 10 },
+    { name: '数列', weight: 13 },
+    { name: '向量', weight: 6 },
+    { name: '直线与圆', weight: 15 },
+    { name: '圆锥曲线', weight: 14 },
+    { name: '指数与对数', weight: 2 },
+    { name: '概率与统计', weight: 6 },
+    { name: '排列组合', weight: 6 }
+  ],
+  chinese: [
+    { name: '字音辨析', weight: 4 },
+    { name: '字形辨析', weight: 5 },
+    { name: '成语与熟语运用', weight: 9 },
+    { name: '文言文基础（实词/虚词/句式/翻译）', weight: 17 },
+    { name: '古诗文默写与诗词鉴赏', weight: 18 },
+    { name: '记叙文与说明文阅读', weight: 5 },
+    { name: '文学常识、文化常识识记', weight: 19 },
+    { name: '病句辨析、句式变换、情境表达', weight: 23 }
+  ],
+  vocational: [
+    { name: '思想政治素养（政策/制度/党史/法治）', weight: 56 },
+    { name: '职业素养与道德（职业道德/人生态度）', weight: 25 },
+    { name: '国情社情与科技发展（资源/经济/科技/地理）', weight: 18 },
+    { name: '院校特色常识', weight: 1 }
+  ]
+};
+
 async function getCategoriesTree() {
   if (state.categoriesTree) return state.categoriesTree;
   const data = await api('/api/categories');
@@ -2209,7 +2284,7 @@ function showPage(page) {
 
   if (page === 'mistakes') renderMistakes();
   if (page === 'stats') renderStats();
-  if (page === 'dashboard') updateDashboard();
+  if (page === 'dashboard') { updateDashboard(); updateRadarChart(); }
   if (page === 'membership') renderMembership();
   if (page === 'admin') renderAdmin();
 }
@@ -2282,6 +2357,8 @@ function updateDashboard() {
       </div>`;
     }).join('');
   }
+
+  getCategoriesTree().then(() => updateRadarChart()).catch(() => {});
 }
 
 function calcSubjectStats(subject) {
@@ -2295,10 +2372,213 @@ function calcSubjectStats(subject) {
 }
 
 function updateCountdown() {
-  const examDate = new Date('2026-04-01');
+  const examDate = new Date('2026-04-18');
   const now = new Date();
   const days = Math.max(0, Math.floor((examDate - now) / (1000*60*60*24)));
   document.getElementById('exam-countdown').textContent = days;
+}
+
+// 蜘蛛图：知识点考卷分值占比 + 我的掌握度
+function getRadarData(subjectKey) {
+  const tree = state.categoriesTree;
+  const weights = EXAM_KNOWLEDGE_WEIGHTS[subjectKey];
+  const ts = state.stats.topicStats || {};
+  if (!tree || !weights || !weights.length) return { labels: [], examWeights: [], myMastery: [] };
+
+  const subjectNode = tree.find(n => n.subjectKey === subjectKey);
+  const l2List = (subjectNode && subjectNode.children) || [];
+  function collectIds(node) {
+    const ids = [node.id];
+    (node.children || []).forEach(c => { ids.push(...collectIds(c)); });
+    return ids;
+  }
+
+  const labels = [];
+  const examWeights = [];
+  const myMastery = [];
+  const myCorrect = [];
+  const myTotal = [];
+  weights.forEach(w => {
+    const l2 = l2List.find(n => n.name === w.name);
+    let total = 0, correct = 0;
+    if (l2) {
+      const ids = collectIds(l2);
+      ids.forEach(id => {
+        const key = subjectKey + '_' + id;
+        const s = ts[key];
+        if (s && s.total > 0) { total += s.total; correct += s.correct; }
+      });
+    }
+    const pct = total > 0 ? Math.round(correct / total * 100) : 0;
+    labels.push(w.name);
+    examWeights.push(w.weight);
+    myMastery.push(pct);
+    myCorrect.push(correct);
+    myTotal.push(total);
+  });
+  return { labels, examWeights, myMastery, myCorrect, myTotal };
+}
+
+function drawRadarChart(canvas, data, opts) {
+  if (!canvas || !data || !data.labels.length) return;
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const w = rect.width;
+  const h = rect.height;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const n = data.labels.length;
+  const pad = n > 8 ? 56 : 44;
+  const R = Math.min(w, h) / 2 - pad;
+  const cx = w / 2;
+  const cy = h / 2;
+  const toRad = (i) => (i / n) * Math.PI * 2 - Math.PI / 2;
+
+  ctx.clearRect(0, 0, w, h);
+  // 网格与轴线
+  ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+  ctx.fillStyle = 'rgba(59,130,246,0.04)';
+  for (let r = 1; r <= 5; r++) {
+    const scale = (r / 5) * R;
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const a = toRad(i);
+      const x = cx + scale * Math.cos(a);
+      const y = cy + scale * Math.sin(a);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+  for (let i = 0; i < n; i++) {
+    const a = toRad(i);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+    ctx.stroke();
+  }
+  // 知识点标签（深色、加粗，确保可见）
+  const fontSize = n > 8 ? 11 : 13;
+  const maxCharsPerLine = n > 8 ? 5 : 6;
+  ctx.font = '600 ' + fontSize + 'px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.fillStyle = '#1f2937';
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2.5;
+  const labelRadius = R + (n > 8 ? 28 : 24);
+  function wrapLabel(text) {
+    const lines = [];
+    for (let i = 0; i < text.length; i += maxCharsPerLine) {
+      lines.push(text.slice(i, i + maxCharsPerLine));
+    }
+    return lines;
+  }
+  data.labels.forEach((label, i) => {
+    const a = toRad(i);
+    const tx = cx + labelRadius * Math.cos(a);
+    const ty = cy + labelRadius * Math.sin(a);
+    const lines = wrapLabel(label);
+    const lineHeight = fontSize + 4;
+    const totalH = (lines.length - 1) * lineHeight;
+    const startY = ty - totalH / 2;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    lines.forEach((line, j) => {
+      const y = startY + j * lineHeight;
+      ctx.strokeText(line, tx, y);
+      ctx.fillText(line, tx, y);
+    });
+  });
+  // 考卷分值占比多边形（参考线，0–100 尺度）
+  const examValues = data.examWeights;
+  ctx.fillStyle = 'rgba(124,58,237,0.15)';
+  ctx.strokeStyle = 'rgba(124,58,237,0.6)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.beginPath();
+  examValues.forEach((v, i) => {
+    const r = (v / 100) * R;
+    const a = toRad(i);
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // 我的掌握度多边形
+  const myValues = data.myMastery;
+  ctx.fillStyle = 'rgba(37,99,235,0.25)';
+  ctx.strokeStyle = 'var(--primary)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  myValues.forEach((v, i) => {
+    const r = (v / 100) * R;
+    const a = toRad(i);
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+}
+
+function updateRadarChart() {
+  const subjectKey = (document.getElementById('radar-subject') && document.getElementById('radar-subject').value) || 'math';
+  const canvas = document.getElementById('radar-canvas');
+  const tbody = document.getElementById('radar-knowledge-tbody');
+  try {
+    if (!state.categoriesTree) {
+      if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:16px;color:var(--text-muted);">加载分类中…</td></tr>';
+      return;
+    }
+    const data = getRadarData(subjectKey);
+    if (canvas && data.labels.length) drawRadarChart(canvas, data);
+    var axisEl = document.getElementById('radar-axis-labels');
+    if (axisEl) axisEl.textContent = data.labels.length ? '上图轴线依次：' + data.labels.join('、') : '';
+    if (tbody) {
+      if (!data.labels.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:16px;color:var(--text-muted);">暂无该科目知识点数据</td></tr>';
+        return;
+      }
+      var rows = data.labels.map(function(name, i) {
+        return {
+          name: name,
+          examPct: data.examWeights[i] || 0,
+          myPct: data.myMastery[i],
+          correct: (data.myCorrect && data.myCorrect[i]) || 0,
+          total: (data.myTotal && data.myTotal[i]) || 0
+        };
+      });
+      rows.sort(function(a, b) {
+        if (b.examPct !== a.examPct) return b.examPct - a.examPct;
+        return (a.myPct || 0) - (b.myPct || 0);
+      });
+      tbody.innerHTML = rows.map(function(r) {
+        var myStr = r.total > 0 ? r.myPct + '%' : '—';
+        var rowClass = r.total > 0 && r.myPct < 60 ? 'score-low' : r.total > 0 && r.myPct < 80 ? 'score-mid' : '';
+        var detail = r.total > 0 ? (r.correct + '/' + r.total + '题') : '—';
+        return '<tr style="border-bottom:1px solid var(--border);" class="' + rowClass + '">' +
+          '<td style="padding:10px 12px;">' + escapeHtml(r.name) + '</td>' +
+          '<td style="text-align:center;padding:10px 12px;">' + r.examPct + '%</td>' +
+          '<td style="text-align:center;padding:10px 12px;font-weight:600;">' + myStr + '</td>' +
+          '<td style="text-align:center;padding:10px 12px;color:var(--text-muted);font-size:12px;">' + detail + '</td></tr>';
+      }).join('');
+    }
+  } catch (e) { console.warn('radar', e); if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:16px;color:var(--danger);">加载失败</td></tr>'; }
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
 }
 
 function updateMistakeBadge() {

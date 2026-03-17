@@ -3,6 +3,8 @@ server/data/*.db
 server/data/*.db-wal
 server/data/*.db-shm
 server/data/*.db.bak*
+server/data/lnexam-production.db
+server/data/lnexam-production.db.gz
 .env
 .DS_Store
 *.log
