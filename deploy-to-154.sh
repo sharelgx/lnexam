@@ -2,6 +2,7 @@
 # 在本地构建 amd64 镜像并部署到 154（需先启动 Docker Desktop）
 # 使用 docker run 重启，避免服务器上 docker-compose 1.29 与新版 Docker 的 ContainerConfig 兼容问题
 # 端口须与 nginx 反代一致：宿主机 3001 -> 容器内 PORT=3030
+# 数据卷须与历史上 docker-compose 项目名一致：项目目录名为 lnexam 时，具名卷 lnexam-data 实际为 lnexam_lnexam-data（勿用 lnexam-data 否则会挂载到空库，账号全失效）
 set -e
 cd "$(dirname "$0")"
 KEY="${HOME}/Downloads/mac.pem"
@@ -25,7 +26,7 @@ ssh -o StrictHostKeyChecking=no -i "$KEY" "$REMOTE" "
     -p 3001:3030 \
     -e NODE_ENV=production \
     -e PORT=3030 \
-    -v lnexam-data:/app/server/data \
+    -v lnexam_lnexam-data:/app/server/data \
     lnexam:latest
   rm -f /tmp/lnexam-amd64.tar.gz
   echo '==> 健康检查:'
