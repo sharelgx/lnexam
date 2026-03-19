@@ -6,7 +6,7 @@
 const { getDb } = require('../db');
 
 const GLM_DEFAULT_BASE  = 'https://open.bigmodel.cn/api/paas/v4';
-const GLM_DEFAULT_MODEL = 'glm-4v-flash';
+const GLM_DEFAULT_MODEL = 'glm-4v-plus';
 
 function readSetting(key) {
   try {
