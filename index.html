@@ -1766,9 +1766,11 @@
               </select>
             </div>
             <div id="paper-knowledge-rows"></div>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
-              <button type="button" class="btn-outline" onclick="addPaperKnowledgeRow()">＋ 添加知识点</button>
-              <button type="button" class="btn-primary" style="width:auto;padding:10px 24px;" onclick="createPaperSessionByKnowledge()">生成试卷并记录</button>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center;">
+              <button type="button" class="btn-outline btn-sm" onclick="addPaperKnowledgeRow()" style="display:flex;align-items:center;gap:4px;">
+                <span style="font-size:16px;line-height:1;">＋</span> 添加知识点行
+              </button>
+              <button type="button" class="btn-primary" style="width:auto;padding:8px 20px;" onclick="createPaperSessionByKnowledge()">生成试卷</button>
             </div>
           </div>
           <input type="file" id="paper-upload-input" accept="image/*" multiple style="display:none" onchange="onPaperPhotosPicked()" />
@@ -3336,28 +3338,46 @@ function snapshotPaperKRowsFromDom() {
   state.paperKRows = next;
 }
 
+function buildKnowledgeOptsGrouped(tree, sub) {
+  var flat = flatCategoriesForSubject(tree, sub);
+  var html = '<option value="">选择知识点</option>';
+  flat.forEach(function (f) {
+    html += '<option value="' + escapeHtml(String(f.id)) + '">' + escapeHtml(f.name) + '</option>';
+  });
+  return html;
+}
+
 function renderPaperKnowledgeRows() {
-  snapshotPaperKRowsFromDom();
+  // 注意：不在这里调用 snapshotPaperKRowsFromDom，避免覆盖刚修改的 state
   if (!state.paperKRows.length) state.paperKRows = [{ categoryId: '', count: 5 }];
-  var sub = document.getElementById('paper-knowledge-subject').value;
+  var subEl = document.getElementById('paper-knowledge-subject');
+  var sub = subEl ? subEl.value : 'math';
   getCategoriesTree().then(function (tree) {
-    var flat = flatCategoriesForSubject(tree, sub);
-    var opts = '<option value="">选择知识点</option>' + flat.map(function (f) {
-      return '<option value="' + escapeHtml(String(f.id)) + '">' + escapeHtml(f.name) + '</option>';
-    }).join('');
+    var opts = buildKnowledgeOptsGrouped(tree, sub);
     var container = document.getElementById('paper-knowledge-rows');
     if (!container) return;
-    container.innerHTML = state.paperKRows.map(function (row, idx) {
-      return '<div class="paper-k-row form-group" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px;">' +
-        '<div style="flex:1;min-width:200px;"><label style="font-size:12px;">知识点</label><select class="paper-k-cat" style="width:100%;">' + opts + '</select></div>' +
-        '<div style="width:88px;"><label style="font-size:12px;">题数</label><input type="number" class="paper-k-count" min="1" max="100" value="' + row.count + '" style="width:100%;"></div>' +
-        '<button type="button" class="btn-outline btn-sm" onclick="removePaperKnowledgeRow(' + idx + ')" style="margin-bottom:2px;">删除</button></div>';
+    var rows = state.paperKRows;
+    container.innerHTML = rows.map(function (row, idx) {
+      return '<div class="paper-k-row" style="display:flex;gap:8px;align-items:center;margin-bottom:8px;padding:10px 12px;background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-sm);">' +
+        '<span style="flex-shrink:0;font-size:12px;color:var(--text-muted);width:20px;text-align:center;">' + (idx + 1) + '</span>' +
+        '<select class="paper-k-cat" style="flex:1;min-width:0;">' + opts + '</select>' +
+        '<div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">' +
+          '<input type="number" class="paper-k-count" min="1" max="50" value="' + row.count + '" style="width:54px;text-align:center;" title="题数">' +
+          '<span style="font-size:12px;color:var(--text-muted);">题</span>' +
+        '</div>' +
+        (rows.length > 1
+          ? '<button type="button" onclick="removePaperKnowledgeRow(' + idx + ')" style="flex-shrink:0;border:none;background:none;color:var(--danger);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;" title="删除">×</button>'
+          : '<span style="width:28px;"></span>') +
+        '</div>';
     }).join('');
+    // 恢复已选值（异步渲染后 select 刚创建，需要手动设置 value）
     var allSel = container.querySelectorAll('.paper-k-cat');
-    state.paperKRows.forEach(function (row, idx) {
+    rows.forEach(function (row, idx) {
       if (allSel[idx] && row.categoryId) allSel[idx].value = String(row.categoryId);
     });
-  }).catch(function () {});
+  }).catch(function (e) {
+    console.error('[renderPaperKnowledgeRows]', e);
+  });
 }
 
 function onPaperKnowledgeSubjectChange() {
@@ -3366,9 +3386,9 @@ function onPaperKnowledgeSubjectChange() {
 }
 
 function addPaperKnowledgeRow() {
-  snapshotPaperKRowsFromDom();
+  snapshotPaperKRowsFromDom(); // 先保存已选值
   state.paperKRows.push({ categoryId: '', count: 5 });
-  renderPaperKnowledgeRows();
+  renderPaperKnowledgeRows(); // 重新渲染（内部不会再 snapshot，保留刚 push 的行）
 }
 
 function removePaperKnowledgeRow(idx) {

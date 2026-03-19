@@ -12,10 +12,10 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3030
-      # 纸质卷「AI识别答题卡」：阶跃星辰密钥（勿写进镜像，仅在部署环境注入）
-      # - STEPFUN_API_KEY=
-      # - STEPFUN_API_BASE=https://api.stepfun.com/v1
-      # - STEPFUN_VISION_MODEL=step-1o-turbo-vision
+      # 纸质卷「AI识别答题卡」：智谱 GLM（勿写进镜像；也可在后台管理写入数据库）
+      # - GLM_API_KEY=
+      # - GLM_API_BASE=https://open.bigmodel.cn/api/paas/v4
+      # - GLM_VISION_MODEL=glm-4v-plus
     volumes:
       # 持久化数据库与上传数据，避免容器删除后丢失
       - lnexam-data:/app/server/data
