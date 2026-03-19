@@ -8,10 +8,14 @@ services:
     container_name: lnexam
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3030:3030"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3030
+      # 纸质卷「AI识别答题卡」：阶跃星辰密钥（勿写进镜像，仅在部署环境注入）
+      # - STEPFUN_API_KEY=
+      # - STEPFUN_API_BASE=https://api.stepfun.com/v1
+      # - STEPFUN_VISION_MODEL=step-1o-turbo-vision
     volumes:
       # 持久化数据库与上传数据，避免容器删除后丢失
       - lnexam-data:/app/server/data

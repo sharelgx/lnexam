@@ -102,6 +102,32 @@ function initSchema(dbInstance) {
       sort_order INTEGER NOT NULL DEFAULT 0
     );
     CREATE INDEX IF NOT EXISTS idx_exam_configs_sort ON exam_configs(sort_order);
+
+    CREATE TABLE IF NOT EXISTS paper_sessions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      mode TEXT NOT NULL,
+      title TEXT NOT NULL,
+      exam_config_id TEXT,
+      meta_json TEXT,
+      question_ids TEXT NOT NULL,
+      question_count INTEGER NOT NULL DEFAULT 0,
+      status TEXT NOT NULL DEFAULT 'pending',
+      uploads_json TEXT,
+      score INTEGER,
+      total INTEGER,
+      graded_answers TEXT,
+      created_at TEXT DEFAULT (datetime('now')),
+      graded_at TEXT,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+    CREATE INDEX IF NOT EXISTS idx_paper_sessions_user ON paper_sessions(user_id);
+
+    CREATE TABLE IF NOT EXISTS app_settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TEXT DEFAULT (datetime('now'))
+    );
   `);
   // 种子：仅保留 4 个模拟考试配置
   const seed = [

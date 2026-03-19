@@ -27,7 +27,7 @@ cd server
 npm start
 ```
 
-浏览器访问：**http://localhost:3000**
+浏览器访问：**http://localhost:3030**
 
 ### 默认账号
 
@@ -85,7 +85,7 @@ docker compose up -d --build
 docker compose logs -f
 ```
 
-访问：**http://服务器IP:3000**
+访问：**http://服务器IP:3030**
 
 ### 常用命令
 
@@ -110,4 +110,4 @@ docker compose exec lnexam cat /app/server/data/lnexam.db > backup.db
 
 ### 自定义端口
 
-在 `docker-compose.yml` 中修改 `ports`，例如改为 `"8080:3000"` 即对外使用 8080 端口。
+在 `docker-compose.yml` 中修改 `ports`，例如改为 `"8080:3030"` 即对外使用 8080 端口。

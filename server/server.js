@@ -1,6 +1,9 @@
+const path = require('path');
+// 本地配置阶跃星辰等密钥：在 server/.env 中设置 STEPFUN_API_KEY（该文件已在 .gitignore，勿提交）
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const { getDb, initSchema } = require('./db');
 
 const app = express();
@@ -33,7 +36,7 @@ app.get('/', (req, res) => {
 // 初始化数据库
 initSchema(getDb());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
   console.log('辽宁金融单招 · 在线备考平台 后端已启动: http://localhost:' + PORT);
 });

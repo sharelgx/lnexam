@@ -1217,15 +1217,20 @@
   }
 
   .result-q-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #f5f0e8;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0ebe0;
     font-size: 13px;
   }
-
   .result-q-item:last-child { border-bottom: none; }
+  .result-q-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+  .result-q-text { flex: 1; line-height: 1.55; color: var(--text); }
+  .result-q-opts { margin: 6px 0 0 28px; display: flex; flex-direction: column; gap: 3px; }
+  .result-q-opt { display: flex; align-items: baseline; gap: 6px; font-size: 12.5px; line-height: 1.45; }
+  .result-q-opt.correct-opt { color: var(--success); font-weight: 600; }
+  .result-q-opt.wrong-opt  { color: var(--danger); font-weight: 600; }
+  .result-q-opt.normal-opt { color: var(--text-muted); }
+  .result-q-explain { margin: 8px 0 0 28px; font-size: 12px; color: #555; background: #f8f4ec; border-left: 3px solid var(--accent); padding: 6px 10px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; line-height: 1.55; }
+  .result-q-answer-row { margin: 6px 0 0 28px; font-size: 12px; }
 
   .correct-mark { color: var(--success); font-weight: 700; }
   .wrong-mark { color: var(--danger); font-weight: 700; }
@@ -1726,6 +1731,53 @@
       <!-- EXAMS PAGE -->
       <div id="page-exams" class="hidden">
         <div class="alert-info">📌 模拟考试包含真题题库，完成后可查看详细解析和成绩分析</div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div class="card-title">📄 纸质试卷 · 组卷 / 打印 / 拍照存档 / 在线阅卷</div>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">
+            选择<strong>考试形式</strong>或<strong>知识点</strong>自动组卷并保存；打印件含<strong>试题</strong>与<strong>答题卡</strong>（填涂 A/B/C/D），线下在答题卡上作答后拍照上传存档。
+            客观题请在「提交答案阅卷」中<strong>点选选项</strong>完成自动批改；答题卡影像可供后续对接阶跃星辰等视觉模型识别，当前判分仍以在线选项为准。
+          </p>
+          <div style="font-size:12px;color:var(--text);background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;line-height:1.65;">
+            <strong style="color:var(--primary);">拍照上传：</strong>支持一次选多张图。建议至少拍清<strong>整张答题卡</strong>（含四角与「试卷编号」），光线均匀、不反光、不模糊；题量多时可<strong>分页拍答题卡</strong>（每张仍尽量完整）。试题页如需存档也可一并上传。<br>
+            <strong style="color:var(--primary);">用笔：</strong>客观题填涂建议用<strong>2B 铅笔</strong>，涂黑涂满选项圆圈内；修改时用橡皮<strong>擦干净</strong>后再涂，避免机器或视觉识别误判。<br>
+            <strong style="color:var(--primary);">AI 识别：</strong>管理员在<strong>后台 → API 配置</strong>（或环境变量 GLM_API_KEY）配置智谱 GLM 后，学员使用「上传并识别」将自动识别答题卡并<strong>直接出成绩与错题记录</strong>。若需先核对选项再交卷，请用「提交答案阅卷」进入答题页手动提交。
+          </div>
+          <div class="filter-row" style="margin-bottom:16px;">
+            <button type="button" class="filter-chip active" id="paper-tab-exam" onclick="setPaperComposeTab('exam')">按考试形式组卷</button>
+            <button type="button" class="filter-chip" id="paper-tab-know" onclick="setPaperComposeTab('knowledge')">按知识点组卷</button>
+          </div>
+          <div id="paper-compose-exam">
+            <div class="form-group">
+              <label>模拟考试形式（与上方卡片一致）</label>
+              <select id="paper-exam-config-select"></select>
+            </div>
+            <button type="button" class="btn-primary" style="width:auto;padding:10px 24px;" onclick="createPaperSessionByExam()">生成试卷并记录</button>
+          </div>
+          <div id="paper-compose-knowledge" class="hidden">
+            <div class="form-group">
+              <label>科目</label>
+              <select id="paper-knowledge-subject" onchange="onPaperKnowledgeSubjectChange()">
+                <option value="math">数学</option>
+                <option value="chinese">语文</option>
+                <option value="vocational">职业适应性测试</option>
+              </select>
+            </div>
+            <div id="paper-knowledge-rows"></div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+              <button type="button" class="btn-outline" onclick="addPaperKnowledgeRow()">＋ 添加知识点</button>
+              <button type="button" class="btn-primary" style="width:auto;padding:10px 24px;" onclick="createPaperSessionByKnowledge()">生成试卷并记录</button>
+            </div>
+          </div>
+          <input type="file" id="paper-upload-input" accept="image/*" multiple style="display:none" onchange="onPaperPhotosPicked()" />
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+            <div class="card-title" style="font-size:14px;margin-bottom:10px;">我的纸质卷（待上传 / 待阅卷）</div>
+            <div id="paper-session-list" style="font-size:13px;color:var(--text-muted);">加载中…</div>
+          </div>
+        </div>
+
         <div class="exam-select-grid" id="exam-select-grid"></div>
       </div>
 
@@ -1821,6 +1873,7 @@
           <div class="admin-tabs">
             <button type="button" class="admin-tab active" data-tab="users" onclick="switchAdminTab('users')">用户管理</button>
             <button type="button" class="admin-tab" data-tab="categories" onclick="switchAdminTab('categories')">分类管理</button>
+            <button type="button" class="admin-tab" data-tab="settings" onclick="switchAdminTab('settings')">API 配置</button>
           </div>
           <div id="admin-tab-users">
             <div class="grid-2" style="margin-bottom:20px;">
@@ -1877,6 +1930,32 @@
                   <button type="button" class="btn-outline" onclick="resetCategoryForm()" style="margin-left:8px;">取消</button>
                 </form>
               </div>
+            </div>
+          </div>
+          <div id="admin-tab-settings" class="hidden">
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">配置<strong>智谱 GLM（glm-4v-flash）</strong>用于纸质答题卡「AI 识别」。密钥保存在服务器数据库，请勿在公共环境泄露管理员账号。</p>
+            <div style="font-size:13px;color:var(--primary);background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;line-height:1.6;">
+              <strong>全员可用：</strong>在此保存 API Key 后，<strong>所有已登录学员</strong>在「模拟考试 → 纸质试卷」中均可使用「AI识别答题卡」，<strong>无需每人单独配置</strong>。密钥申请地址：<a href="https://open.bigmodel.cn" target="_blank" style="color:var(--primary);">open.bigmodel.cn</a>，glm-4v-flash 免费使用。
+            </div>
+            <div id="admin-stepfun-status" style="font-size:13px;margin-bottom:16px;padding:12px;background:#f8fafc;border-radius:var(--radius-sm);border:1px solid var(--border);">加载中…</div>
+            <div class="form-group">
+              <label>API Key（接口密钥）</label>
+              <input type="password" id="admin-stepfun-key" autocomplete="new-password" placeholder="粘贴智谱平台生成的密钥（格式：xxxxxxxx.xxxxxxxxxxxxxxxx）">
+              <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">已保存时留空表示不修改；需更换时输入新密钥后点保存。</p>
+            </div>
+            <div class="form-group">
+              <label>API Base（可选）</label>
+              <input type="text" id="admin-stepfun-base" placeholder="默认 https://open.bigmodel.cn/api/paas/v4">
+            </div>
+            <div class="form-group">
+              <label>视觉模型（可选）</label>
+              <input type="text" id="admin-stepfun-model" placeholder="默认 glm-4v-flash（免费）；付费可用 glm-4v-plus">
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-bottom:16px;">
+              <input type="checkbox" id="admin-stepfun-clear"> 清除已保存的密钥（改回仅使用环境变量 GLM_API_KEY）
+            </label>
+            <div>
+              <button type="button" class="btn-sm" onclick="saveAdminStepfunSettings()">保存配置</button>
             </div>
           </div>
         </div>
@@ -2102,7 +2181,14 @@ let state = {
   categoryNameById: {},
   mistakeQuestions: [],   // 错题本页当前展示的题目（筛选后，供 selectAnswer / 练习当前错题）
   mistakeQuestionsAll: [], // 错题本全部题目（按科目筛选时不再请求）
-  mistakeFilter: 'all'    // 'all' | 'math' | 'chinese' | 'vocational'
+  mistakeFilter: 'all',    // 'all' | 'math' | 'chinese' | 'vocational'
+  // 纸质试卷：组卷会话、拍照上传、在线提交答案阅卷
+  paperSessions: [],
+  isPaperGrading: false,
+  paperGradingSessionId: null,
+  paperUploadSessionId: null,
+  paperUploadAutoRecognize: false,
+  paperKRows: [{ categoryId: '', count: 5 }]
 };
 
 // ============================================
@@ -2287,6 +2373,7 @@ function showPage(page) {
   if (page === 'dashboard') { updateDashboard(); updateRadarChart(); }
   if (page === 'membership') renderMembership();
   if (page === 'admin') renderAdmin();
+  if (page === 'exams') { refreshPaperSessions(); renderPaperKnowledgeRows(); }
 }
 
 // ============================================
@@ -2581,6 +2668,64 @@ function escapeHtml(s) {
   return div.innerHTML;
 }
 
+/**
+ * 渲染成绩页单题详情（题干+选项+答案标注+解析）
+ * @param {object} q       题目对象（含 text, options, answer, explanation）
+ * @param {number} i       题目序号（0-based）
+ * @param {number|undefined} userAns  用户选项索引（undefined 表示未作答 / 识别失败）
+ */
+function renderResultQItem(q, i, userAns) {
+  var letters = ['A', 'B', 'C', 'D'];
+  var correctIdx = q.answer != null ? Number(q.answer) : undefined;
+  var isEmpty = userAns === undefined || userAns === null;
+  var isCorrect = !isEmpty && userAns === correctIdx;
+
+  var iconHtml;
+  if (isEmpty)      iconHtml = '<span style="font-size:14px;color:#d97706;">?</span>';
+  else if (isCorrect) iconHtml = '<span class="correct-mark" style="font-size:14px;">✓</span>';
+  else               iconHtml = '<span class="wrong-mark" style="font-size:14px;">✗</span>';
+
+  var opts = Array.isArray(q.options) ? q.options : [];
+  var optsHtml = opts.map(function (opt, j) {
+    var letter = letters[j] || String(j);
+    var text = (typeof opt === 'string' && opt.length > 3 && /^[A-D][\.、]/.test(opt))
+      ? opt.substring(3) : (opt || '');
+    var cls = 'normal-opt';
+    var tag = '';
+    if (j === correctIdx && j === userAns)  { cls = 'correct-opt'; tag = '✓ 正确'; }
+    else if (j === correctIdx)               { cls = 'correct-opt'; tag = '← 正确答案'; }
+    else if (j === userAns)                  { cls = 'wrong-opt';   tag = '← 你的选择'; }
+    return '<div class="result-q-opt ' + cls + '">' +
+      '<span style="flex-shrink:0;font-weight:600;width:18px;">' + letter + '.</span>' +
+      '<span style="flex:1;">' + escapeHtml(text) + '</span>' +
+      (tag ? '<span style="flex-shrink:0;font-size:11px;opacity:0.85;">' + tag + '</span>' : '') +
+      '</div>';
+  }).join('');
+
+  var answerRow = '';
+  if (!isEmpty && !isCorrect && correctIdx !== undefined) {
+    answerRow = '<div class="result-q-answer-row"><span style="color:var(--danger);">你答：' + letters[userAns] + '</span>　<span style="color:var(--success);">正确：' + letters[correctIdx] + '</span></div>';
+  }
+  if (isEmpty) {
+    answerRow = '<div class="result-q-answer-row" style="color:#d97706;">未作答（识别失败或未填涂）</div>';
+  }
+
+  var explainHtml = '';
+  if (q.explanation && q.explanation.trim()) {
+    explainHtml = '<div class="result-q-explain">📖 ' + escapeHtml(q.explanation) + '</div>';
+  }
+
+  return '<div class="result-q-item">' +
+    '<div class="result-q-header">' +
+      '<span style="flex-shrink:0;width:22px;text-align:center;">' + iconHtml + '</span>' +
+      '<span class="result-q-text"><strong>' + (i + 1) + '.</strong> ' + escapeHtml(q.text || '') + '</span>' +
+    '</div>' +
+    (optsHtml ? '<div class="result-q-opts">' + optsHtml + '</div>' : '') +
+    answerRow +
+    explainHtml +
+    '</div>';
+}
+
 function updateMistakeBadge() {
   const count = (state.stats.mistakeIds||[]).length;
   document.getElementById('mistake-count').textContent = count;
@@ -2810,10 +2955,16 @@ async function initExamList() {
         </div>
       </div>
     `).join('');
+    var psel = document.getElementById('paper-exam-config-select');
+    if (psel) {
+      psel.innerHTML = '<option value="">— 请选择考试形式 —</option>' + list.map(function (c) {
+        return '<option value="' + escapeHtml(c.id) + '">' + escapeHtml(c.name) + '</option>';
+      }).join('');
+    }
   } catch (e) {
     const is404 = e && (e.status === 404 || (e.message && e.message.includes('404')));
     const msg = is404
-      ? '无法连接后端接口（404）。请在本项目目录运行 npm start 或 node server/server.js 启动后端，在浏览器访问 http://localhost:3000 再打开模拟考试。'
+      ? '无法连接后端接口（404）。请在本项目目录运行 npm start 或 node server/server.js 启动后端，在浏览器访问 http://localhost:3030 再打开模拟考试。'
       : '加载考试列表失败，请刷新重试';
     grid.innerHTML = '<div style="text-align:center;padding:24px;color:var(--danger);font-size:14px;">' + msg + '</div>';
     state.examConfigs = [];
@@ -2821,6 +2972,8 @@ async function initExamList() {
 }
 
 async function startExam(examId) {
+  state.isPaperGrading = false;
+  state.paperGradingSessionId = null;
   const cfg = (state.examConfigs || []).find(c => c.id === examId);
   if (!cfg) {
     showToast('未找到该考试配置，请刷新页面');
@@ -2865,6 +3018,8 @@ async function startExam(examId) {
 }
 
 async function startQuickPractice(subject) {
+  state.isPaperGrading = false;
+  state.paperGradingSessionId = null;
   showToast('加载题目中…');
   try {
     const res = await api('/api/questions?subject=' + encodeURIComponent(subject));
@@ -2888,6 +3043,8 @@ async function startQuickPractice(subject) {
 }
 
 async function startPractice() {
+  state.isPaperGrading = false;
+  state.paperGradingSessionId = null;
   const subject = document.getElementById('practice-subject').value;
   const count = parseInt(document.getElementById('practice-count').value);
   const mode = document.getElementById('practice-mode').value;
@@ -3064,6 +3221,10 @@ function confirmSubmit() {
 }
 
 function submitExam() {
+  if (state.isPaperGrading) {
+    submitPaperGrade();
+    return;
+  }
   if (state.examTimer) clearInterval(state.examTimer);
   closeModal();
 
@@ -3143,19 +3304,7 @@ function submitExam() {
   // Render review
   const reviewList = document.getElementById('result-review-list');
   reviewList.innerHTML = `<div class="card-header"><div class="card-title">答题详情</div></div>` +
-    questions.map((q, i) => {
-      const ans = state.examAnswers[q.id];
-      const isCorrect = ans === q.answer;
-      const isEmpty = ans === undefined;
-      const letters = ['A','B','C','D'];
-      return `<div class="result-q-item">
-        <span style="width:20px;flex-shrink:0;">${isEmpty ? '<span style="color:#d97706">?</span>' : isCorrect ? '<span class="correct-mark">✓</span>' : '<span class="wrong-mark">✗</span>'}</span>
-        <div style="flex:1;">
-          <div style="font-size:13px;color:var(--text);margin-bottom:3px;">${i+1}. ${q.text.substring(0,40)}...</div>
-          ${!isCorrect && !isEmpty ? `<div style="font-size:12px;color:var(--danger);">你答：${letters[ans]}  正确：${letters[q.answer]}</div>` : ''}
-        </div>
-      </div>`;
-    }).join('');
+    questions.map((q, i) => renderResultQItem(q, i, state.examAnswers[q.id])).join('');
 
   showScreen('result-screen');
 }
@@ -3163,6 +3312,453 @@ function submitExam() {
 function reviewWrongAnswers() {
   // scroll to review
   document.getElementById('result-review-list').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================
+// 纸质试卷（组卷 / 打印 / 上传 / 阅卷）
+// ============================================
+function setPaperComposeTab(tab) {
+  document.getElementById('paper-tab-exam').classList.toggle('active', tab === 'exam');
+  document.getElementById('paper-tab-know').classList.toggle('active', tab === 'knowledge');
+  document.getElementById('paper-compose-exam').classList.toggle('hidden', tab !== 'exam');
+  document.getElementById('paper-compose-knowledge').classList.toggle('hidden', tab !== 'knowledge');
+}
+
+function snapshotPaperKRowsFromDom() {
+  var rows = document.querySelectorAll('#paper-knowledge-rows .paper-k-row');
+  if (!rows.length) return;
+  var next = [];
+  rows.forEach(function (el) {
+    var cat = el.querySelector('.paper-k-cat');
+    var cnt = el.querySelector('.paper-k-count');
+    next.push({ categoryId: cat ? cat.value : '', count: cnt ? Math.min(100, Math.max(1, parseInt(cnt.value, 10) || 5)) : 5 });
+  });
+  state.paperKRows = next;
+}
+
+function renderPaperKnowledgeRows() {
+  snapshotPaperKRowsFromDom();
+  if (!state.paperKRows.length) state.paperKRows = [{ categoryId: '', count: 5 }];
+  var sub = document.getElementById('paper-knowledge-subject').value;
+  getCategoriesTree().then(function (tree) {
+    var flat = flatCategoriesForSubject(tree, sub);
+    var opts = '<option value="">选择知识点</option>' + flat.map(function (f) {
+      return '<option value="' + escapeHtml(String(f.id)) + '">' + escapeHtml(f.name) + '</option>';
+    }).join('');
+    var container = document.getElementById('paper-knowledge-rows');
+    if (!container) return;
+    container.innerHTML = state.paperKRows.map(function (row, idx) {
+      return '<div class="paper-k-row form-group" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px;">' +
+        '<div style="flex:1;min-width:200px;"><label style="font-size:12px;">知识点</label><select class="paper-k-cat" style="width:100%;">' + opts + '</select></div>' +
+        '<div style="width:88px;"><label style="font-size:12px;">题数</label><input type="number" class="paper-k-count" min="1" max="100" value="' + row.count + '" style="width:100%;"></div>' +
+        '<button type="button" class="btn-outline btn-sm" onclick="removePaperKnowledgeRow(' + idx + ')" style="margin-bottom:2px;">删除</button></div>';
+    }).join('');
+    var allSel = container.querySelectorAll('.paper-k-cat');
+    state.paperKRows.forEach(function (row, idx) {
+      if (allSel[idx] && row.categoryId) allSel[idx].value = String(row.categoryId);
+    });
+  }).catch(function () {});
+}
+
+function onPaperKnowledgeSubjectChange() {
+  state.paperKRows = [{ categoryId: '', count: 5 }];
+  renderPaperKnowledgeRows();
+}
+
+function addPaperKnowledgeRow() {
+  snapshotPaperKRowsFromDom();
+  state.paperKRows.push({ categoryId: '', count: 5 });
+  renderPaperKnowledgeRows();
+}
+
+function removePaperKnowledgeRow(idx) {
+  snapshotPaperKRowsFromDom();
+  state.paperKRows.splice(idx, 1);
+  if (!state.paperKRows.length) state.paperKRows.push({ categoryId: '', count: 5 });
+  renderPaperKnowledgeRows();
+}
+
+async function refreshPaperSessions() {
+  var el = document.getElementById('paper-session-list');
+  if (!el) return;
+  if (!state.user) {
+    el.innerHTML = '<span style="color:var(--text-light);">请先登录</span>';
+    return;
+  }
+  var stepfunOk = false;
+  try {
+    var st = await api('/api/users/me/paper-ai/status');
+    stepfunOk = !!(st && st.stepfunConfigured);
+  } catch (_) {}
+  try {
+    var data = await api('/api/users/me/paper-sessions');
+    state.paperSessions = data.list || [];
+    if (!state.paperSessions.length) {
+      el.innerHTML = '<span style="color:var(--text-light);">暂无记录，请先在上方组卷。</span>';
+      return;
+    }
+    var statusLabel = { pending: '待上传答卷', uploaded: '待阅卷', graded: '已阅卷' };
+    el.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' + state.paperSessions.map(function (s) {
+      var st = statusLabel[s.status] || s.status;
+      var btns = '';
+      if (s.status !== 'graded') {
+        btns += '<button type="button" class="btn-sm" onclick="openPaperPrint(' + s.id + ')">打印试卷</button> ';
+        btns += '<button type="button" class="btn-sm" style="background:#0d9488;border-color:#0f766e;" onclick="pickPaperUpload(' + s.id + ', true)" title="' + (stepfunOk ? '上传后自动识别（智谱GLM）；管理员在后台配置的密钥供全体登录学员共用' : '需管理员在后台「API 配置」填写智谱GLM密钥或配置环境变量 GLM_API_KEY') + '">上传并识别</button> ';
+        btns += '<button type="button" class="btn-outline btn-sm" onclick="startPaperGrading(' + s.id + ')">提交答案阅卷</button>';
+      } else {
+        btns += '<span style="color:var(--text-muted);">得分：' + (s.score != null ? s.score : '-') + ' / ' + (s.total || s.questionCount) + '</span>';
+      }
+      return '<div style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fafafa;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;">' +
+        '<div><strong style="color:var(--primary);">' + escapeHtml(s.title) + '</strong> <span style="color:var(--text-muted);">· ' + st + '</span><br><span style="font-size:12px;color:var(--text-light);">' + (s.questionCount || 0) + ' 题 · ' + (s.createdAt || '') + '</span></div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + btns + '</div></div>';
+    }).join('') + '</div>';
+  } catch (e) {
+    el.innerHTML = '<span style="color:var(--danger);">加载失败</span>';
+  }
+}
+
+async function createPaperSessionByExam() {
+  var sel = document.getElementById('paper-exam-config-select');
+  var id = sel && sel.value;
+  if (!id) { showToast('请选择考试形式'); return; }
+  try {
+    await api('/api/users/me/paper-sessions', {
+      method: 'POST',
+      body: JSON.stringify({ mode: 'exam_config', examConfigId: id })
+    });
+    showToast('已组卷并保存，可打印试卷');
+    refreshPaperSessions();
+  } catch (e) {
+    showToast(e.message || '组卷失败');
+  }
+}
+
+async function createPaperSessionByKnowledge() {
+  snapshotPaperKRowsFromDom();
+  var sub = document.getElementById('paper-knowledge-subject').value;
+  var allocations = [];
+  state.paperKRows.forEach(function (r) {
+    if (r.categoryId) allocations.push({ categoryId: parseInt(r.categoryId, 10), count: r.count });
+  });
+  if (!allocations.length) { showToast('请至少选择一个知识点'); return; }
+  try {
+    await api('/api/users/me/paper-sessions', {
+      method: 'POST',
+      body: JSON.stringify({ mode: 'knowledge', subject: sub, allocations: allocations })
+    });
+    showToast('已组卷并保存，可打印试卷');
+    refreshPaperSessions();
+  } catch (e) {
+    showToast(e.message || '组卷失败');
+  }
+}
+
+async function openPaperPrint(sessionId) {
+  try {
+    var data = await api('/api/users/me/paper-sessions/' + sessionId + '/sheet');
+    var w = window.open('', '_blank');
+    if (!w) { showToast('请允许弹出窗口以打印'); return; }
+    var letters = ['A', 'B', 'C', 'D'];
+    var qs = data.questions || [];
+    var n = qs.length;
+    var title = escapeHtml(data.title || '试卷');
+
+    var styles =
+      'body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;padding:20px 24px;max-width:820px;margin:0 auto;line-height:1.45;color:#111;}' +
+      'h1{font-size:20px;margin:0 0 8px;border-bottom:2px solid #1a3a5c;padding-bottom:8px;}' +
+      '.sub{font-size:13px;color:#444;margin:0 0 16px;}' +
+      '.meta-box{border:2px solid #111;padding:12px 14px;margin-bottom:20px;background:#fafafa;}' +
+      '.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:14px;}' +
+      '.meta-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid #ccc;padding-bottom:6px;min-height:28px;}' +
+      '.meta-label{white-space:nowrap;color:#333;}' +
+      '.meta-line{flex:1;border-bottom:1px solid #000;min-height:18px;}' +
+      '.hint{font-size:12px;color:#555;margin:10px 0 0;line-height:1.5;}' +
+      'h2{font-size:16px;margin:28px 0 12px;color:#1a3a5c;border-left:4px solid #e8a020;padding-left:10px;}' +
+      '.q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #ddd;}' +
+      '.opts{margin-top:8px;font-size:13px;color:#333;}' +
+      '.answer-sheet{page-break-before:always;margin-top:32px;padding-top:8px;}' +
+      '.answer-sheet h2{margin-top:0;}' +
+      '.answer-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px;}' +
+      '.answer-table th,.answer-table td{border:1px solid #000;padding:5px 4px;text-align:center;vertical-align:middle;}' +
+      '.answer-table th{background:#e8e8e8;font-weight:700;font-size:12px;}' +
+      '.answer-table .num{width:36px;font-weight:700;background:#f5f5f5;font-size:13px;}' +
+      '.opt-cell{min-width:52px;padding:4px 2px !important;}' +
+      '.opt-inner{display:flex;flex-direction:column;align-items:center;gap:2px;}' +
+      '.opt-letter{font-size:11px;font-weight:700;color:#222;line-height:1;}' +
+      '.bubble{display:block;width:22px;height:22px;border:2px solid #000;border-radius:50%;}' +
+      '.sheet-foot{font-size:11px;color:#666;margin-top:14px;line-height:1.5;}' +
+      '@media print{body{padding:12mm;} .no-print{display:none !important;}}';
+
+    var html = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>试卷与答题卡 — ' + title + '</title><style>' + styles + '</style></head><body>';
+
+    html += '<div class="no-print" style="margin-bottom:16px;"><button type="button" onclick="window.print()" style="padding:10px 20px;font-size:14px;cursor:pointer;border-radius:8px;border:1px solid #1a3a5c;background:#1a3a5c;color:#fff;">打印 / 另存为 PDF</button></div>';
+
+    html += '<h1>' + title + '</h1>';
+    html += '<p class="sub">试卷编号：<strong>' + escapeHtml(String(sessionId)) + '</strong>　共 <strong>' + n + '</strong> 题（单项选择题）</p>';
+
+    html += '<div class="meta-box"><div class="meta-grid">';
+    html += '<div class="meta-row"><span class="meta-label">姓名</span><span class="meta-line"></span></div>';
+    html += '<div class="meta-row"><span class="meta-label">学号 / 手机</span><span class="meta-line"></span></div>';
+    html += '<div class="meta-row"><span class="meta-label">作答日期</span><span class="meta-line"></span></div>';
+    html += '<div class="meta-row"><span class="meta-label">签名</span><span class="meta-line"></span></div>';
+    html += '</div>';
+    html += '<p class="hint">① 试题部分可在草稿纸演算；<strong>客观题答案请填涂在文末「答题卡」</strong>（用 2B 铅笔将选项圆圈涂满）。② 拍照上传时请<strong>拍清答题卡全貌</strong>（含试卷编号与填涂格），便于后续识别。③ 系统阅卷请仍在平台「提交答案阅卷」中点选提交。</p></div>';
+
+    html += '<h2>第一部分　试　题</h2>';
+    qs.forEach(function (q, i) {
+      html += '<div class="q"><strong>' + (i + 1) + '.</strong> ' + q.text + '<div class="opts">';
+      (q.options || []).forEach(function (opt, j) {
+        var t = (opt && opt.length > 3 && /^[A-D][\.、]/.test(opt)) ? opt.substring(3) : opt;
+        html += letters[j] + '. ' + escapeHtml(t) + '<br>';
+      });
+      html += '</div></div>';
+    });
+
+    html += '<section class="answer-sheet">';
+    html += '<h2>第二部分　答 题 卡（请沿虚线裁剪或单独打印本页）</h2>';
+    html += '<div class="meta-box" style="margin-bottom:16px;"><div class="meta-grid">';
+    html += '<div class="meta-row"><span class="meta-label">姓名</span><span class="meta-line"></span></div>';
+    html += '<div class="meta-row"><span class="meta-label">试卷编号</span><span class="meta-line" style="border-bottom-style:dashed;">' + escapeHtml(String(sessionId)) + '</span></div>';
+    html += '</div><p class="hint" style="margin-top:8px;">填涂说明：答题卡按<strong>横行排列（每行为一个选项字母）</strong>，在对应题号列的圆圈内<strong>用 2B 铅笔涂满涂黑</strong>。修改时请用橡皮擦干净再涂。</p></div>';
+
+    // 每行最多显示10题，超过则分组展示，每组一个表格
+    var COLS_PER_GROUP = 10;
+    var groups = [];
+    for (var gi = 0; gi < n; gi += COLS_PER_GROUP) {
+      groups.push({ start: gi + 1, end: Math.min(gi + COLS_PER_GROUP, n) });
+    }
+
+    groups.forEach(function (g) {
+      html += '<table class="answer-table" style="margin-bottom:12px;" aria-label="答题卡第' + g.start + '-' + g.end + '题">';
+      // 题号行
+      html += '<thead><tr><th style="width:40px;background:#e8e8e8;">题号</th>';
+      for (var ti = g.start; ti <= g.end; ti++) {
+        html += '<th style="width:52px;">' + ti + '</th>';
+      }
+      html += '</tr></thead><tbody>';
+      // A/B/C/D 各一行
+      ['A','B','C','D'].forEach(function (letter) {
+        html += '<tr><td class="num">' + letter + '</td>';
+        for (var qi = g.start; qi <= g.end; qi++) {
+          html += '<td class="opt-cell"><div class="opt-inner"><span class="bubble"></span></div></td>';
+        }
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+    });
+    html += '<p class="sheet-foot">试卷编号 ' + escapeHtml(String(sessionId)) + ' · 共 ' + n + ' 题 · 打印后请核对题号与试题顺序是否一致。</p>';
+    html += '</section>';
+
+    html += '</body></html>';
+    w.document.write(html);
+    w.document.close();
+    w.focus();
+  } catch (e) {
+    showToast(e.message || '打开失败');
+  }
+}
+
+function pickPaperUpload(sessionId, autoRecognize) {
+  state.paperUploadSessionId = sessionId;
+  state.paperUploadAutoRecognize = !!autoRecognize;
+  var input = document.getElementById('paper-upload-input');
+  if (input) input.value = '';
+  input && input.click();
+}
+
+async function onPaperPhotosPicked() {
+  var input = document.getElementById('paper-upload-input');
+  var sid = state.paperUploadSessionId;
+  var runRecognize = state.paperUploadAutoRecognize;
+  if (!sid || !input || !input.files || !input.files.length) return;
+  var base = (typeof API_BASE !== 'undefined' && API_BASE !== '') ? API_BASE : window.location.origin;
+  var fd = new FormData();
+  for (var i = 0; i < input.files.length; i++) fd.append('photos', input.files[i]);
+  try {
+    var res = await fetch(base + '/api/users/me/paper-sessions/' + sid + '/uploads', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + (localStorage.getItem('token') || '') },
+      body: fd
+    });
+    var data = await res.json().catch(function () { return {}; });
+    if (!res.ok) throw new Error(data.message || '上传失败');
+    showToast('已上传 ' + (input.files.length) + ' 张照片');
+    refreshPaperSessions();
+    if (runRecognize) await recognizePaperAnswers(sid);
+  } catch (e) {
+    showToast(e.message || '上传失败');
+  } finally {
+    state.paperUploadSessionId = null;
+    state.paperUploadAutoRecognize = false;
+    input.value = '';
+  }
+}
+
+async function recognizePaperAnswers(sessionId) {
+  try {
+    showToast('正在调用阶跃星辰识别，请稍候（约15-30秒）…');
+    var rec = await api('/api/users/me/paper-sessions/' + sessionId + '/recognize', { method: 'POST', body: '{}' });
+
+    // 调试：打印模型原始返回与映射结果
+    console.log('[AI识别] 模型原始输出片段:', rec.rawContent || '(空)');
+    console.log('[AI识别] 映射后答案:', JSON.stringify(rec.answers || {}));
+    console.log('[AI识别] 识别题数:', rec.recognizedCount, '/ 总题数:', rec.totalQuestions);
+
+    var ans = (rec && rec.answers) ? rec.answers : {};
+    var n = rec.recognizedCount != null ? rec.recognizedCount : Object.keys(ans).length;
+    var total = rec.totalQuestions || 0;
+
+    if (n === 0 && total > 0) {
+      showToast('AI 未能识别任何选项，请检查照片清晰度后重试，或手动点选答案提交');
+      console.warn('[AI识别] 识别结果全部为 null，rawContent:', rec.rawContent);
+      return;
+    }
+
+    showToast('已识别 ' + n + '/' + total + ' 题，正在自动阅卷…');
+    await gradePaperSessionDirect(sessionId, ans, '（AI识别）');
+  } catch (e) {
+    showToast(e.message || '识别失败');
+    console.error('[AI识别] 失败:', e);
+  }
+}
+
+/**
+ * 用纸质疑卷答案直接调后端阅卷并展示成绩页（不经过答题界面）
+ * @param {string} suffix 写入考试记录展示用，如「（AI识别）」
+ */
+async function gradePaperSessionDirect(sessionId, examAnswers, suffix) {
+  var data = await api('/api/users/me/paper-sessions/' + sessionId + '/sheet');
+  var questions = data.questions || [];
+  if (!questions.length) {
+    showToast('试卷无题目');
+    return;
+  }
+  var res = await api('/api/users/me/paper-sessions/' + sessionId + '/grade', {
+    method: 'POST',
+    body: JSON.stringify({ answers: examAnswers || {} })
+  });
+  var title = (data.title || '纸质卷') + (suffix || '');
+  applyPaperGradeResult(res, questions, examAnswers || {}, title);
+}
+
+/** 根据 /grade 返回结果更新统计、错题并打开 result-screen（submitPaperGrade 与 AI 识别共用） */
+function applyPaperGradeResult(res, questions, examAnswers, historyExamName) {
+  var r = res.result || {};
+  var detailById = {};
+  (r.details || []).forEach(function (d) { detailById[d.id] = d; });
+  questions.forEach(function (q) {
+    var d = detailById[q.id];
+    if (d && d.correctIndex !== undefined) q.answer = d.correctIndex;
+  });
+  if (res.mistakeIds) state.stats.mistakeIds = res.mistakeIds;
+
+  var correct = r.correct || 0;
+  var wrong = r.wrong || 0;
+  var blank = r.blank || 0;
+  var scorePct = r.scorePct != null ? r.scorePct : (questions.length ? Math.round(correct / questions.length * 100) : 0);
+  var grade = scorePct >= 90 ? '优秀' : scorePct >= 75 ? '良好' : scorePct >= 60 ? '及格' : '需加强';
+
+  questions.forEach(function (q) {
+    var ans = examAnswers[q.id];
+    if (ans === undefined) return;
+    var subjectKey = q.subject || getQuestionSubject(q);
+    var topicKey = q.topic || 'unknown';
+    var statsKey = subjectKey + '_' + topicKey;
+    var isCorrect = ans === q.answer;
+    if (!state.stats.topicStats[statsKey]) state.stats.topicStats[statsKey] = { total: 0, correct: 0 };
+    state.stats.topicStats[statsKey].total++;
+    state.stats.totalAnswered++;
+    if (isCorrect) {
+      state.stats.topicStats[statsKey].correct++;
+      state.stats.totalCorrect++;
+    }
+  });
+
+  state.stats.examCount = (state.stats.examCount || 0) + 1;
+  state.stats.examHistory = state.stats.examHistory || [];
+  state.stats.examHistory.push({
+    name: historyExamName || '纸质卷',
+    date: new Date().toLocaleDateString('zh-CN'),
+    score: correct,
+    total: questions.length,
+    correct: correct
+  });
+
+  saveUserData();
+  updateMistakeBadge();
+
+  document.getElementById('result-score-num').textContent = scorePct;
+  document.getElementById('result-score-den').textContent = '/ 100 分';
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-pct').textContent = '正确率 ' + scorePct + '%（' + correct + '/' + questions.length + '）';
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-blank').textContent = blank;
+
+  var reviewList = document.getElementById('result-review-list');
+  reviewList.innerHTML = '<div class="card-header"><div class="card-title">答题详情</div></div>' +
+    questions.map(function (q, i) {
+      return renderResultQItem(q, i, examAnswers[q.id]);
+    }).join('');
+
+  state.isPaperGrading = false;
+  state.paperGradingSessionId = null;
+  showScreen('result-screen');
+  refreshPaperSessions();
+}
+
+async function startPaperGrading(sessionId, presetAnswers) {
+  try {
+    var meta = await api('/api/users/me/paper-sessions/' + sessionId);
+    if (meta.session && meta.session.status === 'graded') {
+      showToast('该试卷已阅卷');
+      return;
+    }
+    var data = await api('/api/users/me/paper-sessions/' + sessionId + '/sheet');
+    var m = (meta.session && meta.session.meta) || {};
+    var timeMin = Math.max(120, m.timeMin || 60);
+    state.isPaperGrading = true;
+    state.paperGradingSessionId = sessionId;
+    state.currentExam = {
+      cfg: { id: 'paper-' + sessionId, name: (data.title || '纸质卷') + ' · 提交答案', time: timeMin },
+      questions: data.questions || [],
+      startTime: Date.now()
+    };
+    state.examAnswers = presetAnswers && typeof presetAnswers === 'object' ? Object.assign({}, presetAnswers) : {};
+    state.examCurrentQ = 0;
+    state.examMode = 'exam';
+    state.examTimeLeft = timeMin * 60;
+    showScreen('exam-screen');
+    document.getElementById('exam-title-bar').textContent = state.currentExam.cfg.name;
+    renderExamQuestion();
+    renderQGrid();
+    startTimer();
+    updateExamProgress();
+  } catch (e) {
+    showToast(e.message || '加载失败');
+  }
+}
+
+async function submitPaperGrade() {
+  if (state.examTimer) clearInterval(state.examTimer);
+  closeModal();
+  var sessionId = state.paperGradingSessionId;
+  var questions = state.currentExam.questions;
+  if (!sessionId || !questions || !questions.length) {
+    state.isPaperGrading = false;
+    state.paperGradingSessionId = null;
+    showPage('exams');
+    return;
+  }
+  try {
+    var res = await api('/api/users/me/paper-sessions/' + sessionId + '/grade', {
+      method: 'POST',
+      body: JSON.stringify({ answers: state.examAnswers })
+    });
+    applyPaperGradeResult(res, questions, state.examAnswers, state.currentExam.cfg.name);
+  } catch (e) {
+    showToast(e.message || '阅卷失败');
+  }
 }
 
 // ============================================
@@ -3419,7 +4015,63 @@ function switchAdminTab(tab) {
   document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.toggle('active', t.getAttribute('data-tab') === tab); });
   document.getElementById('admin-tab-users').classList.toggle('hidden', tab !== 'users');
   document.getElementById('admin-tab-categories').classList.toggle('hidden', tab !== 'categories');
+  var setEl = document.getElementById('admin-tab-settings');
+  if (setEl) setEl.classList.toggle('hidden', tab !== 'settings');
   if (tab === 'categories') loadAdminCategories();
+  if (tab === 'settings') loadAdminStepfunSettings();
+}
+
+async function loadAdminStepfunSettings() {
+  var statusEl = document.getElementById('admin-stepfun-status');
+  var keyIn = document.getElementById('admin-stepfun-key');
+  var baseIn = document.getElementById('admin-stepfun-base');
+  var modelIn = document.getElementById('admin-stepfun-model');
+  var clearCb = document.getElementById('admin-stepfun-clear');
+  if (!statusEl || !keyIn) return;
+  if (clearCb) clearCb.checked = false;
+  keyIn.value = '';
+  try {
+    var d = await api('/api/admin/settings/stepfun');
+    var parts = [];
+    if (d.effectiveConfigured) parts.push('<strong style="color:var(--success);">当前可用</strong>（学生端可点 AI 识别）');
+    else parts.push('<strong style="color:var(--danger);">未配置</strong>（请填写密钥或使用环境变量）');
+    if (d.hasDatabaseKey) parts.push('密钥来源：<strong>数据库</strong> ' + (d.keyPreview || '····'));
+    else parts.push('密钥来源：数据库未保存');
+    if (d.hasEnvironmentKey) parts.push('环境变量 <code style="font-size:11px;">STEPFUN_API_KEY</code>：已设置');
+    else parts.push('环境变量：未设置');
+    parts.push('<span style="color:var(--text-muted);">说明：数据库密钥优先于环境变量。</span>');
+    statusEl.innerHTML = parts.join('<br>');
+    if (baseIn) baseIn.value = d.apiBase || '';
+    if (modelIn) modelIn.value = d.visionModel || '';
+  } catch (e) {
+    statusEl.innerHTML = '<span style="color:var(--danger);">加载失败：' + escapeHtml(e.message || '') + '</span>';
+  }
+}
+
+async function saveAdminStepfunSettings() {
+  var keyIn = document.getElementById('admin-stepfun-key');
+  var baseIn = document.getElementById('admin-stepfun-base');
+  var modelIn = document.getElementById('admin-stepfun-model');
+  var clearCb = document.getElementById('admin-stepfun-clear');
+  if (!keyIn) return;
+  var payload = {
+    apiKey: keyIn.value.trim(),
+    apiBase: baseIn ? baseIn.value.trim() : '',
+    visionModel: modelIn ? modelIn.value.trim() : '',
+    clearKey: !!(clearCb && clearCb.checked)
+  };
+  if (payload.clearKey) {
+    if (!confirm('确定清除数据库中的密钥？清除后仅当环境变量已配置时 AI 识别才可用。')) return;
+  }
+  try {
+    await api('/api/admin/settings/stepfun', { method: 'PUT', body: JSON.stringify(payload) });
+    showToast('已保存');
+    keyIn.value = '';
+    if (clearCb) clearCb.checked = false;
+    await loadAdminStepfunSettings();
+  } catch (e) {
+    showToast(e.message || '保存失败');
+  }
 }
 
 var adminCategoryList = [];

@@ -1,6 +1,7 @@
 const express = require('express');
 const { getDb } = require('../db');
 const { authMiddleware } = require('../middleware/auth');
+const { registerPaperSessionRoutes } = require('./paper-sessions');
 
 const router = express.Router();
 router.use(authMiddleware);
@@ -128,5 +129,7 @@ router.put('/me/mistakes', (req, res) => {
   }
   res.json({ ok: true });
 });
+
+registerPaperSessionRoutes(router);
 
 module.exports = router;

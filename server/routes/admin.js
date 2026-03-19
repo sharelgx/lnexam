@@ -9,6 +9,64 @@ router.use(adminOnly);
 
 const roleLabel = { common: '普通类考生', math: '数学单科', chinese: '语文单科', admin: '管理员' };
 
+function upsertAppSetting(db, key, value) {
+  db.prepare(
+    `INSERT INTO app_settings (key, value, updated_at) VALUES (?, ?, datetime('now'))
+     ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = datetime('now')`
+  ).run(key, value);
+}
+
+function getAppSetting(db, key) {
+  const r = db.prepare('SELECT value FROM app_settings WHERE key = ?').get(key);
+  return r && r.value != null ? String(r.value) : '';
+}
+
+/** 智谱 GLM：读取配置（不返回完整密钥） */
+router.get('/settings/stepfun', (req, res) => {
+  const db = getDb();
+  const dbKey = getAppSetting(db, 'glm_api_key').trim();
+  const envKey = (process.env.GLM_API_KEY || '').trim();
+  const hasDbKey = !!dbKey;
+  const hasEnvKey = !!envKey;
+  const keyPreview = hasDbKey ? ('····' + dbKey.slice(-4)) : null;
+  res.json({
+    ok: true,
+    hasDatabaseKey: hasDbKey,
+    keyPreview,
+    apiBase: getAppSetting(db, 'glm_api_base'),
+    visionModel: getAppSetting(db, 'glm_vision_model'),
+    hasEnvironmentKey: hasEnvKey,
+    effectiveConfigured: hasDbKey || hasEnvKey,
+  });
+});
+
+/** 智谱 GLM：保存配置（仅管理员） */
+router.put('/settings/stepfun', (req, res) => {
+  const { apiKey, apiBase, visionModel, clearKey } = req.body || {};
+  const db = getDb();
+  try {
+    if (clearKey) {
+      db.prepare('DELETE FROM app_settings WHERE key = ?').run('glm_api_key');
+    } else if (apiKey != null && String(apiKey).trim() !== '') {
+      upsertAppSetting(db, 'glm_api_key', String(apiKey).trim());
+    }
+    if (apiBase !== undefined) {
+      const b = String(apiBase || '').trim();
+      if (b) upsertAppSetting(db, 'glm_api_base', b);
+      else db.prepare('DELETE FROM app_settings WHERE key = ?').run('glm_api_base');
+    }
+    if (visionModel !== undefined) {
+      const m = String(visionModel || '').trim();
+      if (m) upsertAppSetting(db, 'glm_vision_model', m);
+      else db.prepare('DELETE FROM app_settings WHERE key = ?').run('glm_vision_model');
+    }
+    res.json({ ok: true, message: '已保存' });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ ok: false, message: '保存失败' });
+  }
+});
+
 // 用户列表
 router.get('/users', (req, res) => {
   const db = getDb();
