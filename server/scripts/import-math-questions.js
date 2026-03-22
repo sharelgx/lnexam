@@ -138,7 +138,7 @@ const MATH_QUESTIONS_DATA = [
   { no: 93, text: '计算 2^(-3/4)·4^(2/5)·2^(-1/2)·4^(1/2)=', options: ['A. 64', 'B. 128', 'C. 256', 'D. 512'], answer: 2 },
   { no: 94, text: '在等差数列{aₙ}中，已知 a₅=10，a₁₂=31，则公差 d=', options: ['A. -2', 'B. -3', 'C. 3', 'D. 5'], answer: 2 },
   { no: 95, text: '计算 5sin90°-2cos0°+3tan180°+cos180°=', options: ['A. 1', 'B. 2', 'C. 3', 'D. 5'], answer: 1 },
-  { no: 96, text: '在等差数列{aₙ}中，a₄=10，a₁₉=7，则 a₁=', options: ['A. 1', 'B. 2', 'C. 3', 'D. 4'], answer: 0 },
+  { no: 96, text: '在等差数列{aₙ}中，a₄=10，a₇=19，则 a₁=', options: ['A. 1', 'B. 2', 'C. 3', 'D. 4'], answer: 0 },
   { no: 97, text: '不等式 -x²+2x+8<0 的解集为', options: ['A. {x|-4<x<2}', 'B. {x|x>2 或 x<-4}', 'C. {x|x≠2}', 'D. {x|-2<x<4}'], answer: 1 },
   { no: 98, text: '7+3√5 与 7-3√5 的等比中项为', options: ['A. ±2', 'B. -2', 'C. 2', 'D. 7'], answer: 0 },
   { no: 99, text: '计算 (e²+0.001^0-ln27)/3=', options: ['A. 0.001', 'B. 2', 'C. 100', 'D. 1000'], answer: 2 },
